@@ -28,15 +28,24 @@ create table questions(
 -- connects collaborators and the questions they made 
 drop table if exists madeBy;
 create table madeBy(
-       qid integer foreign key,            
-       cid integer foreign key,
+	qid int not null,
+	cid int,
+	index(qid),
+	index(cid),
+	foreign key (qid) references questions(qid) on delete restrict,
+	foreign key (cid) references users(cid) on delete restrict
        );
+
 
 -- connects users with the questions they have answered 
 drop table if exists hasAnswered;
 create table hasAnswered(
-       qid integer foreign key,            
-       cid integer foreign key,
+	qid int not null,
+	cid int not null,
+	index(qid),
+	index(cid),
+	foreign key (qid) references questions(qid) on delete restrict,
+	foreign key (cid) references users(cid) on delete restrict
        );
        
        
