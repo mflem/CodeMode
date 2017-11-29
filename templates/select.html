@@ -1,0 +1,16 @@
+<!-- Maggie Jennings and Mojia Shen
+Nov 10 2017
+search.html -->
+{% extends 'hwk6.html' %}
+  {% block content %}
+    <form method= "POST" action="{{script}}">
+      <p> Movies without release date or director</p>
+        <select name="menu-tt">
+            {% for movie in movies %}
+              <option value = {{movie.tt}}>{{movie.title}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="submit" name ='submit'></input>
+    </form>
+  {% endblock %}

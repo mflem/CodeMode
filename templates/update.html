@@ -1,0 +1,27 @@
+<!-- Maggie Jennings and Mojia Shen
+Nov 10 2017
+update.html -->
+{% extends 'hwk6.html' %}
+  {% block content %}
+      <form method= "POST" action="{{script}}">
+  <p>Use "None or "Null" to set a field to null. Only Title, Release Year and Director can be null.</p>
+    <p><label for="movie-title">Title</label>
+      <input type=text name='movie-title' value="{{data[0]}}"></input></p>
+    <br>
+    <p><label for="movie-release">Release year</label>
+      <input type=text name='movie-release' value="{{data[2]}}"></input></p>
+    <br>
+    <p><label for="movie-tt">Movie id</label>
+      <input type=text name='movie-tt' value="{{data[1]}}"></input></p>
+    <br>
+    <p><label for="movie-director">Director ID</label>
+      <input type=text name='movie-director' value="{{data[3]}}"></input></p>
+    <br>
+    <p><label for="movie-addedby">Added by</label>
+      <input type=text name='movie-addedby' value="{{data[4]}}"></input></p>
+    <br>
+    <p>Director {{data[5]}}</p>
+    <input type="submit" value='update' name='submit'></input>
+    <input type="submit" value='delete' name='submit'></input>
+</form>
+  {% endblock %}

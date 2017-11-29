@@ -1,0 +1,29 @@
+<!-- Maggie Jennings and Mojia Shen
+Nov 10 2017
+hwk6.html -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Update Movies</title>
+  </head>
+  <body>
+    <h1>Welcome to WMDB</h1>
+    <ul>
+      <li><a href='/'>Home</a></li>
+      <li><a href='/search'>Search by Title</a></li>
+      <li><a href='/select'>Select from Imcomplete Movies</a></li>
+    </ul>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+           <p>{{ message }}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}
+      <h1>{{title}}</h1>
+    {% endblock %}
+  </body>
+</html>
