@@ -24,7 +24,7 @@ def select():
         return redirect(url_for('update', id=movie_tt))
     return render_template('select.html', movies = movies)
 
-@app.route('/update/<id>', methods =['POST', 'GET'])
+@app.route('/make', methods =['POST', 'GET'])
 # renders update page with the info for the movie with the TT from the url
 # allows for updates and deletions to the database
 def update(id):
@@ -38,3 +38,5 @@ if __name__ == '__main__':
   app.debug == True
   port = os.getuid()
   app.run('0.0.0.0', port)
+
+# did this work
