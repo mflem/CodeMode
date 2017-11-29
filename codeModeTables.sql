@@ -13,17 +13,16 @@ create table users (
 -- includes questions and answers as well as what they are worth
 drop table if exists questions;
 create table questions(
-       qid integer auto_increment primary key,            
-       questionText varchar(100),
-       answer varchar(100), 
-explanation varchar(500),     
-       point_value integer,
-       deck_num integer,
-qtype enum('multi','fillblank'), 
-answer varchar(100),
-wrong1 varchar(100), -- if not multi, NULL
+	qid integer auto_increment primary key,     
+	questionText varchar(100),
+	answer varchar(100),
+	explanation varchar(500),     
+	point_value integer,
+	deck_num integer,
+	qtype enum('multi','fillblank'), 
+	wrong1 varchar(100), -- if not multi, NULL
 	wrong2 varchar(100), -- if not multi, NULL
-wrong3 varchar(100) -- if not multi, NULL
+	wrong3 varchar(100) -- if not multi, NULL
        );
 
 -- connects collaborators and the questions they made 
@@ -39,3 +38,5 @@ create table hasAnswered(
        qid integer foreign key,            
        cid integer foreign key,
        );
+       
+       
