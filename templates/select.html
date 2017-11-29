@@ -1,12 +1,13 @@
-<!-- Maggie Jennings and Mojia Shen
-Nov 10 2017
-search.html -->
+<!-- Maggie Jennings and Margaret Flemings
+CodeMode
+Draft -->
 {% extends 'hwk6.html' %}
   {% block content %}
     <form method= "POST" action="{{script}}">
-      <p> Movies without release date or director</p>
+      <p>Decks you can study</p>
         <select name="menu-tt">
-            {% for movie in movies %}
+            {% for deck in decks %}
+		<!-- is this a comment?? change from movies -->
               <option value = {{movie.tt}}>{{movie.title}}</option>
             {% endfor %}
         </select>

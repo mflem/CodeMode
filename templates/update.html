@@ -1,9 +1,11 @@
 <!-- Maggie Jennings and Mojia Shen
-Nov 10 2017
-update.html -->
-{% extends 'hwk6.html' %}
+CodeMode
+Draft -->
+
+{% extends 'codemode.html' %}
   {% block content %}
       <form method= "POST" action="{{script}}">
+	<!-- edit all of this -->
   <p>Use "None or "Null" to set a field to null. Only Title, Release Year and Director can be null.</p>
     <p><label for="movie-title">Title</label>
       <input type=text name='movie-title' value="{{data[0]}}"></input></p>
