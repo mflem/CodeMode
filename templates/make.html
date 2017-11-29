@@ -6,24 +6,25 @@ Draft -->
   {% block content %}
       <form method= "POST" action="{{script}}">
 	<!-- edit all of this -->
-  <p>Use "None or "Null" to set a field to null. Only Title, Release Year and Director can be null.</p>
-    <p><label for="movie-title">Title</label>
-      <input type=text name='movie-title' value="{{data[0]}}"></input></p>
+  <p>Please give the following info for your question</p>
+    <p><label for="questionText">Question Text</label>
+      <input type=text name='qText' value=""></input></p>
+    <p><label for="answer">Answer</label>
+      <input type=text name='answer' value=""></input></p>
+    <p><label for="wrong1">Wrong Option 1:</label>
+        <input type=text name='wrong1' value=""></input></p>
+    <p><label for="wrong2">Wrong Option 2:</label>
+        <input type=text name='wrong2' value=""></input></p>
+    <p><label for="wrong3">Wrong Option 3:</label>
+        <input type=text name='wrong3' value=""></input></p>
+    <p><label for="explanation">Explanation</label>
+      <input type=text name='explanation' value=""></input></p>
+    <p><label for="pointVal">Point value</label>
+      <input type=number name='pointVal' value=""></input></p>
+    <p><label for="deckNum">Add to deck:</label>
+      <input type=text name='deckNum' value=""></input></p>
     <br>
-    <p><label for="movie-release">Release year</label>
-      <input type=text name='movie-release' value="{{data[2]}}"></input></p>
-    <br>
-    <p><label for="movie-tt">Movie id</label>
-      <input type=text name='movie-tt' value="{{data[1]}}"></input></p>
-    <br>
-    <p><label for="movie-director">Director ID</label>
-      <input type=text name='movie-director' value="{{data[3]}}"></input></p>
-    <br>
-    <p><label for="movie-addedby">Added by</label>
-      <input type=text name='movie-addedby' value="{{data[4]}}"></input></p>
-    <br>
-    <p>Director {{data[5]}}</p>
+    <input type="submit" value='add' name='submit'></input>
     <input type="submit" value='update' name='submit'></input>
-    <input type="submit" value='delete' name='submit'></input>
 </form>
   {% endblock %}

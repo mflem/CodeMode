@@ -10,29 +10,34 @@ import dbconn2
 
 app = Flask(__name__)
 
-@app.route('/', methods =['POST', 'GET'])
+@app.route('/')
+#home page
 def home():
     return render_template('codemode.html')
 
 @app.route('/select/', methods =['POST', 'GET'])
-# renders page with all movies without directors or release dates, redirects to update with selected movie's info
+# page for selecting a deck to quiz on
 def select():
     conn = movie.getConn()
     movies = movie.get_movies(conn)
     if request.method == 'POST':
         movie_tt = request.form['menu-tt']
         return redirect(url_for('update', id=movie_tt))
-    return render_template('select.html', movies = movies)
+    return render_template('select.html')
 
-@app.route('/make', methods =['POST', 'GET'])
-# renders update page with the info for the movie with the TT from the url
-# allows for updates and deletions to the database
-def update(id):
+@app.route('/make/', methods =['POST', 'GET'])
+# page for making questions
+def make():
     conn = movie.getConn()
     movie_data = movie.find_movie(conn, int(id))
-    return render_template('update.html', data=update_info)
+    return render_template('make.html', data=update_info)
 
 app.secret_key = 'youcantguessthisout'
+
+@app.route('/quiz/<id>')
+#page for taking a quiz
+def quiz(id):
+    return render_template('quiz.html')
 
 if __name__ == '__main__':
   app.debug == True
