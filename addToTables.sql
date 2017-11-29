@@ -5,7 +5,7 @@ insert into users(loginname,points,email,isCollaborator,password) values
        ('Suzy',0,'martha@gmail.com','n','5551234');
 
 insert into questions(questionText, answer) values ('Is pi delicious?','Obviously');
-insert into questions(questionText, answer) values ('How much would would a woodchuck, chuck, if a woodchuck was Chuck Norris?', 'Much');
+insert into questions(questionText, answer) values ('How much wood would a woodchuck, chuck, if a woodchuck was Chuck Norris?', 'Much');
 
 insert into madeBy(qid, cid) values 
 		('1','2'),
