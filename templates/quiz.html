@@ -4,10 +4,11 @@
   {% block content %}
     <form method= "POST" action="{{script}}">
 	<p>Q TEXT</p>
-	 <input type="radio" name="quiz" value="male" checked><br>
+	 <input type="radio" name="quiz" value="male" checked>other<br>
  	 <input type="radio" name="quiz" value="female"> Female<br>
- 	 <input type="radio" name="quiz" value="other"> Other
-       	 <input type="radio" name="quiz" value="other"> Other
+ 	 <input type="radio" name="quiz" value="other"> Other<br>
+       	 <input type="radio" name="quiz" value="other"> Other<br>
      </form>
 
  {% endblock %}
+<!-- questions and answers(right and wrong) should be in a randomly generated order -->
