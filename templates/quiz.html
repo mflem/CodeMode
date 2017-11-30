@@ -2,12 +2,26 @@
 
 {% extends 'codemode.html' %}
   {% block content %}
-  <form method= "POST" action="{{script}}">
-	     <p>Q TEXT</p>
-	 <input type="radio" name="quiz" value="male" checked><br>
- 	 <input type="radio" name="quiz" value="female"> Female<br>
- 	 <input type="radio" name="quiz" value="other"> Other
-   <input type="radio" name="quiz" value="other"> Other
+  <form method= "GET" action="{{script}}">
+	 <p>{{question.questionText}}</p>
+	    {% if question.qtype == 'multi' %}
+         <input type="radio" name="quiz" value=""><br>
+	       <input type="radio" name="quiz" value=""><br>
+ 	       <input type="radio" name="quiz" value=""><br>
+ 	       <input type="radio" name="quiz" value=""><br>
+	    {% else %}
+		    {% if question.qtype =="truefalse' %}
+				 <input type="radio" name="quiz" value="true">True<br>
+ 	       <input type="radio" name="quiz" value="False">False<br>
+        {% else %}
+            <!-- question is fill in blank -->
+            <input type="text" name="quiz">
+        {% endif%}
+      {% endif %}
+
+      <div id="result"></div>
+      <div id="explanation"></div>
+
   </form>
 
  {% endblock %}

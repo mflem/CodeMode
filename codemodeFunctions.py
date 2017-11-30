@@ -9,7 +9,8 @@ from flask import flash
 
 #functions and connections necessary for app.py
 
-def update_movie(conn, data):
+def insert(conn, data):
+    #add a question into the database
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     try:
         # data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckNum)
@@ -20,3 +21,17 @@ def update_movie(conn, data):
             flash(to_flash)
     except Exception as error:
         flash("error: {}".format(error))
+
+def getQuestion(conn, inQid):
+    #return question info
+    curs = conn.cursor(MySQLdb.cursors.DictCursor)
+    curs.execute('SELECT * from questions where qid = %s;', [inQid])
+    result = curs.fetchone()
+    print result
+    return result 
+
+def getDeck(conn, decknum):
+    #returns all question ids for every question in a given deck
+    curs = conn.cursor(MySQLdb.cursors.DictCursor)
+    curs.execute('SELECT qid from questions where deckNum = %s;', [decknum])
+    return curs.fetchhall()
