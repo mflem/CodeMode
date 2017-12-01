@@ -11,7 +11,11 @@ insert into questions(questionText, answer) values ('How much wood would a woodc
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
 VALUES("How do you close an <html> tag?","</html>", "multi", "<html>", "/html", "<close html>", "You close tags with a slash '/' infront of the original tag",1,1)
 //2
-
+INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
+VALUES("Which of the following is an inline element?","<span>", "multi", "<div>", "<li>", "<header>", "span is the only inline element",1,1)
+//3
+INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
+VALUES("Which attribute do you use for links?","href", "style", "name", "value", "<close html>", "You can use the href attribute to make HTML links",1,1)
 
 insert into madeBy(qid, cid) values 
 		('1','2'),
