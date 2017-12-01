@@ -25,7 +25,7 @@ def select():
 def make():
     if request.method == 'POST': # if there is a request
         action = request.form['submit']
-        if action == 'add':
+        if action == 'submit':
             #gathers inputted info to send to database
             questionText = request.form['questionText']
             answer = request.form['answer']
