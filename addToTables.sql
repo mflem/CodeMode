@@ -16,7 +16,22 @@ VALUES("Which of the following is an inline element?","<span>", "multi", "<div>"
 //3
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
 VALUES("Which attribute do you use for links?","href", "style", "name", "value", "<close html>", "You can use the href attribute to make HTML links",1,1)
-
+//4
+INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
+VALUES("How do you comment in html?",
+	"<!-- comment -->", "multi", "#comment", 
+	"-- comment", "//comment", 
+	'''<!-- --> is the correct format for commenting in html. 
+	# allows commenting in Python. -- comments out in SQL. 
+	Finally // works in Javascript.''',1,1)
+//5
+INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
+VALUES("Which is a relative url?",
+	"/kitten.png", "multi", "https://www.kittensinc.com/kitten.img", 
+	"www.google.com/kitten.png", "Desktop/user/other/kitten.png", 
+	'''The correct answer is /kitten.png because it does not specify the whole path.',1,1)
+	
+	
 insert into madeBy(qid, cid) values 
 		('1','2'),
 		('3','2');
