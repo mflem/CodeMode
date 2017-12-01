@@ -40,10 +40,10 @@ def make():
             conn = codemodeFunctions.getConn()
             codemodeFunctions.insert(conn,data)
             # throw in redirect to update page
-     else:
-        return render_template('make.html', data=update_info)
+    else:
+        return render_template('make.html')
 
-# app.secret_key = 'youcantguessthisout'
+app.secret_key = 'youcantguessthisout'
 
 @app.route('/quiz/<q_id>')
 #page for taking a quiz
