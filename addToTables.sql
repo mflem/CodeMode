@@ -1,11 +1,11 @@
-insert into users(loginname,points,email,isCollaborator,password) values
-       ('Martha',0, 'martha@gmail.com','y','5551234'),
-       ('Brandy',9,'martha@gmail.com','n','5550000'),
-       ('Simba',0,'martha@gmail.com','n','5555555'),
-       ('Suzy',0,'martha@gmail.com','n','5551234');
+/* Data that can be inserted temporarily for testing purposes */
 
-insert into questions(questionText, answer) values ('Is pi delicious?','Obviously');
-insert into questions(questionText, answer) values ('How much wood would a woodchuck, chuck, if a woodchuck was Chuck Norris?', 'Much');
+/* test users */
+insert into users(loginname,points,email,isCollaborator,password) values
+       ('Martha',0, 'martha@gmail.com','y','secret'),
+       ('Brandy',9,'brandy@gmail.com','n','supersecret'),
+       ('Simba',0,'simba@gmail.com','n','justcantwait'),
+       ('Suzy',0,'suzi@gmail.com','n','imaspy');
 
 //1
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
@@ -35,6 +35,10 @@ VALUES("Which is a relative url?",
 insert into madeBy(qid, cid) values 
 		('1','2'),
 		('3','2');
+
+
+insert into questions(questionText, answer) values ('Is pi delicious?','Obviously');
+insert into questions(questionText, answer) values ('How much wood would a woodchuck, chuck, if a woodchuck was Chuck Norris?', 'Much');
 
 UPDATE questions SET wrong2 = 'Hardly' WHERE qid=1;
 
