@@ -1,6 +1,8 @@
 <!-- Maggie Jennings and Mojia Shen
 CodeMode
-Draft -->
+Draft
+Form for inserting a question into the database AND doubles as update form
+when given a question-->
 
 {% extends 'codemode.html' %}
   {% block content %}
@@ -14,8 +16,8 @@ Draft -->
     <p><label for="qtype">Answer</label>
         <select name='qtype'>
           <option value="multi">Multiple Choice</option>
-          <!-- <option value="fillblank">Fill in the Blank</option>
-          <option value="truefalse">True or False</option> -->
+          <option value="fillblank">Fill in the Blank</option>
+          <!-- <option value="truefalse">True or False</option> -->
         </select></p>
     <p><label for="wrong1">Wrong Option 1:</label>
         <input type=text name='wrong1' value="{{wrong1}}"></input></p>

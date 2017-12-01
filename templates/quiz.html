@@ -1,17 +1,20 @@
 <!-- Margaret Flemings and Maggie Jennings -->
-
+<!-- Template for the quiz page, currently loads all questions from a deck on the same page-->
+<!-- No grading right now, add in next round -->
 {% extends 'codemode.html' %}
   {% block content %}
   <form method= "GET" action="{{script}}">
     {% for question in questions %}
 	 <p>{{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
+      <!-- for each multiple choice question show options -->
          <input type="radio" name="quiz" value="{{question['answer']}}">{{question['answer']}}<br>
 	       <input type="radio" name="quiz" value="{{question['wrong1']}}">{{question['wrong1']}}<br>
  	       <input type="radio" name="quiz" value="{{question['wrong2']}}">{{question['wrong2']}}<br>
  	       <input type="radio" name="quiz" value="{{question['wrong3']}}">{{question['wrong3']}}<br>
 	    {% else %}
 		    {% if question['qtype'] == 'truefalse' %}
+        <!-- true or false questions -->
 				 <input type="radio" name="quiz" value="true">True<br>
  	       <input type="radio" name="quiz" value="False">False<br>
         {% else %}
