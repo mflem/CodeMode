@@ -44,7 +44,7 @@ def make():
             # throw in redirect to update page
     else:
         return render_template('make.html')
-    
+
 @app.route('/update/<updateId>', methods =['POST', 'GET'])
 # page for updating questions
 def update(updateId):
@@ -52,24 +52,24 @@ def update(updateId):
     qResults = codemodeFunctions.getQuestion(conn, updateId)
     # print qResults["questionText"]
     return render_template('make.html',
-                           questionText=qResults["questionText"], 
-                           answer=qResults["answer"], 
-                           explanation=qResults["explanation"], 
-                           pointVal=qResults["point_value"], 
+                           questionText=qResults["questionText"],
+                           answer=qResults["answer"],
+                           explanation=qResults["explanation"],
+                           pointVal=qResults["point_value"],
                            deckNum=qResults["deck_num"],
-                           qtype=qResults["qtype"], 
-                           wrong1=qResults["wrong1"], 
-                           wrong2=qResults["wrong2"], 
+                           qtype=qResults["qtype"],
+                           wrong1=qResults["wrong1"],
+                           wrong2=qResults["wrong2"],
                            wrong3=qResults["wrong3"])
-                           
+
 
 app.secret_key = 'youcantguessthisout'
 
-@app.route('/quiz/<q_id>')
+@app.route('/quiz/<quizid>')
 #page for taking a quiz
-def quiz(qid):
+def quiz(quizid):
     conn = codemodeFunctions.getConn()
-    qResults = codemodeFunctions.getQuestion(conn, qid)
+    qResults = codemodeFunctions.getQuestion(conn, quizid)
     return render_template('quiz.html', question=qResults)
 
 if __name__ == '__main__':

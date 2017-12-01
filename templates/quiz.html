@@ -3,14 +3,14 @@
 {% extends 'codemode.html' %}
   {% block content %}
   <form method= "GET" action="{{script}}">
-	 <p>{{question.questionText}}</p>
-	    {% if question.qtype == 'multi' %}
-         <input type="radio" name="quiz" value=""><br>
-	       <input type="radio" name="quiz" value=""><br>
- 	       <input type="radio" name="quiz" value=""><br>
- 	       <input type="radio" name="quiz" value=""><br>
+	 <p>{{question['questionText']}}</p>
+	    {% if question['qtype'] == 'multi' %}
+         <input type="radio" name="quiz" value= "{{question['answer']}}">{{question['answer']}}<br>
+	       <input type="radio" name="quiz" value="{{question['wrong1']}}">{{question['wrong1']}}<br>
+ 	       <input type="radio" name="quiz" value="{{question['wrong2']}}">{{question['wrong2']}}<br>
+ 	       <input type="radio" name="quiz" value="{{question['wrong3']}}">{{question['wrong3']}}<br>
 	    {% else %}
-		    {% if question.qtype =="truefalse' %}
+		    {% if question['qtype'] == 'truefalse' %}
 				 <input type="radio" name="quiz" value="true">True<br>
  	       <input type="radio" name="quiz" value="False">False<br>
         {% else %}
