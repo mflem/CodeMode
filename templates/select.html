@@ -8,10 +8,10 @@ Draft -->
         <select name="decks">
             {% for deck in decks %}
 		<!-- is this a comment?? change from movies -->
-              <option value = {{deck['deck_num']}}>{{deck['deck_num']}}</option>
+              <option value = {{deck}}>{{deck}}</option>
             {% endfor %}
         </select>
         <br>
-        <input type="submit" name ='submit'></input>
+        <input type="submit" name ='submit' value='submit'></input>
     </form>
   {% endblock %}

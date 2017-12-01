@@ -20,7 +20,12 @@ def home():
 def select():
     conn = codemodeFunctions.getConn()
     deckList = codemodeFunctions.getDeckList(conn)
-    return render_template('select.html', decks = deckList)
+    print deckList;
+    print [deckList];
+    if request.method =='POST':
+        deckid = request.form['decks']
+        return redirect(url_for("quiz",deckid=deckid))
+    return render_template('select.html', decks=[deckList])
 
 @app.route('/make/', methods =['POST', 'GET'])
 # page for making questions
