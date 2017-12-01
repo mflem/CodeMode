@@ -3,9 +3,10 @@
 {% extends 'codemode.html' %}
   {% block content %}
   <form method= "GET" action="{{script}}">
+    {% for question in questions %}
 	 <p>{{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
-         <input type="radio" name="quiz" value= "{{question['answer']}}">{{question['answer']}}<br>
+         <input type="radio" name="quiz" value="{{question['answer']}}">{{question['answer']}}<br>
 	       <input type="radio" name="quiz" value="{{question['wrong1']}}">{{question['wrong1']}}<br>
  	       <input type="radio" name="quiz" value="{{question['wrong2']}}">{{question['wrong2']}}<br>
  	       <input type="radio" name="quiz" value="{{question['wrong3']}}">{{question['wrong3']}}<br>
@@ -19,6 +20,7 @@
         {% endif%}
       {% endif %}
 
+      {% endfor %}
       <div id="result"></div>
       <div id="explanation"></div>
 

@@ -67,12 +67,12 @@ def update(updateId):
 
 app.secret_key = 'youcantguessthisout'
 
-@app.route('/quiz/<quizid>')
+@app.route('/quiz/<deckid>')
 #page for taking a quiz
-def quiz(quizid):
+def quiz(deckid):
     conn = codemodeFunctions.getConn()
-    qResults = codemodeFunctions.getQuestion(conn, quizid)
-    return render_template('quiz.html', question=qResults)
+    qResults = codemodeFunctions.getQuestionsFromDeck(conn, deckid)
+    return render_template('quiz.html', questions=qResults)
 
 if __name__ == '__main__':
   app.debug == True

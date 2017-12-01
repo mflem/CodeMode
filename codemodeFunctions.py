@@ -37,6 +37,13 @@ def getQuestion(conn, inQid):
     print result
     return result
 
+def getQuestionsFromDeck(conn, deck_num):
+    curs = conn.cursor(MySQLdb.cursors.DictCursor)
+    curs.execute('SELECT * from questions where deck_num = %s;', [deck_num])
+    result = curs.fetchall()
+    print result
+    return result
+
 def getDeckList(conn):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     result = curs.execute('SELECT DISTINCT(deck_num) AS deck_num FROM questions ORDER BY deck_num DESC;')
