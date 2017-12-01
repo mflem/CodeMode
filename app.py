@@ -38,7 +38,8 @@ def make():
             deckNum = request.form['deckNum']
             data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckNum)
             conn = codemodeFunctions.getConn()
-            codemodeFunctions.insert(conn,data)
+            newID = codemodeFunctions.insert(conn,data)
+            
             # throw in redirect to update page
     else:
         return render_template('make.html')
