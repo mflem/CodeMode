@@ -39,6 +39,7 @@ def make():
             data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckNum)
             conn = codemodeFunctions.getConn()
             newID = codemodeFunctions.insert(conn,data)
+            # newIDStr = str(newID["qid"])
             return redirect(url_for("update",updateId=newID))
             # throw in redirect to update page
     else:
