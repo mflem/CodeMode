@@ -39,14 +39,14 @@ def make():
             data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckNum)
             conn = codemodeFunctions.getConn()
             newID = codemodeFunctions.insert(conn,data)
-            return redirect(url_for("update",id=newID))
+            return redirect(url_for("update",updateId=newID))
             # throw in redirect to update page
     else:
         return render_template('make.html')
     
-@app.route('/update/<id>', methods =['POST', 'GET'])
+@app.route('/update/<updateId>', methods =['POST', 'GET'])
 # page for updating questions
-def update(id):
+def update(updateId):
     conn = codemodeFunctions.getConn()
     qResults = codemodeFunctions.getQuestion(conn, qid)
     return render_template('make.html',
