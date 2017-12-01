@@ -35,3 +35,10 @@ def getDeck(conn, decknum):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     curs.execute('SELECT qid from questions where deckNum = %s;', [decknum])
     return curs.fetchhall()
+
+def getConn():
+    DSN = dbconn2.read_cnf('~/.my.cnf')
+    DSN['db'] = 'codemode_db'
+    conn = dbconn2.connect(DSN)
+#     cursor = conn.cursor(MySQLdb.cursors.DictCursor)
+    return conn
