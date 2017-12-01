@@ -8,16 +8,16 @@ insert into users(loginname,points,email,isCollaborator,password) values
        ('Suzy',0,'suzi@gmail.com','n','imaspy');
        
 DECK ONE:
-//1
+/* 1 */
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
 VALUES("How do you close an <html> tag?","</html>", "multi", "<html>", "/html", "<close html>", "You close tags with a slash '/' infront of the original tag",1,1)
-//2
+/* 2 */
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
 VALUES("Which of the following is an inline element?","<span>", "multi", "<div>", "<li>", "<header>", "span is the only inline element",1,1)
-//3
+/* 3 */
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
 VALUES("Which attribute do you use for links?","href", "style", "name", "value", "<close html>", "You can use the href attribute to make HTML links",1,1)
-//4
+/* 4 */
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
 VALUES("How do you comment in html?",
 	"<!-- comment -->", "multi", "#comment", 
@@ -25,7 +25,7 @@ VALUES("How do you comment in html?",
 	'''<!-- --> is the correct format for commenting in html. 
 	# allows commenting in Python. -- comments out in SQL. 
 	Finally // works in Javascript.''',1,1)
-//5
+/* 5 */
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
 VALUES("Which is a relative url?",
 	"/kitten.png", "multi", "https://www.kittensinc.com/kitten.img", 
