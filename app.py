@@ -16,7 +16,7 @@ def home():
     return render_template('codemode.html')
 
 @app.route('/select/', methods =['POST', 'GET'])
-# page for selecting a deck to quiz on
+# page for selecting a deck to be quizzed on
 def select():
     conn = codemodeFunctions.getConn()
     deckList = codemodeFunctions.getDeckList(conn)
@@ -24,11 +24,12 @@ def select():
     print [deckList];
     if request.method =='POST':
         deckid = request.form['decks']
+        # using the deck's id, go to the associated quiz
         return redirect(url_for("quiz",deckid=deckid))
     return render_template('select.html', decks=[deckList])
 
 @app.route('/make/', methods =['POST', 'GET'])
-# page for making questions
+# page for making questions to add to decks
 def make():
     if request.method == 'POST': # if there is a request
         action = request.form['submit']
@@ -45,10 +46,10 @@ def make():
             deckNum = request.form['deckNum']
             data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckNum)
             conn = codemodeFunctions.getConn()
+            # insert returns the qid of the last inputted value on this connection
             newID = codemodeFunctions.insert(conn,data)
-            # newIDStr = str(newID["qid"])
             return redirect(url_for("update",updateId=newID))
-            # throw in redirect to update page
+            # redirect to update page so updates can be made separately from make
     else:
         return render_template('make.html')
 
