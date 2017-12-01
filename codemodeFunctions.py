@@ -10,27 +10,27 @@ from flask import flash
 #functions and connections necessary for app.py
 
 def insert(conn, data):
-    #add a question into the database
+    #add a question into the database and return the newly inserted question's id
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     try:
         # data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckNum)
-        print "we are trying"
+        # uses prepared query to avoid attacks
         curs.execute('''INSERT INTO questions
         (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num)
         VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)''', (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]))
         to_flash = "Question (" + str(data[0]) +") was inserted successfully"
         flash(to_flash)
-        # "insert into person VALUES(%s, %s, %s, %s)"
+        # check the id of the last inserted question because the qid is auto incremented
         curs.execute('''SELECT last_insert_id();''')
+        # fetch the row
         qID = curs.fetchone()
-        print qID
-        print qID["last_insert_id()"]
+        #check the value in the row
         return qID["last_insert_id()"]
     except Exception as error:
         flash("error: {}".format(error))
 
 def getQuestion(conn, inQid):
-    #return question info
+    # return question info given qid
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     curs.execute('SELECT * from questions where qid = %s;', [inQid])
     result = curs.fetchone()
@@ -38,6 +38,7 @@ def getQuestion(conn, inQid):
     return result
 
 def getQuestionsFromDeck(conn, deck_num):
+    # return array of all questions given a deck number
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     curs.execute('SELECT * from questions where deck_num = %s;', [deck_num])
     result = curs.fetchall()
@@ -45,6 +46,7 @@ def getQuestionsFromDeck(conn, deck_num):
     return result
 
 def getDeckList(conn):
+     # return all unique deck numbers
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     result = curs.execute('SELECT DISTINCT(deck_num) AS deck_num FROM questions ORDER BY deck_num DESC;')
     print result
