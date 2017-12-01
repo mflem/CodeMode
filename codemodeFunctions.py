@@ -23,7 +23,7 @@ def insert(conn, data):
         qID = curs.fetchone()
         print qID
         print qID["qid"]
-        return qID
+        return qID["qid"]
     except Exception as error:
         flash("error: {}".format(error))
 
