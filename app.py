@@ -49,17 +49,18 @@ def make():
 # page for updating questions
 def update(updateId):
     conn = codemodeFunctions.getConn()
-    qResults = codemodeFunctions.getQuestion(conn, qid)
+    qResults = codemodeFunctions.getQuestion(conn, updateId)
+    # print qResults["questionText"]
     return render_template('make.html',
-                           questionText=qResults[1], 
-                           answer=qResults[2], 
-                           explanation=qResults[3], 
-                           pointVal=qResults[4], 
-                           deckNum=qResults[5],
-                           qtype=qResults[6], 
-                           wrong1=qResults[7], 
-                           wrong2=qResults[8], 
-                           wrong3=qResults[9])
+                           questionText=qResults["questionText"], 
+                           answer=qResults["answer"], 
+                           explanation=qResults["explanation"], 
+                           pointVal=qResults["point_value"], 
+                           deckNum=qResults["deck_num"],
+                           qtype=qResults["qtype"], 
+                           wrong1=qResults["wrong1"], 
+                           wrong2=qResults["wrong2"], 
+                           wrong3=qResults["wrong3"])
                            
 
 app.secret_key = 'youcantguessthisout'
