@@ -6,7 +6,8 @@ insert into users(loginname,points,email,isCollaborator,password) values
        ('Brandy',9,'brandy@gmail.com','n','supersecret'),
        ('Simba',0,'simba@gmail.com','n','justcantwait'),
        ('Suzy',0,'suzi@gmail.com','n','imaspy');
-
+       
+DECK ONE:
 //1
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num) 
 VALUES("How do you close an <html> tag?","</html>", "multi", "<html>", "/html", "<close html>", "You close tags with a slash '/' infront of the original tag",1,1)
@@ -31,16 +32,16 @@ VALUES("Which is a relative url?",
 	"www.google.com/kitten.png", "Desktop/user/other/kitten.png", 
 	'''The correct answer is /kitten.png because it does not specify the whole path.',1,1)
 	
-	
+/* testing madeby */
 insert into madeBy(qid, cid) values 
 		('1','2'),
 		('3','2');
 
-
+/* fun additions */
 insert into questions(questionText, answer) values ('Is pi delicious?','Obviously');
 insert into questions(questionText, answer) values ('How much wood would a woodchuck, chuck, if a woodchuck was Chuck Norris?', 'Much');
 
+/* Testing updating */
 UPDATE questions SET wrong2 = 'Hardly' WHERE qid=1;
-
 UPDATE questions SET wrong1 = '1' WHERE qid=2;
 UPDATE questions SET wrong2 = '2' WHERE qid=2;
