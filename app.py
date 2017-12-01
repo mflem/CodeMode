@@ -41,7 +41,7 @@ def make():
             codemodeFunctions.insert(conn,data)
             # throw in redirect to update page
      else:
-    	return render_template('make.html', data=update_info)
+        return render_template('make.html', data=update_info)
 
 # app.secret_key = 'youcantguessthisout'
 
