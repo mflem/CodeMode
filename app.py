@@ -18,7 +18,9 @@ def home():
 @app.route('/select/', methods =['POST', 'GET'])
 # page for selecting a deck to quiz on
 def select():
-    return render_template('select.html')
+    conn = codemodeFunctions.getConn()
+    deckList = codemodeFunctions.getDeckList(conn)
+    return render_template('select.html', decks = deckList)
 
 @app.route('/make/', methods =['POST', 'GET'])
 # page for making questions

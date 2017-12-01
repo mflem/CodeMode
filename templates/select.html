@@ -5,10 +5,10 @@ Draft -->
   {% block content %}
     <form method= "POST" action="{{script}}">
       <p>Decks you can study</p>
-        <select name="menu-tt">
+        <select name="decks">
             {% for deck in decks %}
 		<!-- is this a comment?? change from movies -->
-              <option value = {{movie.tt}}>{{movie.title}}</option>
+              <option value = {{deck['deck_num']}}>{{deck['deck_num']}}</option>
             {% endfor %}
         </select>
         <br>
