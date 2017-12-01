@@ -37,16 +37,18 @@ def make():
             pointVal = request.form['pointVal']
             deckNum = request.form['deckNum']
             data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckNum)
+            conn = codemodeFunctions.getConn()
             codemodeFunctions.insert(conn,data)
             # throw in redirect to update page
      else:
     	return render_template('make.html', data=update_info)
 
-app.secret_key = 'youcantguessthisout'
+# app.secret_key = 'youcantguessthisout'
 
 @app.route('/quiz/<q_id>')
 #page for taking a quiz
 def quiz(qid):
+    conn = codemodeFunctions.getConn()
     qResults = codemodeFunctions.getQuestion(conn, qid)
     return render_template('quiz.html', question=qResults)
 
