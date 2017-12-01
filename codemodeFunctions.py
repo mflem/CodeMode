@@ -19,7 +19,7 @@ def insert(conn, data):
                         ''', (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]))
         to_flash = "Question (" + str(data[0]) +") was inserted successfully"
         flash(to_flash)
-        qID = conn.insert_id()
+        qID = curs.execute('''SELECT last_insert_id()''')
         print qID
         return qID
     except Exception as error:
