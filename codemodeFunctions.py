@@ -16,7 +16,7 @@ def insert(conn, data):
         # data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckNum)
         # uses prepared query to avoid attacks
         curs.execute('''INSERT INTO questions
-        (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num)
+        (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_name)
         VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)''', (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]))
         to_flash = "Question (" + str(data[0]) +") was inserted successfully"
         flash(to_flash)
@@ -37,10 +37,10 @@ def getQuestion(conn, inQid):
     print result
     return result
 
-def getQuestionsFromDeck(conn, deck_num):
+def getQuestionsFromDeck(conn, deck_name):
     # return array of all questions given a deck number
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
-    curs.execute('SELECT * from questions where deck_num = %s;', [deck_num])
+    curs.execute('SELECT * from questions where deck_name = %s;', [deck_name])
     result = curs.fetchall()
     print result
     return result
@@ -48,7 +48,7 @@ def getQuestionsFromDeck(conn, deck_num):
 def getDeckList(conn):
      # return all unique deck numbers
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
-    result = curs.execute('SELECT DISTINCT(deck_num) AS deck_num FROM questions ORDER BY deck_num DESC;')
+    result = curs.execute('SELECT DISTINCT(deck_name) AS deck_name FROM questions ORDER BY deck_name DESC;')
     print result
     return result
 
