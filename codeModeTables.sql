@@ -18,7 +18,7 @@ create table questions(
 	answer varchar(100),
 	explanation varchar(500),     
 	point_value integer,
-	deck_num integer,
+	deck_name varchar(100),
 	qtype enum('multi','fillblank'), 
 	wrong1 varchar(100), -- if not multi, NULL
 	wrong2 varchar(100), -- if not multi, NULL
