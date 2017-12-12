@@ -43,7 +43,7 @@ def join():
     except Exception as err:
         flash('form submission error '+str(err))
         return redirect( url_for('index') )
-        
+
 @app.route('/login/', methods=["POST"])
 def login():
     try:
@@ -58,7 +58,7 @@ def login():
             # Same response as wrong password, so no information about what went wrong
             flash('login incorrect. Try again or join')
             return redirect( url_for('index'))
-        hashed = row['hashed']
+        hashed = row['password']
         # strings always come out of the database as unicode objects
         if bcrypt.hashpw(passwd.encode('utf-8'),hashed.encode('utf-8')) == hashed:
             flash('successfully logged in as '+username)
