@@ -6,7 +6,7 @@ create table users (
        points integer default 0,    
        email varchar(50) default null,     -- email address
        isCollaborator enum('y','n') default 'n', 
-       password varchar(20)
+       password varchar(150)
        );
 
 
