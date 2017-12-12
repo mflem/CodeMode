@@ -26,7 +26,7 @@ def select():
         deckid = request.form['decks']
         # using the deck's id, go to the associated quiz
         return redirect(url_for("quiz",deckid=deckid))
-    return render_template('select.html', decks=[deckList])
+    return render_template('select.html', decks=deckList)
 
 @app.route('/make/', methods =['POST', 'GET'])
 # page for making questions to add to decks
