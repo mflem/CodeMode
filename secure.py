@@ -28,13 +28,13 @@ def join():
         hashed = bcrypt.hashpw(passwd1.encode('utf-8'), bcrypt.gensalt())
         conn = dbconn2.connect(dsn)
         curs = conn.cursor(MySQLdb.cursors.DictCursor)
-        curs.execute('SELECT username FROM userpass WHERE username = %s',
+        curs.execute('SELECT loginname FROM users WHERE loginname = %s',
                      [username])
         row = curs.fetchone()
         if row is not None:
             flash('That username is taken')
             return redirect( url_for('index') )
-        curs.execute('INSERT into userpass(username,hashed) VALUES(%s,%s)',
+        curs.execute('INSERT into users(loginname,password) VALUES(%s,%s)',
                      [username, hashed])
         session['username'] = username
         session['logged_in'] = True
@@ -51,7 +51,7 @@ def login():
         passwd = request.form['password']
         conn = dbconn2.connect(dsn)
         curs = conn.cursor(MySQLdb.cursors.DictCursor)
-        curs.execute('SELECT hashed FROM userpass WHERE username = %s',
+        curs.execute('SELECT password FROM users WHERE loginname = %s',
                      [username])
         row = curs.fetchone()
         if row is None:
@@ -110,6 +110,6 @@ def logout():
 
 if __name__ == '__main__':
     dsn = dbconn2.read_cnf()
-    dsn['db'] = 'webdb'
+    dsn['db'] = 'codemode_db'
     app.debug = True
     app.run('0.0.0.0',os.getuid())
