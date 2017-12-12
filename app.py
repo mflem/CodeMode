@@ -21,7 +21,7 @@ def select():
     conn = codemodeFunctions.getConn()
     deckList = codemodeFunctions.getDeckList(conn)
     print deckList;
-    print [deckList];
+#     print [deckList];
     if request.method =='POST':
         deckid = request.form['decks']
         # using the deck's id, go to the associated quiz
