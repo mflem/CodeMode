@@ -29,8 +29,12 @@ when given a question-->
       <input type=text name='explanation' value="{{explanation}}"></input></p>
     <p><label for="pointVal">Point value</label>
       <input type=number name='pointVal' value="{{pointVal}}"></input></p>
-    <p><label for="deckNum">Add to deck:</label>
-      <input type=text name='deckNum' value="{{deckNum}}"></input></p>
+    <p><label for="deckNum">Add to exisiting deck:</label>
+      <select name='deckName'>
+        {% for deck in decks %}
+          <option value = {{deck}}>{{deck}}</option>
+        {% endfor %}
+      </select></p>
     <br>
     <input type="submit" value='submit' name='submit'></input>
 </form>

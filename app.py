@@ -43,8 +43,8 @@ def make():
             wrong3 = request.form['wrong3']
             explanation = request.form['explanation']
             pointVal = request.form['pointVal']
-            deckNum = request.form['deckNum']
-            data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckNum)
+            deckName = request.form['deckName']
+            data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
             conn = codemodeFunctions.getConn()
             # insert returns the qid of the last inputted value on this connection
             newID = codemodeFunctions.insert(conn,data)
@@ -64,7 +64,7 @@ def update(updateId):
                            answer=qResults["answer"],
                            explanation=qResults["explanation"],
                            pointVal=qResults["point_value"],
-                           deckNum=qResults["deck_num"],
+                           deckName=qResults["deck_name"],
                            qtype=qResults["qtype"],
                            wrong1=qResults["wrong1"],
                            wrong2=qResults["wrong2"],
