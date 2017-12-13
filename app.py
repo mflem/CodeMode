@@ -182,6 +182,7 @@ def quiz(deckid):
     if request.method == 'POST':
         index = 0
         formData = []
+        print request.form
         for q in qResults:
             qName = 'q' + str(index)
             formData[index] = request.form[qName]

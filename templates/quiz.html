@@ -4,10 +4,12 @@
 {% extends 'codemode.html' %}
   {% block content %}
 
+  <form id="test-form" method='post'>
+
     {% set count = [1] %}
     {% for question in questions %}
 
-  <form id="test-form" method='post'>
+
   <div class="question{{ count }}">
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
@@ -27,18 +29,18 @@
         {% endif%}
       {% endif %}
       <br>
-      <input type="submit" name="submit"></button>
-      
+
+
       <div id="questionResult"></div>
       <div id="explanation"></div>
     </div>
-  </form>
+
       {% if count.append(count.pop() + 1) %}
       {% endif %}
       {% endfor %}
-
+      <input type="submit" name="submit"></input>
       <div id="totalResult"></div>
-
+      </form>
       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
       <script>
       function grading(){
