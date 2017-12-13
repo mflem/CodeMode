@@ -14,3 +14,5 @@ function grading(){
       console.log('Wrong!');
     }
 }
+
+grading();

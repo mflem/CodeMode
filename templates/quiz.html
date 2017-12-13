@@ -5,7 +5,7 @@
   {% block content %}
 
     {% for question in questions %}
-    <form method= "GET" action="grading.js">
+    <form method= "GET" onsubmit="grading.js">
   <div class="question">
 	 <p data-answer="{{question['answer']}}">{{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
@@ -34,9 +34,10 @@
 
       <div id="totalResult"></div>
       <script>
+      <!--
         $('form').submit(function( event ) {
           alert( "Handler for .submit() called." );
           event.preventDefault();
-        });
+        }); -->
       </script>
  {% endblock %}
