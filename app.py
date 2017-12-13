@@ -2,6 +2,7 @@
 # CodeMode
 
 from flask import Flask, render_template, make_response, request, flash, redirect, url_for, session, send_from_directory
+from werkzeug import secure_filename
 import os, sys
 import bcrypt
 import MySQLdb
@@ -9,6 +10,8 @@ import codemodeFunctions
 import dbconn2
 
 app = Flask(__name__)
+
+app.secret_key = 'youcantguessthisout'
 
 @app.route('/')
 #home page
@@ -69,9 +72,6 @@ def update(updateId):
                            wrong1=qResults["wrong1"],
                            wrong2=qResults["wrong2"],
                            wrong3=qResults["wrong3"])
-
-
-app.secret_key = 'youcantguessthisout'
 
 @app.route('/quiz/<deckid>')
 #page for taking a quiz
