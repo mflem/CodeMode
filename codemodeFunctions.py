@@ -69,3 +69,19 @@ def getConn():
     conn = dbconn2.connect(DSN)
 #     cursor = conn.cursor(MySQLdb.cursors.DictCursor)
     return conn
+
+def gradeQuiz(conn, questionInfo, formData, username):
+    curs = conn.cursor(MySQLdb.cursors.DictCursor)
+    index = 0;
+    pointCounter = 0;
+    answerResults = [];
+    totalCorrect = 0;
+    for question in formData:
+        if questionInfo[index]['answer'] == formData[index]:
+            pointCounter += questionInfo[index]['points']
+            totalCorrect += 1
+            answerResults[index] = True
+        else:
+            answerResults[index] = False
+    curs.execute('UPDATE users SET points = points + %d where loginname = %s;', [pointCounter, username])
+    return answerResults

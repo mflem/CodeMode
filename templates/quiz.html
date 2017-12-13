@@ -8,7 +8,7 @@
     {% for question in questions %}
 
   <form i="test-form">
-  <div class="question">
+  <div class="question{{ count }}">
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
       <!-- for each multiple choice question show options -->
