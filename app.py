@@ -47,7 +47,7 @@ def join():
     except Exception as err:
         flash('form submission error '+str(err))
         return redirect( url_for('index') )
-        
+
 @app.route('/login/', methods=["POST"])
 def login():
     try:
@@ -110,7 +110,7 @@ def logout():
     except Exception as err:
         flash('some kind of error '+str(err))
         return redirect( url_for('index') )
-    
+
 #-------- End of Login Code ---------------
 
 
@@ -174,11 +174,21 @@ def update(updateId):
                            wrong2=qResults["wrong2"],
                            wrong3=qResults["wrong3"])
 
-@app.route('/quiz/<deckid>')
+@app.route('/quiz/<deckid>', methods = [POST])
 #page for taking a quiz
 def quiz(deckid):
     conn = codemodeFunctions.getConn()
     qResults = codemodeFunctions.getQuestionsFromDeck(conn, deckid)
+    if method == 'POST':
+        index = 0
+        formData = []
+        for q in qResults:
+            qName = 'q' + str(index)
+            formData[index] = request.form[qName]
+        print formData
+        answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, 'me') # change to username later
+        print answerResults
+        return render_template('quiz.html', questions=qResults)
     return render_template('quiz.html', questions=qResults)
 
 if __name__ == '__main__':
