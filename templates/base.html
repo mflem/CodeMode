@@ -1,11 +1,11 @@
-
 <!doctype html>
 <html lang='en'>
 <head>
     <meta charset='utf-8'>
-    <meta name=author content="Scott D. Anderson">
+    <meta name=author content="Scott D. Anderson"> <!-- Adapted by Margaret Flemings -->
     <title>{{ page_title }}</title>
-    <link rel='stylesheet' href="{{url_for('static', filename = 'style.css')}}">
+    <!-- <link rel='stylesheet' href="{{url_for('static', filename = 'style.css')}}"> -->
+    
     {% block head_stuff %} {% endblock %}
 </head>
 <body>
@@ -29,6 +29,17 @@
 {% block jquery_scripts %}
 <script>
 console.log('jQuery loaded');
+</script>
+<script type="text/javascript">
+    
+        function showJoin() {
+             var x = document.getElementById("joinform");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
 </script>
 {% endblock %}
 
