@@ -1,12 +1,17 @@
-
 {% extends "base.html" %}
 
 {% block main_content %}
-<h1>Welcome to My App</h1>
+<h1>Welcome to back to CodeMode</h1>
 
-<p>Please login or join, using one of the forms below:</p>
+<form id="loginform" action="{{url_for('login')}}" method="post">
+    <h2>Login</h2>
+    <p><label>Username: <input type="text" name="username" required pattern="^\w+$"></label></p>
+    <p><label>Password: <input type="password" name="password" required></label></p>
+    <p><button type="submit">Submit</button></p>
+</form>
 
-<p>BTW, here's a string you might use: Göthe
+<p>Don't already have an account?</p>
+<button onclick="showJoin()">Join Now</button>
     
 
 <form id="joinform" action="{{url_for('join')}}" method="post">
@@ -17,12 +22,7 @@
     <p><button type="submit">Submit</button></p>
 </form>
     
-<form id="loginform" action="{{url_for('login')}}" method="post">
-    <h2>Login</h2>
-    <p><label>Username: <input type="text" name="username" required pattern="^\w+$"></label></p>
-    <p><label>Password: <input type="password" name="password" required></label></p>
-    <p><button type="submit">Submit</button></p>
-</form>
+
 {% endblock %}
     
 
@@ -39,7 +39,3 @@ $("#joinform").on('submit', function (event) {
 });
 </script>
 {% endblock %}
-
-
-
-
