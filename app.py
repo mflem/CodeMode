@@ -114,10 +114,10 @@ def logout():
 #-------- End of Login Code ---------------
 
 
-@app.route('/home/')
-#home page
-def home(name):
-    return render_template('codemode.html', name=name)
+# @app.route('/home/')
+# #home page
+# def home(name):
+#     return render_template('codemode.html', name=name)
 
 @app.route('/select/', methods =['POST', 'GET'])
 # page for selecting a deck to be quizzed on
