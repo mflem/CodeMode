@@ -33,5 +33,10 @@
       {% endfor %}
 
       <div id="totalResult"></div>
-
+      <script>
+        $('form').submit(function( event ) {
+          alert( "Handler for .submit() called." );
+          event.preventDefault();
+        });
+      </script>
  {% endblock %}
