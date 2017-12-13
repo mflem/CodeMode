@@ -9,6 +9,17 @@ Draft -->
     <title>CodeMode</title>
   </head>
   <body>
+    {% block main_content %}
+    <p>Click to <a href="{{ url_for('index') }}">return to the main page</a>.</p>
+
+    <h1>Greetings {{name}}</h1>
+
+    <form id="logoutform" action="{{url_for('logout')}}">
+        <button type="submit">logout</button>
+    </form>
+
+
+    {% endblock %}
     <h1>CodeMode</h1>
     <ul>
       <li><a href='/'>Home</a></li>
