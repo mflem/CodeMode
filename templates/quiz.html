@@ -7,7 +7,7 @@
     {% set count = [1] %}
     {% for question in questions %}
 
-  <form i="test-form">
+  <form id="test-form" method='post'>
   <div class="question{{ count }}">
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
@@ -27,13 +27,15 @@
         {% endif%}
       {% endif %}
       <br>
-      <input type="submit" name="submit">Grade</button>
+      <input type="submit" name="submit"></button>
+      
       <div id="questionResult"></div>
       <div id="explanation"></div>
     </div>
-
   </form>
-      {% if count.append(count.pop() + 1) %}{% endfor %}
+      {% if count.append(count.pop() + 1) %}
+      {% endif %}
+      {% endfor %}
 
       <div id="totalResult"></div>
 
