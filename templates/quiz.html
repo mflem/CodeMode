@@ -3,9 +3,11 @@
 <!-- No grading right now, add in next round -->
 {% extends 'codemode.html' %}
   {% block content %}
-  <form method= "GET" action="{{script}}">
+
     {% for question in questions %}
-	 <p>{{question['questionText']}}</p>
+    <form method= "GET" action="grading.js">
+  <div class="question">
+	 <p data-answer="{{question['answer']}}">{{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
       <!-- for each multiple choice question show options -->
          <input type="radio" name="quiz" value="{{question['answer']}}">{{question['answer']}}<br>
@@ -25,12 +27,11 @@
 
       <div id="questionResult"></div>
       <div id="explanation"></div>
-
-      {% endfor %}
-      <input type="submit" name ='submit' value='submit'></input>
-      <div id="totalResult"></div>
-
-
+    </div>
+    <input type="submit" name ='submit' value='submit'></input>
   </form>
+      {% endfor %}
+
+      <div id="totalResult"></div>
 
  {% endblock %}
