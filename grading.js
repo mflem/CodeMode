@@ -13,6 +13,8 @@ function grading(){
       $('questionResult').text('Wrong!');
       console.log('Wrong!');
     }
+
+    return false; 
 }
 
 grading();

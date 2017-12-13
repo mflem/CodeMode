@@ -5,7 +5,7 @@
   {% block content %}
 
     {% for question in questions %}
-    <form method= "GET" onsubmit="grading.js">
+  <!--  <form onsubmit="return grading()"> -->
   <div class="question">
 	 <p data-answer="{{question['answer']}}">{{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
@@ -24,20 +24,35 @@
             <input type="text" name="quiz">
         {% endif%}
       {% endif %}
-
+      <br>
+      <button onclick="grading()">Grade</button>
       <div id="questionResult"></div>
       <div id="explanation"></div>
     </div>
-    <input type="submit" name ='submit' value='submit'></input>
-  </form>
+
+  <!-- </form> -->
       {% endfor %}
 
       <div id="totalResult"></div>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
       <script>
-      <!--
-        $('form').submit(function( event ) {
-          alert( "Handler for .submit() called." );
-          event.preventDefault();
-        }); -->
+      function grading(){
+          var points = 0;
+          var radioVal = $("input[name='quiz']:checked").val();
+          var textVal = $("input[name='quiz'][type='text']").val();
+          var correctAnswer = $('p').attr('data-answer');
+          console.log(radioVal);
+          console.log(textVal);
+          console.log(correctAnswer);
+          if (radioVal == correctAnswer || textVal == correctAnswer){
+            $('#questionResult').text('Correct!');
+            console.log("Correct!");
+          } else{
+            $('#questionResult').text('Wrong!');
+            console.log('Wrong!');
+          }
+          return false;
+      }
       </script>
  {% endblock %}
