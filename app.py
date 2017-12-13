@@ -187,6 +187,7 @@ def quiz(deckid):
             qName = 'q[' + str(index) + ']'
             print request.form[qName]
             formData.append(request.form[qName])
+            index += 1
         print formData
         answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, 'me') # change to username later
         print answerResults
