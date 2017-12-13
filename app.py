@@ -1,9 +1,9 @@
 # Maggie Jennings and Margaret Flemings
 # CodeMode
-# Draft
 
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, make_response, request, flash, redirect, url_for, session, send_from_directory
 import os, sys
+import bcrypt
 import MySQLdb
 import codemodeFunctions
 import dbconn2
