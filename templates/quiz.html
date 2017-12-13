@@ -1,41 +1,43 @@
 <!-- Margaret Flemings and Maggie Jennings -->
 <!-- Template for the quiz page, currently loads all questions from a deck on the same page-->
-<!-- No grading right now, add in next round -->
+<!-- Counting from: https://stackoverflow.com/questions/7537439/how-to-increment-a-variable-on-a-for-loop-in-jinja-template -->
 {% extends 'codemode.html' %}
   {% block content %}
 
+    {% set count = [1] %}
     {% for question in questions %}
-  <!--  <form onsubmit="return grading()"> -->
+
+  <form i="test-form">
   <div class="question">
-	 <p data-answer="{{question['answer']}}">{{question['questionText']}}</p>
+	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
       <!-- for each multiple choice question show options -->
-         <input type="radio" name="quiz" value="{{question['answer']}}">{{question['answer']}}<br>
-	       <input type="radio" name="quiz" value="{{question['wrong1']}}">{{question['wrong1']}}<br>
- 	       <input type="radio" name="quiz" value="{{question['wrong2']}}">{{question['wrong2']}}<br>
- 	       <input type="radio" name="quiz" value="{{question['wrong3']}}">{{question['wrong3']}}<br>
+         <input type="radio" name="q{{ count }}" value="{{question['answer']}}">{{question['answer']}}<br>
+	       <input type="radio" name="q{{ count }}" value="{{question['wrong1']}}">{{question['wrong1']}}<br>
+ 	       <input type="radio" name="q{{ count }}" value="{{question['wrong2']}}">{{question['wrong2']}}<br>
+ 	       <input type="radio" name="q{{ count }}" value="{{question['wrong3']}}">{{question['wrong3']}}<br>
 	    {% else %}
 		    {% if question['qtype'] == 'truefalse' %}
         <!-- true or false questions -->
-				 <input type="radio" name="quiz" value="true">True<br>
- 	       <input type="radio" name="quiz" value="False">False<br>
+				 <input type="radio" name="q{{ count }}" value="true">True<br>
+ 	       <input type="radio" name="q{{ count }}" value="False">False<br>
         {% else %}
             <!-- question is fill in blank -->
-            <input type="text" name="quiz">
+            <input type="text" name="q{{ count }}">
         {% endif%}
       {% endif %}
       <br>
-      <button onclick="grading()">Grade</button>
+      <input type="submit" name="submit">Grade</button>
       <div id="questionResult"></div>
       <div id="explanation"></div>
     </div>
-
-  <!-- </form> -->
+      {% if count.append(count.pop() + 1) %}
+  </form>
       {% endfor %}
 
       <div id="totalResult"></div>
 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
       <script>
       function grading(){
           var points = 0;
@@ -46,7 +48,9 @@
           console.log(textVal);
           console.log(correctAnswer);
           if (radioVal == correctAnswer || textVal == correctAnswer){
-            $('#questionResult').text('Correct!');
+            $('#questionResult')
+
+            .text('Correct!');
             console.log("Correct!");
           } else{
             $('#questionResult').text('Wrong!');
@@ -54,5 +58,5 @@
           }
           return false;
       }
-      </script>
+      </script> -->
  {% endblock %}
