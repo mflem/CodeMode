@@ -174,12 +174,12 @@ def update(updateId):
                            wrong2=qResults["wrong2"],
                            wrong3=qResults["wrong3"])
 
-@app.route('/quiz/<deckid>', methods = [POST])
+@app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
 #page for taking a quiz
 def quiz(deckid):
     conn = codemodeFunctions.getConn()
     qResults = codemodeFunctions.getQuestionsFromDeck(conn, deckid)
-    if method == 'POST':
+    if request.method == 'POST':
         index = 0
         formData = []
         for q in qResults:
