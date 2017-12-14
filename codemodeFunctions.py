@@ -77,11 +77,14 @@ def gradeQuiz(conn, questionInfo, formData, username):
     answerResults = [];
     totalCorrect = 0;
     for question in formData:
+        print questionInfo[index]['answer']
+        print formData[index]
         if questionInfo[index]['answer'] == formData[index]:
-            pointCounter += questionInfo[index]['points']
+            pointCounter += questionInfo[index]['point_value']
             totalCorrect += 1
-            answerResults[index] = True
+            answerResults.append(True)
         else:
-            answerResults[index] = False
-    curs.execute('UPDATE users SET points = points + %d where loginname = %s;', [pointCounter, username])
-    return answerResults.append(totalCorrect)
+            answerResults.append(False)
+        index += 1
+    curs.execute('UPDATE users SET points = points + %s where loginname = %s;', [pointCounter, username])
+    return answerResults
