@@ -21,8 +21,8 @@ CodeMode -->
       <ul class="nav navbar-nav">
         <li><a href="#">Home</a></li>
         <li><a href='/make/'>Make New Question</a></li>
-        <li><a href='/select/'>Select</a></li>
-        <li><a href='/logout/'>Logout</a></li>
+        <li><a href='/select/'>Select A Quiz</a></li>
+        <li><a href='/logout/' id="logoutID">Logout</a></li>
       </ul>
     </div>
   </nav>
@@ -55,11 +55,19 @@ CodeMode -->
     {% endblock %}
     
 <script>
-$(document).ready(function() { 
-	loc = window.location.pathname.split('/');
-	console.log(loc);
-// 	if (loc == "http://cs.wellesley.edu:7535/select/"
-});
+// $(document).ready(function() { 
+// 	loc = window.location.pathname.split('/');
+// 	console.log(loc);
+// 	lengthArray = loc.length;
+// 	for (var i = 0; i < lengthArray; i++) {
+// 		if (loc[i] == "select") {
+// 			if ($("li").attr("href") == "/"+loc[i]+"/")) {
+// 				$("li")
+// 			}
+// 		}
+// 	}
+// // 	if (loc == "http://cs.wellesley.edu:7535/select/"
+// });
 $("li").click(function(){
 	$("li").not(this).each(function(){
          $(this).removeClass("active");
