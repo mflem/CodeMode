@@ -4,10 +4,9 @@
 {% extends 'codemode.html' %}
   {% block content %}
 
+  <form i="test-form">
     {% set count = [1] %}
     {% for question in questions %}
-
-  <form i="test-form">
   <div class="question{{ count }}">
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
@@ -27,7 +26,7 @@
         {% endif%}
       {% endif %}
       <br>
-      <input type="submit" name="submit">Grade</button>
+      <input type="submit" name="submit"></button>
       <div id="questionResult">
         {% if results[count][0] %}
           Correct!
@@ -38,9 +37,8 @@
       <div id="explanation">{{question['explanation']}}</div>
     </div>
       {% if count.append(count.pop() + 1) %}
-  </form>
       {% endfor %}
-
+  </form>
       <div id="totalResult">{{results[count][0 + 1]}}</div>
 
  {% endblock %}
