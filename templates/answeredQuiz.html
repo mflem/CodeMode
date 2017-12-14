@@ -30,9 +30,9 @@
       {% endfor %}
   </div>
   <br><br>
-      <div id="totalResult" class="bd-callout bd-callout-primary">
+      <div class="alert alert-primary" role="alert">
         <h5>You got: {{results[count[0]]}} out of {{ count[0] }}</h5>
-        You earned {{ points }} points!
+        You earned {{ points[0] }} points!
       </div>
 
  {% endblock %}
