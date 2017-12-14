@@ -5,6 +5,7 @@ CodeMode -->
 <html>
   <head>
     <meta charset="utf-8">
+    <!-- Inserted for the bootstrap   -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -13,15 +14,17 @@ CodeMode -->
   </head>
   <body>
     
+<!--  Adds navbar that shows up on all pages where codemode.html is extended 
+(except for the login page)   -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">CodeMode</a>
       </div>
       <ul class="nav navbar-nav">
-<!--         <li><a href="#">Home</a></li> -->
-        <li><a href='/make/'>Make New Question</a></li>
+	<!-- if not a home button, maybe a profile button eventually -->
         <li><a href='/select/'>Select A Quiz</a></li>
+	 <li><a href='/make/'>Make New Question</a></li> <!--  eventually, only if collaborator -->
         <li><a href='/logout/' id="logoutID">Logout</a></li>
 <!-- 	<li><h3>Greetings, {{username}}!</h3></li> -->
       </ul>
@@ -31,10 +34,6 @@ CodeMode -->
   
     
     {% block main_content %}
-<!--     <p>Click to <a href="{{ url_for('index') }}">return to the main page</a>.</p> -->
-<!--       <form style="color:blue;" id="logoutform" action="{{url_for('logout')}}">
-          <button type="submit">logout</button>
-      </form> -->
     {% endblock %}
     
     {% with messages = get_flashed_messages() %}
@@ -49,25 +48,12 @@ CodeMode -->
     {% endblock %}
     
 <script>
-// $(document).ready(function() { 
-// 	loc = window.location.pathname.split('/');
-// 	console.log(loc);
-// 	lengthArray = loc.length;
-// 	for (var i = 0; i < lengthArray; i++) {
-// 		if (loc[i] == "select") {
-// 			if ($("li").attr("href") == "/"+loc[i]+"/")) {
-// 				$("li")
-// 			}
-// 		}
-// 	}
-// // 	if (loc == "http://cs.wellesley.edu:7535/select/"
-// });
-$("li").click(function(){
-	$("li").not(this).each(function(){
-         $(this).removeClass("active");
-     });
-     $(this).addClass("active");   
-})
+	$("li").click(function(){
+		$("li").not(this).each(function(){
+		 $(this).removeClass("active");
+	     });
+	     $(this).addClass("active");   
+	})
 </script>
   </body>
 </html>
