@@ -15,7 +15,7 @@
           <br>
           Correct!</p>
         {% else %}
-        <pp class="bg-danger text-white">You answered: {{ form[count[0]] }}
+        <p class="bg-danger text-white">You answered: {{ form[count[0]] }}
           <br>
           Wrong!</p>
         {% endif %}
@@ -28,6 +28,6 @@
       {% endfor %}
       <input type="submit" name="submit"></input>
   </form>
-      <div id="totalResult">You got: {{results[count[0]]}} out of {{ count[0] - 1 }}</div>
+      <div id="totalResult">You got: {{results[count[0]]}} out of {{ count[0] }}</div>
 
  {% endblock %}

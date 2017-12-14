@@ -32,7 +32,7 @@ when given a question-->
     <p><label for="deckNum">Add to exisiting deck:</label>
       <select name='deckName'>
         {% for deck in decks %}
-          <option value = {{deck}}>{{deck}}</option>
+          <option name="deckName" value="{{deck}}">{{deck}}</option>
         {% endfor %}
       </select></p>
       <button id="newDeck">Add to New Deck</button><br>

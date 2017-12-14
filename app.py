@@ -125,7 +125,6 @@ def select():
     conn = codemodeFunctions.getConn()
     deckList = codemodeFunctions.getDeckList(conn)
     print deckList;
-#     print [deckList];
     if request.method =='POST':
         deckid = request.form['deck']
         print deckid
