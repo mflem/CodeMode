@@ -27,6 +27,7 @@
       {% endif %}
       <br>
       <div id="questionResult">
+        {{ mdebug(if results[count[0]]) }}
         {% if results[count[0]] %}
           Correct!
         {% else %}
@@ -42,6 +43,7 @@
   </form>
   {% if count.append(count.pop() + 1) %}
   {% endif %}
+  {{ mdebug(results[count[0]]) }}
       <div id="totalResult">{{results[count[0]]}}</div>
 
  {% endblock %}
