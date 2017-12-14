@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 
 {% block main_content %} 
-<h1>Welcome to CodeMode</h1>
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand">Welcome to CodeMode!</a>
+  </nav>
+    
+<!-- 
+<h1>Welcome to CodeMode</h1> -->
 
 <form id="loginform" action="{{url_for('login')}}" method="post">
     <h2>Login</h2>
