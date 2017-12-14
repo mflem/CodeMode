@@ -108,6 +108,7 @@ def logout():
             return redirect(url_for('index'))
         else:
             flash('you are not logged in. Please login or join')
+            usernameDisplay = ""
             return redirect( url_for('index') )
     except Exception as err:
         flash('some kind of error '+str(err))
