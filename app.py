@@ -85,7 +85,7 @@ def user(username):
         if 'username' in session:
             username = session['username']
             session['visits'] = 1+int(session['visits'])
-            flash('Greetings, '+username+'!')
+#             flash('Greetings, '+username+'!')
             return render_template('codemode.html',
                                    page_title='My App: Welcome '+username,
                                    name=username)
