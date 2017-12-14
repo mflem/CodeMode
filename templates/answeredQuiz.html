@@ -28,13 +28,19 @@
       {% endif %}
       <br>
       <input type="submit" name="submit">Grade</button>
-      <div id="questionResult">results[count]</div>
+      <div id="questionResult">
+        {% if results[count][0] %}
+          Correct!
+        {% else %}
+          Wrong!
+        {% endif %}
+      </div>
       <div id="explanation">{{question['explanation']}}</div>
     </div>
       {% if count.append(count.pop() + 1) %}
   </form>
       {% endfor %}
 
-      <div id="totalResult">results[(count + 1)]</div>
+      <div id="totalResult">results[count][0 + 1]</div>
 
  {% endblock %}
