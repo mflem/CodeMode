@@ -37,7 +37,8 @@ $("button").on('submit', function (event) {
          alert("passwords don't match");
      }
 });
-$("#join").click(function(){
+
+$("#join").hide().click(function(){
     $("#joinform").toggle(1000);
     console.log('toggle');
 });
