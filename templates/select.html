@@ -3,6 +3,9 @@ CodeMode
 Draft
 Lists all current, unique deck options -->
 {% extends 'codemode.html' %}
+  {% block greeting %}
+ {% endblock %}
+{% extends 'codemode.html' %}
   {% block content %}
     <form method= "POST" action="{{script}}">
       <p>Decks you can study</p>
