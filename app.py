@@ -191,7 +191,7 @@ def quiz(deckid):
         print formData
         answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, 'me') # change to username later
         print answerResults
-        return render_template('answeredQuiz.html', questions=qResults, results=answerResults)
+        return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData)
     return render_template('quiz.html', questions=qResults)
 
 if __name__ == '__main__':
