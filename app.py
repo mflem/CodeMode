@@ -43,6 +43,8 @@ def join():
         session['username'] = username
         session['logged_in'] = True
         session['visits'] = 1
+        flash('Welcome to CodeMode, '+username+'.')
+        flash('To get started you may like to chose a subject to be quizzed on.')
         return redirect( url_for('user', username=username) )
     except Exception as err:
         flash('form submission error '+str(err))
