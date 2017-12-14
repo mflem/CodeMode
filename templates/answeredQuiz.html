@@ -5,7 +5,7 @@
   {% block content %}
 
   <form i="test-form" method="POST">
-    {% set count = [1] %}
+    {% set count = [0] %}
     {% for question in questions %}
   <div class="question{{ count }}">
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{question['questionText']}}</p>
@@ -27,7 +27,6 @@
       {% endif %}
       <br>
       <div id="questionResult">
-        {{ mdebug(if results[count[0]]) }}
         {% if results[count[0]] %}
           Correct!
         {% else %}
@@ -43,7 +42,6 @@
   </form>
   {% if count.append(count.pop() + 1) %}
   {% endif %}
-  {{ mdebug(results[count[0]]) }}
       <div id="totalResult">{{results[count[0]]}}</div>
 
  {% endblock %}

@@ -5,11 +5,8 @@
   {% block content %}
 
   <form id="test-form" method='post'>
-
     {% set count = [0] %}
     {% for question in questions %}
-
-
   <div class="question{{ count }}">
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
@@ -29,8 +26,6 @@
         {% endif%}
       {% endif %}
       <br>
-
-
       <div id="questionResult"></div>
       <div id="explanation"></div>
     </div>

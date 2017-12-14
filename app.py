@@ -194,13 +194,6 @@ def quiz(deckid):
         return render_template('answeredQuiz.html', questions=qResults, results=answerResults)
     return render_template('quiz.html', questions=qResults)
 
-@app.context_processor
-def utility_functions():
-    def print_in_console(message):
-        print str(message)
-
-    return dict(mdebug=print_in_console)
-
 if __name__ == '__main__':
   dsn = dbconn2.read_cnf()
   dsn['db'] = 'codemode_db'
