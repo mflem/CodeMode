@@ -9,20 +9,22 @@
     {% block head_stuff %} {% endblock %}
 </head>
 <body style="color:green;">
-
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <div id="messages">
-        {% for msg in messages %}
-            <p>{{msg}}</p>
-        {% endfor %}
-        </div>
-    {% endif %}
-{% endwith %}
-            
-{% block main_content %}
-<h1>Welcome!</h1>
+    
+{% block messages %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="messages">
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 {% endblock %}
+            
+<!-- {% block main_content %}
+<h1>Welcome!</h1>
+{% endblock %} -->
 
 
 <script src="https://code.jquery.com/jquery.js"></script>
