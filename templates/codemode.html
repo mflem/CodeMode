@@ -19,7 +19,7 @@ CodeMode -->
         <a class="navbar-brand" href="#">CodeMode</a>
       </div>
       <ul class="nav navbar-nav">
-        <li><a href="#">Home</a></li>
+<!--         <li><a href="#">Home</a></li> -->
         <li><a href='/make/'>Make New Question</a></li>
         <li><a href='/select/'>Select A Quiz</a></li>
         <li><a href='/logout/' id="logoutID">Logout</a></li>
@@ -35,15 +35,9 @@ CodeMode -->
 <!--       <form style="color:blue;" id="logoutform" action="{{url_for('logout')}}">
           <button type="submit">logout</button>
       </form> -->
+	<h3>Greetings, {{username}}!</h3>
     {% endblock %}
     
-<!--     <h1>CodeMode</h1> -->
-    
-    <ul>
-<!--       <li><a href='/'>Logout</a></li>  fix home--> 
-<!--       <li><a href='/select/'>Select a deck</a></li>
-      <li><a href='/make/'>Make a deck</a></li> -->
-    </ul>
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for message in messages %}
