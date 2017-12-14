@@ -9,16 +9,14 @@
     {% for question in questions %}
   <div class="question{{ count }}">
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{question['questionText']}}</p>
-
-     <p>You answered: {{ form[count[0]] }}</p>
-     
-      <br>
-      <div id="questionResult">
+    <div id="questionResult">
+      <p>You answered: {{ form[count[0]] }}</p>
         {% if results[count[0]] %}
           Correct!
         {% else %}
           Wrong!
         {% endif %}
+        <p>Correct answer: {{question['answer']}}</p>
       </div>
       <div id="explanation">{{question['explanation']}}</div>
     </div>
