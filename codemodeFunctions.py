@@ -87,4 +87,5 @@ def gradeQuiz(conn, questionInfo, formData, username):
             answerResults.append(False)
         index += 1
     curs.execute('UPDATE users SET points = points + %s where loginname = %s;', [pointCounter, username])
+    answerResults.append(totalCorrect)
     return answerResults
