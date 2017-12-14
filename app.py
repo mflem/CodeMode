@@ -78,14 +78,13 @@ def login():
         return redirect( url_for('index') )
 
 
-@app.route('/user/<username>/')
+@app.route('/user/<username>')
 def user(username):
     try:
         # don't trust the URL; it's only there for decoration
         if 'username' in session:
             username = session['username']
             session['visits'] = 1+int(session['visits'])
-#             flash('Greetings, '+username+'!')
             return render_template('codemode.html',
                                    page_title='My App: Welcome '+username,
                                    name=username)
@@ -192,7 +191,7 @@ def quiz(deckid):
         print formData
         answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, 'me') # change to username later
         print answerResults
-        return render_template('answeredQuiz.html', questions=qResults, results=answerResults)
+        return render_template('answeredQuiz.html', questions=qResults,results=answerResults)
     return render_template('quiz.html', questions=qResults)
 
 if __name__ == '__main__':
