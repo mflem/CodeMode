@@ -129,7 +129,7 @@ def select():
         deckid = request.form['selectDeck']
         print deckid
         # using the deck's id, go to the associated quiz
-        return redirect(url_for("quiz",deckid=deckid))
+        return redirect(url_for("quiz", deckid=deckid))
     return render_template('select.html', decks=deckList)
 
 @app.route('/make/', methods =['POST', 'GET'])

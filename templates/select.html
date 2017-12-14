@@ -6,9 +6,9 @@ Lists all current, unique deck options -->
   {% block content %}
     <h2>Choose a deck to study:</h2>
     <form method= "POST" action="{{script}}">
-        <select name="deckList">
+        <select name="selectDeck">
             {% for deck in decks %}
-              <option name="deckList" value="{{deck}}">{{deck}}</option>
+              <option name="selectDeck" value="{{deck}}">{{deck}}</option>
             {% endfor %}
         </select>
         <br>
