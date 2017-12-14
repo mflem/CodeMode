@@ -10,11 +10,14 @@
   <div class="question{{ count }}">
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{question['questionText']}}</p>
     <div id="questionResult">
-      <p>You answered: {{ form[count[0]] }}</p>
         {% if results[count[0]] %}
-          Correct!
+        <p class="bg-success text-white">You answered: {{ form[count[0]] }}
+          <br>
+          Correct!</p>
         {% else %}
-          Wrong!
+        <pp class="bg-warning text-white">You answered: {{ form[count[0]] }}
+          <br>
+          Wrong!</p>
         {% endif %}
         <p>Correct answer: {{question['answer']}}</p>
       </div>
@@ -27,6 +30,6 @@
   </form>
   {% if count.append(count.pop() + 1) %}
   {% endif %}
-      <div id="totalResult">{{results[count[0]]}}</div>
+      <div id="totalResult">You got: {{results[count[0]]}} out of {{ count[0] - 1 }}</div>
 
  {% endblock %}
