@@ -14,7 +14,6 @@ app = Flask(__name__)
 app.secret_key = 'youcantguessthisout'
 
 #------ Login -----------------------
-usernameDisplay=""
 
 @app.route('/')
 #login page
@@ -68,7 +67,6 @@ def login():
         if bcrypt.hashpw(passwd.encode('utf-8'),hashed.encode('utf-8')) == hashed:
             flash('successfully logged in as '+username)
             session['username'] = username
-            usernameDisplay = username
             session['logged_in'] = True
             session['visits'] = 1
             return redirect( url_for('user', username=username) )
@@ -108,7 +106,6 @@ def logout():
             return redirect(url_for('index'))
         else:
             flash('you are not logged in. Please login or join')
-            usernameDisplay = ""
             return redirect( url_for('index') )
     except Exception as err:
         flash('some kind of error '+str(err))
@@ -129,7 +126,7 @@ def select():
     deckList = codemodeFunctions.getDeckList(conn)
     print deckList;
     if request.method =='POST':
-        deckid = request.form['deck']
+        deckid = request.form['selectDeck']
         print deckid
         # using the deck's id, go to the associated quiz
         return redirect(url_for("quiz",deckid=deckid))
