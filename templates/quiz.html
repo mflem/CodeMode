@@ -4,7 +4,7 @@
 {% extends 'codemode.html' %}
   {% block content %}
 
-  <form i="test-form">
+  <form i="test-form" method="POST">
     {% set count = [1] %}
     {% for question in questions %}
   <div class="question{{ count }}">
