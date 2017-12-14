@@ -43,6 +43,15 @@ console.log('jQuery loaded');
             }
         }
 </script> -->
+<script>
+$("li").click(function(){
+	$("li").not(this).each(function(){
+         $(this).removeClass("active");
+     });
+     $(this).addClass("active");   
+})
+</script>
+
 {% endblock %}
 
 </body>
