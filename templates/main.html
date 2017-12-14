@@ -19,7 +19,7 @@
     <p><label><input type="text" name="username" required pattern="^\w+$"> Username</label></p>
     <p><label><input type="password" name="password1" required> Password </label></p>
     <p><label><input type="password" name="password2" required> Password again </label></p>
-    <p><button type="submit">Submit</button></p>
+    <p><button id="join" type="submit">Submit</button></p>
 </form>
     
 
@@ -37,8 +37,8 @@ $("#joinform").on('submit', function (event) {
          alert("passwords don't match");
      }
 });
-$("button").click(function(){
-    $("joinform").toggle(1000);
+$("#join").click(function(){
+    $("#joinform").toggle(1000);
     console.log('toggle');
 });
 </script>
