@@ -182,17 +182,17 @@ def quiz(deckid):
     conn = codemodeFunctions.getConn()
     qResults = codemodeFunctions.getQuestionsFromDeck(conn, deckid)
     if request.method == 'POST':
+        #"counts" through list of questions to collect data from each question
+        # in the form submitted, which in turn gives back to the new page
         index = 0
         formData = []
-        print request.form
+        # print request.form
         for q in qResults:
             qName = 'q[' + str(index) + ']'
-            print request.form[qName]
+            # print request.form[qName]
             formData.append(request.form[qName])
             index += 1
-        print formData
         answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, 'me') # change to username later
-        print answerResults
         return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData)
     return render_template('quiz.html', questions=qResults)
 

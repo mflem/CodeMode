@@ -71,21 +71,23 @@ def getConn():
     return conn
 
 def gradeQuiz(conn, questionInfo, formData, username):
+    #grades the quiz and returns a list which can be used by the template
+    #to show the proper responses and add up the proper amount of points
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
+    #counters to keep track of the current question, points, num correct, etc
     index = 0;
     pointCounter = 0;
-    answerResults = [];
+    answerResults = []; #using booleans to keep track of right/wrong answers
     totalCorrect = 0;
     for question in formData:
-        print questionInfo[index]['answer']
-        print formData[index]
-        if questionInfo[index]['answer'] == formData[index]:
-            pointCounter += questionInfo[index]['point_value']
-            totalCorrect += 1
+        if questionInfo[index]['answer'] == formData[index]: #if right answer
+            pointCounter += questionInfo[index]['point_value'] #add points
+            totalCorrect += 1 #increment correct
             answerResults.append(True)
         else:
             answerResults.append(False)
         index += 1
+    #query to addpoints to the user's info in the database
     curs.execute('UPDATE users SET points = points + %s where loginname = %s;', [pointCounter, username])
-    answerResults.append(totalCorrect)
+    answerResults.append(totalCorrect) #add totalCorrect to the end so it can be displayed
     return answerResults
