@@ -11,7 +11,7 @@
 </form>
 
 <p>Don't already have an account?</p>
-<button onclick="showJoin()">Join Now</button>
+<button>Join Now</button> <!-- onclick="showJoin()" -->
     
 
 <form id="joinform" action="{{url_for('join')}}" method="post">
@@ -36,6 +36,9 @@ $("#joinform").on('submit', function (event) {
          // something more sophisticated than alert would be nice
          alert("passwords don't match");
      }
+});
+$("button").click(function(){
+    $("joinform").hide(1000);
 });
 </script>
 {% endblock %}
