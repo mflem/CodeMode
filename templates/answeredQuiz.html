@@ -1,16 +1,22 @@
 <!-- Margaret Flemings and Maggie Jennings -->
-<!-- Template for the quiz page, currently loads all questions from a deck on the same page-->
+<!-- Template for the an answered quiz-->
 <!-- Counting from: https://stackoverflow.com/questions/7537439/how-to-increment-a-variable-on-a-for-loop-in-jinja-template -->
+
 {% extends 'codemode.html' %}
   {% block content %}
   <div i="test-form">
+    <!-- Counters for questions and points -->
     {% set points = [0] %}
     {% set count = [0] %}
     {% for question in questions %}
   <div class="question{{ count }}">
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{question['questionText']}}</p>
     <div id="questionResult">
+      <!-- will check the list of booleans to figure out if question was
+    right or wrong -->
         {% if results[count[0]] %}
+        <!-- shows answer they gave from formData, correct/wrong message
+         and adds points -->
         <p class="bg-success text-white">You answered: {{ form[count[0]] }}
           <br>
           Correct!</p>
@@ -25,14 +31,15 @@
       </div>
       <div id="explanation">{{question['explanation']}}</div>
     </div>
+    <!-- increment counter for questions/forms/results -->
       {% if count.append(count.pop() + 1) %}
       {% endif %}
       {% endfor %}
   </div>
   <br><br>
+    <!-- show total score and points earned -->
       <div class="alert alert-primary" role="alert">
         <h5>You got: {{results[count[0]]}} out of {{ count[0] }}</h5>
         You earned {{ points[0] }} points!
       </div>
-
  {% endblock %}

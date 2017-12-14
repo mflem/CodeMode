@@ -1,10 +1,11 @@
 <!-- Margaret Flemings and Maggie Jennings -->
 <!-- Template for the quiz page, currently loads all questions from a deck on the same page-->
-<!-- Counting from: https://stackoverflow.com/questions/7537439/how-to-increment-a-variable-on-a-for-loop-in-jinja-template -->
+<!-- Counting idea from: https://stackoverflow.com/questions/7537439/how-to-increment-a-variable-on-a-for-loop-in-jinja-template -->
 {% extends 'codemode.html' %}
   {% block content %}
 
   <form id="test-form" method='post'>
+    <!-- count number of questions so we can loop through them later -->
     {% set count = [0] %}
     {% for question in questions %}
   <div class="question{{ count }}">
@@ -29,7 +30,7 @@
       <div id="questionResult"></div>
       <div id="explanation"></div>
     </div>
-
+      <!-- increment counter -->
       {% if count.append(count.pop() + 1) %}
       {% endif %}
       {% endfor %}
