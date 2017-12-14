@@ -11,9 +11,9 @@ CodeMode -->
     {% block main_content %}
 <!--     <p>Click to <a href="{{ url_for('index') }}">return to the main page</a>.</p> -->
 
-    <h1>Greetings {{name}}</h1>
+    <h1>Greetings, {{name}}!</h1>
 
-    <form id="logoutform" action="{{url_for('logout')}}">
+    <form style="color:blue;" id="logoutform" action="{{url_for('logout')}}">
         <button type="submit">logout</button>
     </form>
 
@@ -21,7 +21,7 @@ CodeMode -->
     {% endblock %}
     <h1>CodeMode</h1>
     <ul>
-      <li><a href='/'>Logout</a></li>
+<!--       <li><a href='/'>Logout</a></li>  fix home--> 
       <li><a href='/select/'>Select a deck</a></li>
       <li><a href='/make/'>Make a deck</a></li>
     </ul>
@@ -35,5 +35,6 @@ CodeMode -->
     {% block content %}
       <h1>{{title}}</h1>
     {% endblock %}
+    
   </body>
 </html>
