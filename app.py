@@ -121,7 +121,7 @@ def logout():
 
 @app.route('/select/', methods =['POST', 'GET'])
 # page for selecting a deck to be quizzed on
-def select(name):
+def select():
     conn = codemodeFunctions.getConn()
     deckList = codemodeFunctions.getDeckList(conn)
     print deckList;
@@ -130,7 +130,7 @@ def select(name):
         print deckid
         # using the deck's id, go to the associated quiz
         return redirect(url_for("quiz",deckid=deckid))
-    return render_template('select.html', decks=deckList, name=name)
+    return render_template('select.html', decks=deckList)
 
 @app.route('/make/', methods =['POST', 'GET'])
 # page for making questions to add to decks
