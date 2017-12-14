@@ -54,13 +54,18 @@ CodeMode -->
       <h1>{{title}}</h1>
     {% endblock %}
     
-<!-- <script>
+<script>
+$(document).ready(function() { 
+	loc = window.location.pathname.split('/');
+	console.log(loc);
+// 	if (loc == "http://cs.wellesley.edu:7535/select/"
+}
 $("li").click(function(){
 	$("li").not(this).each(function(){
          $(this).removeClass("active");
      });
      $(this).addClass("active");   
 })
-</script> -->
+</script>
   </body>
 </html>
