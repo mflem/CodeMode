@@ -40,6 +40,7 @@
       {% endfor %}
       <input type="submit" name="submit"></input>
   </form>
-      <div id="totalResult">{{results[count[0 + 1]]}}</div>
+  {% if count.append(count.pop() + 1) %}
+      <div id="totalResult">{{results[count[0]]}}</div>
 
  {% endblock %}
