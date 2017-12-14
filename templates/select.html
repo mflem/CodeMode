@@ -6,7 +6,7 @@ Lists all current, unique deck options -->
   {% block content %}
     <form method= "POST" action="{{script}}">
       <p>Decks you can study</p>
-        <select name="decks">
+        <select name="deckList">
             {% for deck in decks %}
               <option value = {{deck}}>{{deck}}</option>
             {% endfor %}

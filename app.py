@@ -135,6 +135,8 @@ def select():
 @app.route('/make/', methods =['POST', 'GET'])
 # page for making questions to add to decks
 def make():
+    conn = codemodeFunctions.getConn()
+    deckList = codemodeFunctions.getDeckList(conn)
     if request.method == 'POST': # if there is a request
         action = request.form['submit']
         if action == 'submit':
@@ -155,7 +157,7 @@ def make():
             return redirect(url_for("update",updateId=newID))
             # redirect to update page so updates can be made separately from make
     else:
-        return render_template('make.html')
+        return render_template('make.html', decks=deckList)
 
 @app.route('/update/<updateId>', methods =['POST', 'GET'])
 # page for updating questions
