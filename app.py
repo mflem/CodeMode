@@ -65,7 +65,8 @@ def login():
         hashed = row['password']
         # strings always come out of the database as unicode objects
         if bcrypt.hashpw(passwd.encode('utf-8'),hashed.encode('utf-8')) == hashed:
-            flash('successfully logged in as '+username)
+            flash('Welcome to CodeMode, '+username+'.')
+            flash('To get started you may like to chose a subject to be quizzed on.')
             session['username'] = username
             session['logged_in'] = True
             session['visits'] = 1
