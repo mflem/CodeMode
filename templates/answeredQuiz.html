@@ -3,8 +3,8 @@
 <!-- Counting from: https://stackoverflow.com/questions/7537439/how-to-increment-a-variable-on-a-for-loop-in-jinja-template -->
 {% extends 'codemode.html' %}
   {% block content %}
-
-  <form i="test-form" method="POST">
+  <div i="test-form">
+    {% set points = [0] %}
     {% set count = [0] %}
     {% for question in questions %}
   <div class="question{{ count }}">
@@ -14,6 +14,8 @@
         <p class="bg-success text-white">You answered: {{ form[count[0]] }}
           <br>
           Correct!</p>
+          {% if points.append(points.pop() + question['point_value']) %}
+          {% endif %}
         {% else %}
         <p class="bg-danger text-white">You answered: {{ form[count[0]] }}
           <br>
@@ -26,8 +28,11 @@
       {% if count.append(count.pop() + 1) %}
       {% endif %}
       {% endfor %}
-      <input type="submit" name="submit"></input>
-  </form>
-      <div id="totalResult">You got: {{results[count[0]]}} out of {{ count[0] }}</div>
+  </div>
+  <br><br>
+      <div id="totalResult" class="bd-callout bd-callout-primary">
+        <h5>You got: {{results[count[0]]}} out of {{ count[0] }}</h5>
+        You earned {{ points }} points!
+      </div>
 
  {% endblock %}

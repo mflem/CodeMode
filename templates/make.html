@@ -46,27 +46,30 @@ when given a question-->
             <th scope="row"><label for="pointVal">Point value</label></th>
             <td> <input type=number name='pointVal' value="{{pointVal}}"></input></td>
           </tr>
+          <tr>
+            <th scope="row"><label for="deckNum">Add to exisiting deck:</label></th>
+            <td><select name='deckName'>
+              {% for deck in decks %}
+                <option name="deckName" value="{{deck}}">{{deck}}</option>
+              {% endfor %}
+            </select></td>
+          </tr>
         </tbody>
       </table>
+      <input type="submit" value='submit' name='submit'></input>
+  </form>
 
-    <p><label for="deckNum">Add to exisiting deck:</label>
-      <select name='deckName'>
-        {% for deck in decks %}
-          <option name="deckName" value="{{deck}}">{{deck}}</option>
-        {% endfor %}
-      </select></p>
-      <button id="newDeck">Add to New Deck</button><br>
+      <!-- <button id="newDeck">Add to New Deck</button><br>
       <div id="newDeckAdd">
       <p><label for="deckName">Add to new deck:</label>
         <input type="text" name='deckName'></input></p></div>
     <br>
-    <input type="submit" value='submit' name='submit'></input>
-</form>
+
 <script>
 $("#newDeckAdd").hide();
 $("#newDeck").click(function(){
     $("#newDeckAdd").toggle(1000);
     console.log('toggle');
 });
-</script>
+</script> -->
   {% endblock %}
