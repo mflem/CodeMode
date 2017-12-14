@@ -7,28 +7,48 @@ when given a question-->
 {% extends 'codemode.html' %}
   {% block content %}
       <form method= "POST" action="{{script}}">
-	<!-- edit all of this -->
-  <p>Please give the following info for your question</p>
-    <p><label for="questionText">Question Text</label>
-      <input type=text name='questionText' value="{{questionText}}"></input></p>
-    <p><label for="answer">Answer</label>
-      <input type=text name='answer' value="{{answer}}"></input></p>
-    <p><label for="qtype">Answer</label>
-        <select name='qtype'>
-          <option value="multi">Multiple Choice</option>
-          <option value="fillblank">Fill in the Blank</option>
-          <!-- <option value="truefalse">True or False</option> -->
-        </select></p>
-    <p><label for="wrong1">Wrong Option 1:</label>
-        <input type=text name='wrong1' value="{{wrong1}}"></input></p>
-    <p><label for="wrong2">Wrong Option 2:</label>
-        <input type=text name='wrong2' value="{{wrong2}}"></input></p>
-    <p><label for="wrong3">Wrong Option 3:</label>
-        <input type=text name='wrong3' value="{{wrong3}}"></input></p>
-    <p><label for="explanation">Explanation</label>
-      <input type=text name='explanation' value="{{explanation}}"></input></p>
-    <p><label for="pointVal">Point value</label>
-      <input type=number name='pointVal' value="{{pointVal}}"></input></p>
+        <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row"><label for="questionText">Question Text</label></th>
+            <td><input type=text name='questionText' value="{{questionText}}"></input></td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="answer">Anser</label></th>
+            <td><input type=text name='answer' value="{{answer}}"></input></td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="qtype">Answer Type</label></th>
+            <td>
+              <select name='qtype'>
+                <option value="multi">Multiple Choice</option>
+                <option value="fillblank">Fill in the Blank</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="wrong1">Wrong Option 1:</label></th>
+            <td><input type=text name='wrong1' value="{{wrong1}}"></input></td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="wrong2">Wrong Option 2:</label></th>
+            <td><input type=text name='wrong2' value="{{wrong2}}"></input></td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="wrong3">Wrong Option 3:</label></th>
+            <td><input type=text name='wrong3' value="{{wrong3}}"></input></td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="explanation">Explanation</label></th>
+            <td><input type=text name='explanation' value="{{explanation}}"></input></td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="pointVal">Point value</label></th>
+            <td> <input type=number name='pointVal' value="{{pointVal}}"></input></td>
+          </tr>
+        </tbody>
+      </table>
+
     <p><label for="deckNum">Add to exisiting deck:</label>
       <select name='deckName'>
         {% for deck in decks %}
@@ -37,7 +57,7 @@ when given a question-->
       </select></p>
       <button id="newDeck">Add to New Deck</button><br>
       <div id="newDeckAdd">
-      <p><label for="deckNum">Add to new deck:</label>
+      <p><label for="deckName">Add to new deck:</label>
         <input type="text" name='deckName'></input></p></div>
     <br>
     <input type="submit" value='submit' name='submit'></input>
@@ -49,5 +69,4 @@ $("#newDeck").click(function(){
     console.log('toggle');
 });
 </script>
-
   {% endblock %}
