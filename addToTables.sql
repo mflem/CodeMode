@@ -7,7 +7,6 @@ insert into users(loginname,points,email,isCollaborator,password) values
        ('Simba',0,'simba@gmail.com','n','justcantwait'),
        ('Suzy',0,'suzi@gmail.com','n','imaspy');
 
-DECK ONE:
 /* 1 */
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_name)
 VALUES("How do you close an <html> tag?","</html>", "multi", "<html>", "/html", "<close html>", "You close tags with a slash '/' infront of the original tag",1,"HTML Questions")
