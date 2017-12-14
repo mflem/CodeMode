@@ -78,7 +78,7 @@ def login():
         return redirect( url_for('index') )
 
 
-@app.route('/home/')
+@app.route('/user/<username>/')
 def user(username):
     try:
         # don't trust the URL; it's only there for decoration
