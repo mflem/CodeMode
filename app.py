@@ -14,6 +14,7 @@ app = Flask(__name__)
 app.secret_key = 'youcantguessthisout'
 
 #------ Login -----------------------
+usernameDisplay=""
 
 @app.route('/')
 #login page
@@ -67,6 +68,7 @@ def login():
         if bcrypt.hashpw(passwd.encode('utf-8'),hashed.encode('utf-8')) == hashed:
             flash('successfully logged in as '+username)
             session['username'] = username
+            usernameDisplay = username
             session['logged_in'] = True
             session['visits'] = 1
             return redirect( url_for('user', username=username) )
