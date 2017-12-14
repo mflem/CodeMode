@@ -8,7 +8,7 @@ Lists all current, unique deck options -->
       <p>Decks you can study</p>
         <select name="deckList">
             {% for deck in decks %}
-              <option value = {{deck}}>{{deck}}</option>
+              <option name="deck" value = {{deck}}>{{deck}}</option>
             {% endfor %}
         </select>
         <br>

@@ -127,7 +127,7 @@ def select():
     print deckList;
 #     print [deckList];
     if request.method =='POST':
-        deckid = request.form['deckList']
+        deckid = request.form['deck']
         print deckid
         # using the deck's id, go to the associated quiz
         return redirect(url_for("quiz",deckid=deckid))
