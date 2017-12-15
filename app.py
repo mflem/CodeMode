@@ -204,10 +204,10 @@ def quiz(deckid):
         # print request.form
         for q in qResults:
             qName = 'q[' + str(index) + ']'
-            # print request.form[qName]
+            print request.form[qName]
             formData.append(request.form[qName])
             index += 1
-        print formData
+        print "formData: " + str(formData)
         if (None in formData or string.empty in formData):
             flash("Please answers all questions!")
             return render_template('quiz.html', questions=qResults)
