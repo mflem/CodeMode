@@ -46,6 +46,7 @@ when given a question-->
             <th scope="row"><label for="pointVal">Point value</label></th>
             <td> <input type=number name='pointVal' value="{{pointVal}}"></input></td>
           </tr>
+
           <tr id="addExisting">
             <th scope="row"><label for="deckNum">Add to exisiting deck:</label></th>
             <td><select name='deckName'>
@@ -54,14 +55,19 @@ when given a question-->
               {% endfor %}
             </select></td>
           </tr>
+
+          <tr id="newDeckAdd">
+            <th scope="row"><label for="deckName">Add to new deck:</label></th>
+            <td><select name='deckName'>
+                <input type="submit" value='submit' name='submit'></input>
+            </select></td>
+          </tr> 
+
         </tbody>
       </table>
+      <button id="newDeck">Add to New Deck</button><br>
       <input type="submit" value='submit' name='submit'></input>
   </form>
 
-      <button id="newDeck">Add to New Deck</button><br>
-      <div id="newDeckAdd">
-      <p><label for="deckName">Add to new deck:</label>
-        <input type="text" name='deckName'></input></p></div>
     <br>
   {% endblock %}
