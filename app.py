@@ -154,8 +154,9 @@ def make():
             pointVal = request.form['pointVal']
             deckName = request.form['deckName']
             if (not questionText or not answer or (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or not explanation or pointVal <= 0 or not deckName):
-                flash "Please fill out all fields before submitting your question!"
+                flash("Please fill out all fields before submitting your question!")
                 data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
+                return render_template('make.html', decks=deckList)
             else:
                 data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
                 conn = codemodeFunctions.getConn()
@@ -183,7 +184,7 @@ def update(updateId):
                            wrong2=qResults["wrong2"],
                            wrong3=qResults["wrong3"])
 
-@app.route('/quiz/<deckid>', method = ['POST', 'GET'])
+@app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
 #page for taking a quiz
 def quiz(deckid):
     conn = codemodeFunctions.getConn()
@@ -200,7 +201,8 @@ def quiz(deckid):
             formData.append(request.form[qName])
             index += 1
         if (None in formData  or string.empty in formData):
-            flash "Please answers all questions!"
+            flash("Please answers all questions!")
+            return render_template('quiz.html', questions=qResults)
         else:
             answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, 'me') # change to username later
             return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData)
