@@ -49,6 +49,7 @@ when given a question-->
           <tr id="addExisting">
             <th scope="row"><label for="deckNum">Add to exisiting deck:</label></th>
             <td><select name='deckName'>
+                <option name="deckName" value="None">Select a deck</option>
               {% for deck in decks %}
                 <option name="deckName" value="{{deck}}">{{deck}}</option>
               {% endfor %}
@@ -60,7 +61,7 @@ when given a question-->
             <td><select name='deckName'>
               <input type=text name="newDeckName" value="{{deck}}"></input>
             </select></td>
-          </tr> 
+          </tr>
         <button id="newDeck">Add to New Deck</button><br>
         </tbody>
       </table>

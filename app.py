@@ -116,7 +116,6 @@ def logout():
 
 #-------- End of Login Code ---------------
 
-
 # @app.route('/home/')
 # #home page
 # def home(name):
@@ -157,8 +156,8 @@ def make():
             if (not questionText or not answer or (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or not explanation or pointVal <= 0 or not deckName):
                 if (deckName and newDeckName):
                     flash("Please only fill in one deck!")
-                elif (newDeckName in deckList):
-                    flash("That deck already exists! Please select it from the drop down")
+                    if (newDeckName in deckList):
+                        flash("That deck already exists! Please select it from the drop down")
                 flash("Please fill out all fields before submitting your question!")
                 data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
                 return render_template('make.html', decks=deckList)

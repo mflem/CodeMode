@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-{% block main_content %} 
+{% block main_content %}
 
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand">Welcome to CodeMode!</a>
   </nav>
-    
-<!-- 
+
+<!--
 <h1>Welcome to CodeMode</h1> -->
 
 <form id="loginform" action="{{url_for('login')}}" method="post">
@@ -19,8 +19,8 @@
 </form>
 
 <p>Don't already have an account?</p>
-<button id="join">Join Now</button> 
-    
+<button id="join">Join Now</button>
+
 
 <form id="joinform" action="{{url_for('join')}}" method="post">
     <h2>Join</h2>
@@ -29,10 +29,10 @@
     <p><label><input type="password" name="password2" required> Password again </label></p>
     <p><button type="submit">Submit</button></p>
 </form>
-    
+
 
 {% endblock %}
-    
+
 
 {% block jquery_scripts %}
 <script>
