@@ -153,7 +153,7 @@ def make():
             explanation = request.form['explanation']
             pointVal = request.form['pointVal']
             deckName = request.form['deckName']
-            if (not questionText || not answer || (qtype == "multi" and (not wrong1 || not wrong2 || not wrong3)) || not explanation || pointVal <= 0 || not deckName):
+            if (not questionText or not answer or (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or not explanation or pointVal <= 0 or not deckName):
                 flash "Please fill out all fields before submitting your question!"
                 data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
             else:
@@ -199,7 +199,7 @@ def quiz(deckid):
             # print request.form[qName]
             formData.append(request.form[qName])
             index += 1
-        if (None in formData  || string.empty in formData):
+        if (None in formData  or string.empty in formData):
             flash "Please answers all questions!"
         else:
             answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, 'me') # change to username later
