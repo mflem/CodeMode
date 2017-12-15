@@ -135,6 +135,14 @@ def select():
         return redirect(url_for("quiz", deckid=deckid))
     return render_template('select.html', decks=deckList)
 
+@app.route('/update/<qid>' methods=['POST', 'GET'])
+def update(qid):
+    conn = codemodeFunctions.getConn()
+    data = codemodeFunctions.getQuestion(conn, qid)
+    return render_template('update.html', question=data)
+
+#@app.route('/search/')
+
 @app.route('/make/', methods =['POST', 'GET'])
 # page for making questions to add to decks
 def make():
@@ -153,11 +161,15 @@ def make():
             explanation = request.form['explanation']
             pointVal = request.form['pointVal']
             deckName = request.form['deckName']
-            data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
-            conn = codemodeFunctions.getConn()
-            # insert returns the qid of the last inputted value on this connection
-            newID = codemodeFunctions.insert(conn,data)
-            return redirect(url_for("update",updateId=newID))
+            if (not questionText || not answer || (qtype == "multi" and (not wrong1 || not wrong2 || not wrong3)) || not explanation || pointVal <= 0 || not deckName):
+                flash "Please fill out all fields before submitting your question!"
+                data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
+            else:
+                data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
+                conn = codemodeFunctions.getConn()
+                # insert returns the qid of the last inputted value on this connection
+                newID = codemodeFunctions.insert(conn,data)
+                return redirect(url_for("update",updateId=newID))
             # redirect to update page so updates can be made separately from make
     else:
         return render_template('make.html', decks=deckList)
