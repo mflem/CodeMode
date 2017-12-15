@@ -54,6 +54,14 @@ CodeMode -->
 	     });
 	     $(this).addClass("active");   
 	})
+	$("#newDeckAdd").hide();
+	$("#newDeck").click(function(){
+	    $("#newDeckAdd").toggle(1000);
+	    $("#addExisting").toggle(1000);
+
+	    console.log('toggle');
+	});
+
 </script>
   </body>
 </html>
