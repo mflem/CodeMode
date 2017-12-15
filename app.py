@@ -153,12 +153,20 @@ def make():
             explanation = request.form['explanation']
             pointVal = request.form['pointVal']
             deckName = request.form['deckName']
+            newDeckName = request.form['newDeckName']
             if (not questionText or not answer or (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or not explanation or pointVal <= 0 or not deckName):
+                if (deckName and newDeckName):
+                    flash("Please only fill in one deck!")
+                elif (newDeckName in deckList):
+                    flash("That deck already exists! Please select it from the drop down")
                 flash("Please fill out all fields before submitting your question!")
                 data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
                 return render_template('make.html', decks=deckList)
             else:
-                data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
+                if (deckName and not newDeckName):
+                    data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
+                else:
+                    data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, newDeckName)
                 conn = codemodeFunctions.getConn()
                 # insert returns the qid of the last inputted value on this connection
                 newID = codemodeFunctions.insert(conn,data)
@@ -200,7 +208,8 @@ def quiz(deckid):
             # print request.form[qName]
             formData.append(request.form[qName])
             index += 1
-        if (None in formData  or string.empty in formData):
+        print formData
+        if (None in formData or string.empty in formData):
             flash("Please answers all questions!")
             return render_template('quiz.html', questions=qResults)
         else:
