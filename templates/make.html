@@ -68,5 +68,14 @@ when given a question-->
       <input type="submit" value='submit' name='submit'></input>
   </form>
 
-    <br>
+
   {% endblock %}
+<script>
+	$("#newDeckAdd").hide();
+	$("#newDeck").click(function(){
+		$("#newDeck").html("Add to Existing Deck");
+		$("#newDeckAdd").toggle(1000);
+		$("#addExisting").toggle(1000);
+		console.log('toggle');
+	});
+</script>
