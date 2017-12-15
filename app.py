@@ -207,8 +207,11 @@ def quiz(deckid):
             # print request.form[qName]
             formData.append(request.form[qName])
             index += 1
-        answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, 'me') # change to username later
-        return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData)
+        if (None in formData  || string.empty in formData):
+            flash "Please answers all questions!"
+        else:
+            answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, 'me') # change to username later
+            return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData)
     return render_template('quiz.html', questions=qResults)
 
 if __name__ == '__main__':
