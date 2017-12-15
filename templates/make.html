@@ -72,7 +72,9 @@ when given a question-->
   {% endblock %}
 <script>
 	$("#newDeckAdd").hide();
+	console.log("hidden");
 	$("#newDeck").click(function(){
+		console.log("Button clicked");
 		$("#newDeck").html("Add to Existing Deck");
 		$("#newDeckAdd").toggle(1000);
 		$("#addExisting").toggle(1000);
