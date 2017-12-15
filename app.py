@@ -135,14 +135,6 @@ def select():
         return redirect(url_for("quiz", deckid=deckid))
     return render_template('select.html', decks=deckList)
 
-@app.route('/update/<qid>' methods=['POST', 'GET'])
-def update(qid):
-    conn = codemodeFunctions.getConn()
-    data = codemodeFunctions.getQuestion(conn, qid)
-    return render_template('update.html', question=data)
-
-#@app.route('/search/')
-
 @app.route('/make/', methods =['POST', 'GET'])
 # page for making questions to add to decks
 def make():
@@ -191,7 +183,7 @@ def update(updateId):
                            wrong2=qResults["wrong2"],
                            wrong3=qResults["wrong3"])
 
-@app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
+@app.route('/quiz/<deckid>', method = ['POST', 'GET'])
 #page for taking a quiz
 def quiz(deckid):
     conn = codemodeFunctions.getConn()
