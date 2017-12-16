@@ -13,8 +13,8 @@ CodeMode -->
     <title>CodeMode</title>
   </head>
   <body>
-    
-<!--  Adds navbar that shows up on all pages where codemode.html is extended 
+
+<!--  Adds navbar that shows up on all pages where codemode.html is extended
 (except for the login page)   -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -24,18 +24,19 @@ CodeMode -->
       <ul class="nav navbar-nav">
 	<!-- if not a home button, maybe a profile button eventually -->
         <li><a href='/select/'>Select A Quiz</a></li>
-	 <li><a href='/make/'>Make New Question</a></li> <!--  eventually, only if collaborator -->
+	      <li><a href='/add-question/'>Make New Question</a></li> <!--  eventually, only if collaborator -->
+        <li><a href='/add-deck/'>Make New Deck</a></li> <!--  eventually, only if collaborator -->
         <li><a href='/logout/' id="logoutID">Logout</a></li>
 <!-- 	<li><h3>Greetings, {{username}}!</h3></li> -->
       </ul>
     </div>
   </nav>
-    
-  
-    
+
+
+
     {% block main_content %}
     {% endblock %}
-    
+
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for message in messages %}
@@ -46,13 +47,13 @@ CodeMode -->
     {% block content %}
       <h1>{{title}}</h1>
     {% endblock %}
-    
+
 <script>
 	$("li").click(function(){
 		$("li").not(this).each(function(){
 		 $(this).removeClass("active");
 	     });
-	     $(this).addClass("active");   
+	     $(this).addClass("active");
 	})
 	$("#newDeckAdd").hide();
 // 	$("#newDeck").click(function(){

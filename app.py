@@ -135,9 +135,9 @@ def select():
         return redirect(url_for("quiz", deckid=deckid))
     return render_template('select.html', decks=deckList)
 
-@app.route('/add-question', methods =['POST', 'GET'])
+@app.route('/add-question/', methods =['POST', 'GET'])
 # page for making questions to add to decks
-def make():
+def addquestion():
     conn = codemodeFunctions.getConn()
     deckList = codemodeFunctions.getDeckList(conn)
     if request.method == 'POST': # if there is a request
@@ -163,11 +163,11 @@ def make():
                 # insert returns the qid of the last inputted value on this connection
                 newID = codemodeFunctions.insert(conn,data)
                 return redirect(url_for("update",updateId=newID))
-            # redirect to update page so updates can be made separately from make
+            # redirect to update page so updates can be made separately from add-question
     else:
         return render_template('add-question.html', decks=deckList)
 
-@app.route('/add-deck', methods=['POST'])
+@app.route('/add-deck/', methods=['POST'])
 if request.method == 'POST':
     conn = codemodeFunctions.getConn()
     deckName = request.form['deckName']
@@ -195,7 +195,7 @@ def update(updateId):
     conn = codemodeFunctions.getConn()
     qResults = codemodeFunctions.getQuestion(conn, updateId)
     # print qResults["questionText"]
-    return render_template('make.html',
+    return render_template('add-question.html',
                            questionText=qResults["questionText"],
                            answer=qResults["answer"],
                            explanation=qResults["explanation"],
