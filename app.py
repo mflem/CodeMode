@@ -131,6 +131,8 @@ def select():
     if request.method =='POST':
         deckName = request.form['selectDeck']
         deckid = codemodeFunctions.getDeckID(conn, deckName)
+        deckid = deckid['deckid']
+        print deckName + " is " + str(deckid)
         # using the deck's id, go to the associated quiz
         return redirect(url_for("quiz", deckid=deckid))
     return render_template('select.html', decks=deckList)
