@@ -6,7 +6,7 @@ insert into users(loginname,points,email,isCollaborator,password) values
        ('Simba',0,'simba@gmail.com','n','justcantwait'),
        ('Suzy',0,'suzi@gmail.com','n','imaspy');
 
-insert into decks(deck_name, pathname) VALUES
+insert into decks(deck_name, image_path) VALUES
   ('SQL','SQL.jpeg'),
   ('HTML', 'HTML.jpeg'),
   ('PHP', 'PHP.jpeg');
