@@ -1,5 +1,10 @@
--- includes users and collaborators who add new questions
+drop table if exists hasAnswered;
+drop table if exists madeBy;
+drop table if exists questions;
+drop table if exists decks;
 drop table if exists users;
+
+-- includes users and collaborators who add new questions
 create table users (
        cid integer auto_increment primary key,
        loginname varchar(15) not null,
@@ -9,7 +14,7 @@ create table users (
        password varchar(150)
        );
 
-drop table if exists decks;
+
 create table decks(
        	deckid integer auto_increment primary key,
         deck_name varchar(100) not null,
@@ -17,7 +22,6 @@ create table decks(
         );
 
 -- includes questions and answers as well as what they are worth
-drop table if exists questions;
 create table questions(
 	qid integer auto_increment primary key,
 	questionText varchar(100),
@@ -32,7 +36,6 @@ create table questions(
        );
 
 -- connects collaborators and the questions they made
-drop table if exists madeBy;
 create table madeBy(
 	qid int not null,
 	cid int,
@@ -44,7 +47,6 @@ create table madeBy(
 
 
 -- connects users with the questions they have answered
-drop table if exists hasAnswered;
 create table hasAnswered(
 	qid int not null,
 	cid int not null,
