@@ -34,7 +34,7 @@ def insertDeck(conn, deckName):
     pathname = deckName + '.jpeg'
     try:
         curs.execute('''INSERT INTO decks
-        (deck_name, imagepath)
+        (deck_name, image_path)
         VALUES(%s, %s)''', ([deckName, pathname])
         to_flash = "Question (" + str(data[0]) +") was inserted successfully"
         flash(to_flash)

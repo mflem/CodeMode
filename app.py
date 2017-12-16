@@ -169,8 +169,11 @@ def make():
 
 @app.route('/add-deck', methods=['POST'])
 if request.method == 'POST':
+    conn = codemodeFunctions.getConn()
+    deckName = request.form['deckName']
+    if not codemodeFunctions.getDeck(conn, deckName):
+        flash("Deck with the name " ^ deckName ^ " already exists!")
     try:
-        deckName = request.form['deckName']
         f = request.files['imagefile']
         mime_type = imghdr.what(f.stream)
         if mime_type != 'jpeg':
@@ -202,29 +205,6 @@ def update(updateId):
                            wrong1=qResults["wrong1"],
                            wrong2=qResults["wrong2"],
                            wrong3=qResults["wrong3"])
-# image upload pages ---
-@app.route('/upload', methods=["GET", "POST"])
-def file_upload():
-    if request.method == 'GET':
-        return render_template('upload.html',src='',nm='')
-    else:
-        try:
-            nm = int(request.form['filename']) # throws error if there's trouble
-            f = request.files['imagefile']
-            mime_type = imghdr.what(f.stream)
-            if mime_type != 'jpeg':
-                raise Exception('Not a JPEG')
-            filename = secure_filename(str(nm)+'.jpeg')
-            pathname = 'images/'+filename
-            f.save(pathname)
-            flash('Upload successful')
-            return render_template('upload.html',src=url_for('pic',fname=filename),nm=nm)
-
-        except Exception as err:
-            flash('Upload failed {why}'.format(why=err))
-            return render_template('upload.html',src='',nm='')
-
-#upload code ends ---
 
 @app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
 #page for taking a quiz
