@@ -35,7 +35,7 @@ def insertDeck(conn, deckName):
     try:
         curs.execute('''INSERT INTO decks
         (deck_name, image_path)
-        VALUES(%s, %s)''', ([deckName, pathname])
+        VALUES(%s, %s)''', ([deckName, pathname]))
         to_flash = "Question (" + str(data[0]) +") was inserted successfully"
         flash(to_flash)
         # check the id of the last inserted question because the qid is auto incremented
@@ -48,7 +48,7 @@ def insertDeck(conn, deckName):
         flash("error: {}".format(error))
 
  # check the id of the last inserted question because the qid is auto incremented
- curs.execute('''SELECT last_insert_id();''')
+
 
 def getQuestion(conn, inQid):
     # return question info given qid

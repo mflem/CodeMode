@@ -168,28 +168,29 @@ def addquestion():
         return render_template('add-question.html', decks=deckList)
 
 @app.route('/add-deck/', methods=['POST'])
-if request.method == 'POST':
+def addDeck():
     conn = codemodeFunctions.getConn()
-    deckName = request.form['deckName']
-    if not codemodeFunctions.getDeck(conn, deckName):
-        flash("Deck with the name " ^ deckName ^ " already exists!")
-    try:
-        f = request.files['imagefile']
-        mime_type = imghdr.what(f.stream)
-        if mime_type != 'jpeg':
-            raise Exception('Not a JPEG')
-        filename = secure_filename(deckName +'.jpeg')
-        pathname = 'images/'+filename
-        f.save(pathname)
-        flash('Upload successful')
-        codemodeFunctions.insertDeck(conn, deckName)
-        print pathname
-        return render_template('update-deck.html',pathname=pathname,deckName=deckName)
-    except Exception as err:
-        flash('Upload failed {why}'.format(why=err))
+    if request.method == 'POST':
+        deckName = request.form['deckName']
+        if not codemodeFunctions.getDeck(conn, deckName):
+            flash("Deck with the name " ^ deckName ^ " already exists!")
+        try:
+            f = request.files['imagefile']
+            mime_type = imghdr.what(f.stream)
+            if mime_type != 'jpeg':
+                raise Exception('Not a JPEG')
+            filename = secure_filename(deckName +'.jpeg')
+            pathname = 'images/'+filename
+            f.save(pathname)
+            flash('Upload successful')
+            codemodeFunctions.insertDeck(conn, deckName)
+            print pathname
+            return render_template('update-deck.html',pathname=pathname,deckName=deckName)
+        except Exception as err:
+            flash('Upload failed {why}'.format(why=err))
+            return render_template('add-deck.html',src='',nm='')
+    else:
         return render_template('add-deck.html',src='',nm='')
-else:
-    return render_template('add-deck.html',src='',nm='')
 
 @app.route('/update/<updateId>', methods =['POST', 'GET'])
 # page for updating questions
