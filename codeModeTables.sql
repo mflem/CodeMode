@@ -9,7 +9,7 @@ create table users (
        password varchar(150)
        );
 
-drop table if exists hasAnswered;
+drop table if exists decks;
 create table decks(
        	deckid integer auto_increment primary key,
         deck_name varchar(100) not null,

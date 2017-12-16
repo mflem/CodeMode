@@ -16,7 +16,7 @@ def insert(conn, data):
         # data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
         # uses prepared query to avoid attacks
         curs.execute('''INSERT INTO questions
-        (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_name)
+        (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num)
         VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)''', (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]))
         to_flash = "Question (" + str(data[0]) +") was inserted successfully"
         flash(to_flash)
@@ -47,9 +47,6 @@ def insertDeck(conn, deckName):
     except Exception as error:
         flash("error: {}".format(error))
 
- # check the id of the last inserted question because the qid is auto incremented
-
-
 def getQuestion(conn, inQid):
     # return question info given qid
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
@@ -58,10 +55,10 @@ def getQuestion(conn, inQid):
     print result
     return result
 
-def getQuestionsFromDeck(conn, deck_name):
+def getQuestionsFromDeck(conn, deck_num):
     # return array of all questions given a deck number
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
-    curs.execute('SELECT * from questions where deck_name = %s;', [deck_name])
+    curs.execute('SELECT * from questions where deck_num = %s;', [deck_num])
     result = curs.fetchall()
     print result
     return result
@@ -69,19 +66,18 @@ def getQuestionsFromDeck(conn, deck_name):
 def getDeckList(conn):
      # return all unique deck numbers
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
-    curs.execute('SELECT DISTINCT(deck_name) AS deck_name FROM questions ORDER BY deck_name DESC;')
+    curs.execute('SELECT DISTINCT(deckName) AS deckName FROM decks ORDER BY deckid DESC;')
     result = curs.fetchall()
     deck_list = []
-
     for row in result:
-        deck_list.append(row["deck_name"])
+        deck_list.append(row["deckName"])
     print deck_list
     return deck_list
 
-def getDeck(conn, deckName):
+def getDeck(conn, deckNum):
     #returns all question ids for every question in a given deck
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
-    curs.execute('SELECT qid from questions where deckName = %s;', [deckName])
+    curs.execute('SELECT qid from questions where deck_num = %s;', [deckNum])
     return curs.fetchhall()
 
 def getConn():
