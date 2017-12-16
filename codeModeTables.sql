@@ -13,7 +13,7 @@ drop table if exists hasAnswered;
 create table decks(
        	deckid integer auto_increment primary key,
         deck_name varchar(100) not null,
-      	image_path varchar(100),
+      	image_path varchar(100)
         );
 
 -- includes questions and answers as well as what they are worth
