@@ -1,5 +1,5 @@
-/* Data that can be inserted temporarily for testing purposes */
-/* test users */
+-- /* Data that can be inserted temporarily for testing purposes */
+-- /* test users */
 insert into users(loginname,points,email,isCollaborator,password) values
        ('Martha',0, 'martha@gmail.com','y','secret'),
        ('Brandy',9,'brandy@gmail.com','n','supersecret'),
@@ -25,7 +25,7 @@ VALUES("Which is a relative url?",
 	"www.google.com/kitten.png", "Desktop/user/other/kitten.png",
 	'''The correct answer is /kitten.png because it does not specify the whole path.',1,"HTML Questions");
 
-/* SQL DECK */
+-- /* SQL DECK */
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_name)
 VALUES("What does SQL stand for?","Structured Query Language", "multi", "Structured Question Language", "Strong Query Language", "Sanctioned Query Language", "SQL stands for Structured Query Language",1,"SQL");
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_name)
