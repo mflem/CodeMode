@@ -6,6 +6,11 @@ insert into users(loginname,points,email,isCollaborator,password) values
        ('Simba',0,'simba@gmail.com','n','justcantwait'),
        ('Suzy',0,'suzi@gmail.com','n','imaspy');
 
+insert into decks(deck_name, pathname) VALUES
+  ('SQL','SQL.jpeg'),
+  ('HTML', 'HTML.jpeg')
+  ('PHP', 'PHP.jpeg');
+
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num)
 VALUES("How do you close an <html> tag?","</html>", "multi", "<html>", "/html", "<close html>", "You close tags with a slash '/' infront of the original tag",1,"HTML");
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num)
@@ -18,12 +23,12 @@ VALUES("How do you comment in html?",
 	"-- comment", "//comment",
 	'''<!-- --> is the correct format for commenting in html.
 	# allows commenting in Python. -- comments out in SQL.
-	Finally // works in Javascript.''',1,"HTML Questions");
+	Finally // works in Javascript.''',1,"HTML");
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num)
 VALUES("Which is a relative url?",
 	"/kitten.png", "multi", "https://www.kittensinc.com/kitten.img",
 	"www.google.com/kitten.png", "Desktop/user/other/kitten.png",
-	'''The correct answer is /kitten.png because it does not specify the whole path.',1,"HTML Questions");
+	'''The correct answer is /kitten.png because it does not specify the whole path.',1,"HTML");
 
 -- /* SQL DECK */
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num)

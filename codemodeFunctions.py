@@ -70,7 +70,7 @@ def getDeckList(conn):
     result = curs.fetchall()
     deck_list = []
     for row in result:
-        deck_list.append(row["deckName"])
+        deck_list.append(row["deck_name"])
     print deck_list
     return deck_list
 
@@ -78,7 +78,7 @@ def getDeck(conn, deckNum):
     #returns all question ids for every question in a given deck
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     curs.execute('SELECT qid from questions where deck_num = %s;', [deckNum])
-    return curs.fetchhall()
+    return curs.fetchall()
 
 def getConn():
     DSN = dbconn2.read_cnf('~/.my.cnf')
