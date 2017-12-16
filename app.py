@@ -5,6 +5,7 @@ from flask import Flask, render_template, make_response, request, flash, redirec
 from werkzeug import secure_filename
 import os, sys
 import bcrypt
+import imghdr #for image file upload
 import MySQLdb
 import codemodeFunctions
 import dbconn2
@@ -190,7 +191,7 @@ def update(updateId):
                            wrong1=qResults["wrong1"],
                            wrong2=qResults["wrong2"],
                            wrong3=qResults["wrong3"])
-
+# image upload pages ---
 @app.route('/upload', methods=["GET", "POST"])
 def file_upload():
     if request.method == 'GET':
@@ -210,7 +211,13 @@ def file_upload():
 
         except Exception as err:
             flash('Upload failed {why}'.format(why=err))
-            return render_template('form.html',src='',nm='')
+            return render_template('upload.html',src='',nm='')
+
+@app.route('/pic/<fname>')
+def pic(fname):
+    f = secure_filename(fname)
+    return send_from_directory('images',f)
+ # upload code ends ---
 
 @app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
 #page for taking a quiz
