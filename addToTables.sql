@@ -8,7 +8,7 @@ insert into users(loginname,points,email,isCollaborator,password) values
 
 insert into decks(deck_name, pathname) VALUES
   ('SQL','SQL.jpeg'),
-  ('HTML', 'HTML.jpeg')
+  ('HTML', 'HTML.jpeg'),
   ('PHP', 'PHP.jpeg');
 
 INSERT INTO questions(questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, point_value, deck_num)
