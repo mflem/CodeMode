@@ -164,9 +164,26 @@ def make():
                 return render_template('make.html', decks=deckList)
             else:
                 if (deckName and not newDeckName):
-                    data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
                 else:
-                    data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, newDeckName)
+                    deckName = newDeckName
+                data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
+                try:
+                    name = deckName
+                    f = request.files['imagefile']
+                    mime_type = imghdr.what(f.stream)
+                    if mime_type != 'jpeg':
+                        raise Exception('Not a JPEG')
+                    filename = secure_filename(deckName +'.jpeg')
+                    pathname = 'images/'+filename
+                    f.save(pathname)
+                    flash('Upload successful')
+                    print pathname
+                except Exception as err:
+                    flash('Upload failed {why}'.format(why=err))
+                    return render_template('upload.html',src='',nm='')
+
+
+
                 conn = codemodeFunctions.getConn()
                 # insert returns the qid of the last inputted value on this connection
                 newID = codemodeFunctions.insert(conn,data)
@@ -213,10 +230,11 @@ def file_upload():
             flash('Upload failed {why}'.format(why=err))
             return render_template('upload.html',src='',nm='')
 
-@app.route('/pic/<fname>')
-def pic(fname):
-    f = secure_filename(fname)
-    return send_from_directory('images',f)
+# @app.route('/pic/<fname>')
+# def pic(fname):
+#     print fname
+#     f = secure_filename(fname)
+#     return send_from_directory('images',f)
  # upload code ends ---
 
 @app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
