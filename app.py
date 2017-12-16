@@ -129,8 +129,8 @@ def select():
     deckList = codemodeFunctions.getDeckList(conn)
     print deckList;
     if request.method =='POST':
-        deckid = request.form['selectDeck']
-        print deckid
+        deckName = request.form['selectDeck']
+        deckid = codemodeFunctions.getDeckID(conn, deckName)
         # using the deck's id, go to the associated quiz
         return redirect(url_for("quiz", deckid=deckid))
     return render_template('select.html', decks=deckList)
@@ -179,7 +179,7 @@ def addDeck():
             try:
                 f = request.files['imagefile']
                 mime_type = imghdr.what(f.stream)
-                if mime_type != 'jpeg' || mime_type != 'png':
+                if mime_type != 'jpeg' or mime_type != 'png':
                     raise Exception('Not a JPEG or PNG')
                 filename = secure_filename(deckName + '.' + mime_type)
                 pathname = 'images/'+filename

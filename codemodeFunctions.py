@@ -55,6 +55,12 @@ def getQuestion(conn, inQid):
     print result
     return result
 
+def getDeckID(conn, deckName):
+    curs = conn.cursor(MySQLdb.cursors.DictCursor)
+    curs.execute('SELECT deckid from decks where deck_name = %s;', [deckName])
+    result = curs.fetchone()
+    return result
+
 def getQuestionsFromDeck(conn, deck_num):
     # return array of all questions given a deck number
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
