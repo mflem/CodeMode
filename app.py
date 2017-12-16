@@ -188,6 +188,8 @@ if request.method == 'POST':
     except Exception as err:
         flash('Upload failed {why}'.format(why=err))
         return render_template('add-deck.html',src='',nm='')
+else:
+    return render_template('add-deck.html',src='',nm='')
 
 @app.route('/update/<updateId>', methods =['POST', 'GET'])
 # page for updating questions
