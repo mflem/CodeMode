@@ -1,0 +1,18 @@
+{% extends 'codemode.html' %}
+  {% block content %}
+      <form enctype="multipart/form-data" method= "POST" action="{{script}}">
+        <table class="table">
+          <tbody>
+            <tr id="newDeckAdd">
+              <th scope="row"><label for="deckName">Create new deck:</label></th>
+              <td><input type=text name="deckName" value="{{deck}}"></input></td>
+            </tr>
+            <tr>
+              <th scope="row"><label for="imagefile">File to upload: </label></th>
+              <td><input type="file" name="imagefile" size="50"></input></td>
+            </tr>
+          </tbody>
+        </table>
+        <input type="submit" value='submit' name='submit'></input>
+      </form>
+  {% endblock %}

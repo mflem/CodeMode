@@ -29,6 +29,27 @@ def insert(conn, data):
     except Exception as error:
         flash("error: {}".format(error))
 
+def insertDeck(conn, deckName):
+    curs = conn.cursor(MySQLdb.cursors.DictCursor)
+    pathname = deckName + '.jpeg'
+    try:
+        curs.execute('''INSERT INTO decks
+        (deck_name, imagepath)
+        VALUES(%s, %s)''', ([deckName, pathname])
+        to_flash = "Question (" + str(data[0]) +") was inserted successfully"
+        flash(to_flash)
+        # check the id of the last inserted question because the qid is auto incremented
+        curs.execute('''SELECT last_insert_id();''')
+        # fetch the row
+        deckid = curs.fetchone()
+        #check the value in the row
+        return deckid["last_insert_id()"]
+    except Exception as error:
+        flash("error: {}".format(error))
+
+ # check the id of the last inserted question because the qid is auto incremented
+ curs.execute('''SELECT last_insert_id();''')
+
 def getQuestion(conn, inQid):
     # return question info given qid
     curs = conn.cursor(MySQLdb.cursors.DictCursor)

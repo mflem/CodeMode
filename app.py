@@ -135,7 +135,7 @@ def select():
         return redirect(url_for("quiz", deckid=deckid))
     return render_template('select.html', decks=deckList)
 
-@app.route('/make/', methods =['POST', 'GET'])
+@app.route('/add-question', methods =['POST', 'GET'])
 # page for making questions to add to decks
 def make():
     conn = codemodeFunctions.getConn()
@@ -153,43 +153,38 @@ def make():
             explanation = request.form['explanation']
             pointVal = request.form['pointVal']
             deckName = request.form['deckName']
-            newDeckName = request.form['newDeckName']
             if (not questionText or not answer or (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or not explanation or pointVal <= 0 or not deckName):
-                if (deckName and newDeckName):
-                    flash("Please only fill in one deck!")
-                    if (newDeckName in deckList):
-                        flash("That deck already exists! Please select it from the drop down")
                 flash("Please fill out all fields before submitting your question!")
                 data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
-                return render_template('make.html', decks=deckList)
+                return render_template('add-question.html', decks=deckList)
             else:
-                if (deckName and not newDeckName):
-                    deckName = deckName
-                else:
-                    deckName = newDeckName
                 data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
-                try:
-                    name = deckName
-                    f = request.files['imagefile']
-                    mime_type = imghdr.what(f.stream)
-                    if mime_type != 'jpeg':
-                        raise Exception('Not a JPEG')
-                    filename = secure_filename(deckName +'.jpeg')
-                    pathname = 'images/'+filename
-                    f.save(pathname)
-                    flash('Upload successful')
-                    print pathname
-                except Exception as err:
-                    flash('Upload failed {why}'.format(why=err))
-                    return render_template('make.html',src='',nm='')
-
                 conn = codemodeFunctions.getConn()
                 # insert returns the qid of the last inputted value on this connection
                 newID = codemodeFunctions.insert(conn,data)
                 return redirect(url_for("update",updateId=newID))
             # redirect to update page so updates can be made separately from make
     else:
-        return render_template('make.html', decks=deckList)
+        return render_template('add-question.html', decks=deckList)
+
+@app.route('/add-deck', methods=['POST'])
+if request.method == 'POST':
+    try:
+        deckName = request.form['deckName']
+        f = request.files['imagefile']
+        mime_type = imghdr.what(f.stream)
+        if mime_type != 'jpeg':
+            raise Exception('Not a JPEG')
+        filename = secure_filename(deckName +'.jpeg')
+        pathname = 'images/'+filename
+        f.save(pathname)
+        flash('Upload successful')
+        codemodeFunctions.insertDeck(conn, deckName)
+        print pathname
+        return render_template('add-deck.html',src='',nm='')
+    except Exception as err:
+        flash('Upload failed {why}'.format(why=err))
+        return render_template('add-deck.html',src='',nm='')
 
 @app.route('/update/<updateId>', methods =['POST', 'GET'])
 # page for updating questions
