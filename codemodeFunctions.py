@@ -66,7 +66,7 @@ def getQuestionsFromDeck(conn, deck_num):
 def getDeckList(conn):
      # return all unique deck numbers
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
-    curs.execute('SELECT DISTINCT(deckName) AS deckName FROM decks ORDER BY deckid DESC;')
+    curs.execute('SELECT DISTINCT(deck_name) AS deck_name FROM decks ORDER BY deckid DESC;')
     result = curs.fetchall()
     deck_list = []
     for row in result:

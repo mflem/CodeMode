@@ -167,7 +167,7 @@ def addquestion():
     else:
         return render_template('add-question.html', decks=deckList)
 
-@app.route('/add-deck/', methods=['POST'])
+@app.route('/add-deck/', methods=['POST', 'GET'])
 def addDeck():
     conn = codemodeFunctions.getConn()
     if request.method == 'POST':
@@ -190,7 +190,7 @@ def addDeck():
             flash('Upload failed {why}'.format(why=err))
             return render_template('add-deck.html',src='',nm='')
     else:
-        return render_template('add-deck.html',src='',nm='')
+        return render_template('add-deck.html')
 
 @app.route('/update/<updateId>', methods =['POST', 'GET'])
 # page for updating questions
