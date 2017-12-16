@@ -184,7 +184,7 @@ if request.method == 'POST':
         flash('Upload successful')
         codemodeFunctions.insertDeck(conn, deckName)
         print pathname
-        return render_template('add-deck.html',src='',nm='')
+        return render_template('update-deck.html',pathname=pathname,deckName=deckName)
     except Exception as err:
         flash('Upload failed {why}'.format(why=err))
         return render_template('add-deck.html',src='',nm='')
