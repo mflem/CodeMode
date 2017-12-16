@@ -164,6 +164,7 @@ def make():
                 return render_template('make.html', decks=deckList)
             else:
                 if (deckName and not newDeckName):
+                    deckName = deckName
                 else:
                     deckName = newDeckName
                 data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
@@ -180,9 +181,7 @@ def make():
                     print pathname
                 except Exception as err:
                     flash('Upload failed {why}'.format(why=err))
-                    return render_template('upload.html',src='',nm='')
-
-
+                    return render_template('make.html',src='',nm='')
 
                 conn = codemodeFunctions.getConn()
                 # insert returns the qid of the last inputted value on this connection
@@ -230,12 +229,7 @@ def file_upload():
             flash('Upload failed {why}'.format(why=err))
             return render_template('upload.html',src='',nm='')
 
-# @app.route('/pic/<fname>')
-# def pic(fname):
-#     print fname
-#     f = secure_filename(fname)
-#     return send_from_directory('images',f)
- # upload code ends ---
+#upload code ends ---
 
 @app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
 #page for taking a quiz

@@ -5,7 +5,7 @@ when given a question-->
 
 {% extends 'codemode.html' %}
   {% block content %}
-      <form method= "POST" action="{{script}}">
+      <form enctype="multipart/form-data" method= "POST" action="{{script}}">
         <table class="table">
         <tbody>
           <tr>
@@ -13,7 +13,7 @@ when given a question-->
             <td><input type=text name='questionText' value="{{questionText}}"></input></td>
           </tr>
           <tr>
-            <th scope="row"><label for="answer">Anser</label></th>
+            <th scope="row"><label for="answer">Answer</label></th>
             <td><input type=text name='answer' value="{{answer}}"></input></td>
           </tr>
           <tr>
