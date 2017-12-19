@@ -247,7 +247,7 @@ def update(updateId):
                 if (not questionText or not answer or (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or not explanation or pointVal <= 0 or not deckName):
                     flash("Please fill out all fields before submitting your question!")
                     data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
-                    print data
+                    print "data is: " + str(data)
                     return render_template('add-question.html',
                                             questionText=data[0],
                                             answer=data[1],
@@ -261,7 +261,7 @@ def update(updateId):
                 else:
                     data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
                     conn = codemodeFunctions.getConn()
-                    print data
+                    print "data is: " + str(data)
                     newInfo = codemodeFunctions.updateQuestion(conn,data,updateId)
                     return redirect(url_for("update",updateId=updateId))
     return render_template('add-question.html',

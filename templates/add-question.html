@@ -49,7 +49,7 @@ when given a question-->
             <th scope="row"><label for="deckName">Add to deck:</label></th>
             <td><select name='deckName' required>
                 {% if selectedDeck %}
-                  <option name="deckName" value="{{selectedDeck}}"></option>
+                  <option name="deckName" value="{{selectedDeck}}">{{selectedDeck}}</option>
                   {% else %}
                   <option name="deckName" value="None">Select a deck</option>
                   {% endif %}
