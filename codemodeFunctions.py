@@ -32,12 +32,13 @@ def insertQuestion(conn, data):
 def updateQuestion(conn, qid, data):
     #update a question in the database, returns the row for the updated question
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
+    deckID = getDeckID(conn,data[8])
     try:
         # data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
         # uses prepared query to avoid attacks
         curs.execute('''UPDATE questions
         SET questionText = %s, answer = %s, qtype = %s, wrong1 = %s, wrong2 = %s, wrong3 = %s, explanation = %s, point_value = %s, deck_num = %s
-        WHERE qid = %s''', (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], qid))
+        WHERE qid = %s''', (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], deckID["deckid"], qid))
         to_flash = "Question (" + str(data[0]) +") was inserted successfully"
         flash(to_flash)
         return getQuestion(conn, qid)
@@ -92,6 +93,13 @@ def getDeckID(conn, deckName):
     print result
     return result
 
+def getDeckName(conn, deckID):
+    curs = conn.cursor(MySQLdb.cursors.DictCursor)
+    curs.execute('SELECT deck_name from decks where deckid = %s;', [deckName])
+    result = curs.fetchone()
+    print result
+    return result
+
 def getQuestionsFromDeck(conn, deck_num):
     # return array of all questions given a deck number
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
@@ -108,7 +116,6 @@ def getDeckList(conn):
     deck_list = []
     for row in result:
         deck_list.append(row["deck_name"])
-    print deck_list
     # deck_list = [ row["deck_name"] for row in curs.fetchall() ]
     # print deck_list
     return deck_list

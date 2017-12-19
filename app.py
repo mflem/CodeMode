@@ -137,6 +137,7 @@ def select():
         return redirect(url_for("quiz", deckid=deckid))
     return render_template('select.html', decks=deckList)
 
+# INSERT AND UPDATE questions --------------------------------------------------
 @app.route('/add-question/', methods =['POST', 'GET'])
 # page for making questions to add to decks
 def addquestion():
@@ -168,6 +169,62 @@ def addquestion():
             # redirect to update page so updates can be made separately from add-question
     else:
         return render_template('add-question.html', decks=deckList)
+
+
+@app.route('/update/<updateId>', methods =['POST', 'GET'])
+# page for updating questions
+def update(updateId):
+    conn = codemodeFunctions.getConn()
+    qResults = codemodeFunctions.getQuestion(conn, updateId)
+    deckList = codemodeFunctions.getDeckList(conn)
+    currentDeckName = codemodeFunctions.getDeckName(conn, qResults["deck_num"])
+    # print qResults["questionText"]
+    print "in update"
+    if request.method == 'POST':
+                #gathers inputted info to send to database
+                questionText = request.form['questionText']
+                answer = request.form['answer']
+                qtype = request.form['qtype']
+                wrong1 = request.form['wrong1']
+                wrong2 = request.form['wrong2']
+                wrong3 = request.form['wrong3']
+                explanation = request.form['explanation']
+                pointVal = request.form['pointVal']
+                deckName = request.form['deckName']
+                if (not questionText or not answer or (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or not explanation or pointVal <= 0 or not deckName):
+                    flash("Please fill out all fields before submitting your question!")
+                    data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
+                    print "data is: " + str(data)
+                    return render_template('add-question.html',
+                                            questionText=questionText,
+                                            answer=answer,
+                                            explanation=explanation,
+                                            pointVal=pointVal,
+                                            selectedDeck=deckName,
+                                            wrong1=wrong1,
+                                            wrong2=wrong2,
+                                            wrong3=wrong3,
+                                            decks=deckList)
+                else:
+                    print "conditional passed"
+                    data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
+                    conn = codemodeFunctions.getConn()
+                    print data
+                    newInfo = codemodeFunctions.updateQuestion(conn,updateId,data)
+                    return redirect(url_for("update",updateId=updateId))
+    return render_template('add-question.html',
+                           questionText=qResults["questionText"],
+                           answer=qResults["answer"],
+                           explanation=qResults["explanation"],
+                           pointVal=qResults["point_value"],
+                           selectedDeck=currentDeckName,
+                           qtype=qResults["qtype"],
+                           wrong1=qResults["wrong1"],
+                           wrong2=qResults["wrong2"],
+                           wrong3=qResults["wrong3"],
+                           decks=deckList)
+
+# INSERT AND UPDATE decks ------------------------------------------------------
 
 @app.route('/add-deck/', methods=['POST', 'GET'])
 def addDeck():
@@ -225,56 +282,6 @@ def updateDeck(deckID):
                 flash('Upload failed {why}'.format(why=err))
                 return render_template('update-deck.html')
     return render_template('update-deck.html',pathname=deckInfo[2],deckName=[1])
-
-@app.route('/update/<updateId>', methods =['POST', 'GET'])
-# page for updating questions
-def update(updateId):
-    conn = codemodeFunctions.getConn()
-    qResults = codemodeFunctions.getQuestion(conn, updateId)
-    deckList = codemodeFunctions.getDeckList(conn)
-    # print qResults["questionText"]
-    if request.method == 'POST':
-                #gathers inputted info to send to database
-                questionText = request.form['questionText']
-                answer = request.form['answer']
-                qtype = request.form['qtype']
-                wrong1 = request.form['wrong1']
-                wrong2 = request.form['wrong2']
-                wrong3 = request.form['wrong3']
-                explanation = request.form['explanation']
-                pointVal = request.form['pointVal']
-                deckName = request.form['deckName']
-                if (not questionText or not answer or (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or not explanation or pointVal <= 0 or not deckName):
-                    flash("Please fill out all fields before submitting your question!")
-                    data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
-                    print "data is: " + str(data)
-                    return render_template('add-question.html',
-                                            questionText=data[0],
-                                            answer=data[1],
-                                            explanation=data[6],
-                                            pointVal=data[7],
-                                            selectedDeck=data[8],
-                                            wrong1=data[3],
-                                            wrong2=data[4],
-                                            wrong3=data[5],
-                                            decks=deckList)
-                else:
-                    data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
-                    conn = codemodeFunctions.getConn()
-                    print "data is: " + str(data)
-                    newInfo = codemodeFunctions.updateQuestion(conn,data,updateId)
-                    return redirect(url_for("update",updateId=updateId))
-    return render_template('add-question.html',
-                           questionText=qResults["questionText"],
-                           answer=qResults["answer"],
-                           explanation=qResults["explanation"],
-                           pointVal=qResults["point_value"],
-                           selectedDeck=qResults["deck_num"],
-                           qtype=qResults["qtype"],
-                           wrong1=qResults["wrong1"],
-                           wrong2=qResults["wrong2"],
-                           wrong3=qResults["wrong3"],
-                           decks=deckList)
 
 @app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
 #page for taking a quiz
