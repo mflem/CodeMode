@@ -1,7 +1,7 @@
 
 	$("li").click(function(){
 		$("li").not(this).each(function(){
-		 $(this).removeClass("active");
+		 $(this).first().addClass("active").nextAll().removeClass("active");
 	     });
 	     $(this).addClass("active");
 	})
