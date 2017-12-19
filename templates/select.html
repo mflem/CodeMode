@@ -17,7 +17,7 @@ Lists all current, unique deck options -->
 
 
 <!-- Carousel Code adapted from W3Schools -->
-<div class="container"> 
+<div class="container">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -28,18 +28,18 @@ Lists all current, unique deck options -->
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
-      
+
       {% for deck in decks %}
 <!--    src="{{deck}}.jpg"    -->
           <div class="item">
-            <img src="../images/{{deck}}.jpeg" alt="{{deck}} image" style="width:100%;" name="selectDeck" value="{{deck}}">
+            <img src="{{deck['image_path']}}" alt="{{deck['deck_name']}} image" style="width:100%;" name="selectDeck" value="{{deck}}">
             <div class="carousel-caption">
-              <h3>{{deck}}</h3>
+              <h3>{{deck['deck_name']}}</h3>
 <!--               <p>Learn about *what deck is about* Or this has _ questions</p> -->
             </div>
           </div>
       {% endfor %}
-      
+
     </div> <!-- end of carousel-inner -->
 
     <!-- Left and right controls -->
@@ -55,4 +55,3 @@ Lists all current, unique deck options -->
 </div>
 
   {% endblock %}
-

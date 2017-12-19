@@ -122,6 +122,12 @@ def getDeckList(conn):
     # print deck_list
     return deck_list
 
+def getDeckTotalList(conn):
+        curs = conn.cursor(MySQLdb.cursors.DictCursor)
+        curs.execute('SELECT DISTINCT(deck_name) AS deck_name FROM decks ORDER BY deckid DESC;')
+        result = curs.fetchall()
+        return result
+
 def getDeck(conn, deckNum):
     #returns all question ids for every question in a given deck
     curs = conn.cursor(MySQLdb.cursors.DictCursor)

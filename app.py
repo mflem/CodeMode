@@ -131,7 +131,7 @@ def pic(fname):
 # page for selecting a deck to be quizzed on
 def select():
     conn = codemodeFunctions.getConn()
-    deckList = codemodeFunctions.getDeckList(conn)
+    deckList = codemodeFunctions.getDeckTotalList(conn)
     print deckList;
     if request.method =='POST':
         deckName = request.form['selectDeck']
@@ -237,7 +237,7 @@ def addDeck():
     if request.method == 'POST':
         deckName = request.form['deckName']
         if not codemodeFunctions.getDeck(conn, deckName):
-            flash("Deck with the name " ^ deckName ^ " already exists!")
+            flash("Deck with the name " + deckName + " already exists!")
             return render_template('add-deck.html')
         else:
             try:
@@ -246,7 +246,8 @@ def addDeck():
                 if mime_type != 'jpeg' or mime_type != 'png':
                     raise Exception('Not a JPEG or PNG')
                 filename = secure_filename(deckName + '.' + mime_type)
-                f.save(filename)
+                pathname = url_for('pic',fname=filename)
+                f.save(pathname)
                 flash('Upload successful')
                 codemodeFunctions.insertDeck(conn, deckName)
                 print pathname
