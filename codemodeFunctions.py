@@ -9,7 +9,7 @@ from flask import flash
 
 #functions and connections necessary for app.py
 
-def insert(conn, data):
+def insertQuestion(conn, data):
     #add a question into the database and return the newly inserted question's id
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     try:
@@ -29,6 +29,21 @@ def insert(conn, data):
     except Exception as error:
         flash("error: {}".format(error))
 
+def updateQuestion(conn, qid, data):
+    #update a question in the database, returns the row for the updated question
+    curs = conn.cursor(MySQLdb.cursors.DictCursor)
+    try:
+        # data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
+        # uses prepared query to avoid attacks
+        curs.execute('''UPDATE questions
+        SET questionText = %s, answer = %s, qtype = %s, wrong1 = %s, wrong2 = %s, wrong3 = %s, explanation = %s, point_value = %s, deck_num = %s
+        WHERE qid = %s''', (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], qid))
+        to_flash = "Question (" + str(data[0]) +") was inserted successfully"
+        flash(to_flash)
+        return getQuestion(conn, qid)
+    except Exception as error:
+        flash("error: {}".format(error))
+
 def insertDeck(conn, deckName):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     pathname = deckName + '.jpeg'
@@ -36,7 +51,7 @@ def insertDeck(conn, deckName):
         curs.execute('''INSERT INTO decks
         (deck_name, image_path)
         VALUES(%s, %s)''', ([deckName, pathname]))
-        to_flash = "Question (" + str(data[0]) +") was inserted successfully"
+        to_flash = "Question (" + str(data[0]) +") was updated successfully"
         flash(to_flash)
         # check the id of the last inserted question because the qid is auto incremented
         curs.execute('''SELECT last_insert_id();''')
@@ -44,6 +59,21 @@ def insertDeck(conn, deckName):
         deckid = curs.fetchone()
         #check the value in the row
         return deckid["last_insert_id()"]
+    except Exception as error:
+        flash("error: {}".format(error))
+
+def updateDeck(conn, deckName, pathname, deckNum):
+    # function that takes in connection and deck info and updates the deck in
+    #the decks table
+    curs = conn.cursor(MySQLdb.cursors.DictCursor)
+    pathname = deckName + '.jpeg'
+    try:
+        curs.execute('''UPDATE decks
+        SET deck_name = %s, image_path = %s
+        WHERE deck_num = %s''', ([deckName, pathname, deckNum]))
+        to_flash = "Deck (" + str(data[0]) +") was updated successfully"
+        flash(to_flash)
+        return getDeck(deckNum)
     except Exception as error:
         flash("error: {}".format(error))
 
@@ -76,10 +106,10 @@ def getDeckList(conn):
     curs.execute('SELECT DISTINCT(deck_name) AS deck_name FROM decks ORDER BY deckid DESC;')
     result = curs.fetchall()
     deck_list = []
-    for row in result:
-        deck_list.append(row["deck_name"])
-    print deck_list
-    return deck_list
+    # for row in result:
+    #     deck_list.append(row["deck_name"])
+    # print deck_list
+    return [ row["deck_name"] for row in curs.fetchall() ]
 
 def getDeck(conn, deckNum):
     #returns all question ids for every question in a given deck

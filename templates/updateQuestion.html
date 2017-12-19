@@ -48,14 +48,10 @@ when given a question-->
           <tr id="addExisting">
             <th scope="row"><label for="deckName">Add to deck:</label></th>
             <td><select name='deckName' required>
-                {% if selectedDeck %}
-                  <option name="deckName" value="{{selectedDeck}}"></option>
-                  {% else %}
-                  <option name="deckName" value="None">Select a deck</option>
-                  {% endif %}
-                {% for deck in decks %}
-                  <option name="deckName" value="{{deck}}">{{deck}}</option>
-                {% endfor %}
+                <option name="deckName" value="None">Select a deck</option>
+              {% for deck in decks %}
+                <option name="deckName" value="{{deck}}">{{deck}}</option>
+              {% endfor %}
             </select></td>
           </tr>
         </tbody>
@@ -65,14 +61,3 @@ when given a question-->
 
 
   {% endblock %}
-<script>
-	$("#newDeckAdd").hide();
-	console.log("hidden");
-	$("#newDeck").click(function(){
-		console.log("Button clicked");
-// 		$("#newDeck").html("Add to Existing Deck");
-// 		$("#newDeckAdd").toggle(1000);
-// 		$("#addExisting").toggle(1000);
-// 		console.log('toggle');
-	});
-</script>

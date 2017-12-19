@@ -196,12 +196,70 @@ def addDeck():
     else:
         return render_template('add-deck.html')
 
+@app.route('/update-deck/<deckID>', methods=['POST', 'GET'])
+def addDeck(deckID):
+    conn = codemodeFunctions.getConn()
+    deckInfo = codemodeFunctions.getDeck(conn, deckID)
+    if request.method == 'POST':
+        deckName = request.form['deckName']
+        f = request.files['imagefile']
+        if not f and deckInfo['image_path']:
+            imagePath = deckInfo['image_path']
+            codemodeFunctions.updateDeck(conn, deckName, imagePath, deckID)
+            return redirect(url_for("update-deck",deckID=deckID))
+        else:
+            try:
+                f = request.files['imagefile']
+                mime_type = imghdr.what(f.stream)
+                if mime_type != 'jpeg' or mime_type != 'png':
+                    raise Exception('Not a JPEG or PNG')
+                filename = secure_filename(deckName + '.' + mime_type)
+                pathname = 'images/'+filename
+                f.save(pathname)
+                flash('Upload successful')
+                codemodeFunctions.updateDeck(conn, deckName, imagePath, deckID)
+                print pathname
+                return redirect(url_for("update-deck",deckID=deckID))
+            except Exception as err:
+                flash('Upload failed {why}'.format(why=err))
+                return render_template('update-deck.html')
+    return render_template('update-deck.html',pathname=deckInfo['image_path'],deckName=['deck_name'])
+
 @app.route('/update/<updateId>', methods =['POST', 'GET'])
 # page for updating questions
 def update(updateId):
     conn = codemodeFunctions.getConn()
     qResults = codemodeFunctions.getQuestion(conn, updateId)
     # print qResults["questionText"]
+    if request.method == 'POST':
+                #gathers inputted info to send to database
+                questionText = request.form['questionText']
+                answer = request.form['answer']
+                qtype = request.form['qtype']
+                wrong1 = request.form['wrong1']
+                wrong2 = request.form['wrong2']
+                wrong3 = request.form['wrong3']
+                explanation = request.form['explanation']
+                pointVal = request.form['pointVal']
+                deckName = request.form['deckName']
+                if (not questionText or not answer or (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or not explanation or pointVal <= 0 or not deckName):
+                    flash("Please fill out all fields before submitting your question!")
+                    data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
+                    return render_template('add-question.html',
+                                            questionText=data[0],
+                                            answer=data[1],
+                                            explanation=data[6],
+                                            pointVal=data[7],
+                                            selectedDeck=data[8],
+                                            wrong1=data[3],
+                                            wrong2=data[4],
+                                            wrong3=data[5],
+                                            decks=deckList)
+                else:
+                    data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
+                    conn = codemodeFunctions.getConn()
+                    newInfo = codemodeFunctions.updateQuestion(conn,data,updateId)
+                    return redirect(url_for("update",updateId=updateId))
     return render_template('add-question.html',
                            questionText=qResults["questionText"],
                            answer=qResults["answer"],
@@ -223,8 +281,8 @@ def quiz(deckid):
         # in the form submitted, which in turn gives back to the new page
         index = 0
         formData = []
-        # print request.form
         for q in qResults:
+            # print request.form
             qName = 'q[' + str(index) + ']'
             print request.form[qName]
             formData.append(request.form[qName])
