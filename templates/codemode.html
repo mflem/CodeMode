@@ -52,6 +52,13 @@ CodeMode -->
       <h1>{{title}}</h1>
     {% endblock %}
 
+	{% block jquery_scripts %}
+	  <script>
+		$("div .item").load().first().addClass("active").nextAll().removeClass("active");
+		console.log("this happened");
+	  </script>
+	{% endblock %}
+	  
 <!-- <script>
 // $("li").click(function(){
 // $("li").each(function(){
