@@ -236,22 +236,24 @@ def addDeck():
     conn = codemodeFunctions.getConn()
     if request.method == 'POST':
         deckName = request.form['deckName']
-        if not codemodeFunctions.getDeck(conn, deckName):
+        if codemodeFunctions.getDeck(conn, deckName):
             flash("Deck with the name " + deckName + " already exists!")
             return render_template('add-deck.html')
         else:
             try:
                 f = request.files['imagefile']
                 mime_type = imghdr.what(f.stream)
-                if mime_type != 'jpeg' or mime_type != 'png':
-                    raise Exception('Not a JPEG or PNG')
-                filename = secure_filename(deckName + '.' + mime_type)
-                pathname = url_for('pic',fname=filename)
-                f.save(pathname)
-                flash('Upload successful')
-                codemodeFunctions.insertDeck(conn, deckName)
-                print pathname
-                return render_template('updateDeck.html',pathname=filename,deckName=deckName)
+                if mime_type == 'jpeg' or mime_type == 'png' or mime_type == 'jpg':
+                    filename = secure_filename(deckName + '.' + mime_type)
+                    pathname = url_for('pic',fname=filename)
+                    f.save(pathname)
+                    flash('Upload successful')
+                    codemodeFunctions.insertDeck(conn, deckName)
+                    print pathname
+                    return render_template('updateDeck.html',pathname=filename,deckName=deckName)
+                else:
+                    raise Exception('Not a JPEG, JPG, or PNG')
+
             except Exception as err:
                 flash('Upload failed {why}'.format(why=err))
                 return render_template('add-deck.html',src='',nm='')
