@@ -11,18 +11,18 @@
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{count[0] + 1}}. {{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
       <!-- for each multiple choice question show options -->
-         <input type="radio" name="q{{ count }}" value="{{question['answer']}}">{{question['answer']}}<br>
-	       <input type="radio" name="q{{ count }}" value="{{question['wrong1']}}">{{question['wrong1']}}<br>
- 	       <input type="radio" name="q{{ count }}" value="{{question['wrong2']}}">{{question['wrong2']}}<br>
- 	       <input type="radio" name="q{{ count }}" value="{{question['wrong3']}}">{{question['wrong3']}}<br>
+         <input type="radio" name="q{{ count }}" value="{{question['answer']}}" required>{{question['answer']}}<br>
+	       <input type="radio" name="q{{ count }}" value="{{question['wrong1']}}" required>{{question['wrong1']}}<br>
+ 	       <input type="radio" name="q{{ count }}" value="{{question['wrong2']}}" required>{{question['wrong2']}}<br>
+ 	       <input type="radio" name="q{{ count }}" value="{{question['wrong3']}}" required>{{question['wrong3']}}<br>
 	    {% else %}
 		    {% if question['qtype'] == 'truefalse' %}
         <!-- true or false questions -->
-				 <input type="radio" name="q{{ count }}" value="true">True<br>
- 	       <input type="radio" name="q{{ count }}" value="False">False<br>
+				 <input type="radio" name="q{{ count }}" value="true" required>True<br>
+ 	       <input type="radio" name="q{{ count }}" value="False" required>False<br>
         {% else %}
             <!-- question is fill in blank -->
-            <input type="text" name="q{{ count }}">
+            <input type="text" name="q{{ count }}" required>
         {% endif%}
       {% endif %}
       <br>
