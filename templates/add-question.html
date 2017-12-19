@@ -73,10 +73,10 @@ when given a question-->
 		if ($('#qtype').val() == 'multi') {
 // 	if ($("#qtype option:selected").val() == 'multi') {
 			console.log("is multi");
-			$(".wrong").show();
+			$(".wrong").show(1000);
 		} else {
 			console.log("is not multi");
-			$(".wrong").hide();
+			$(".wrong").hide(1000);
 			console.log("made it");
 	}
 	});
