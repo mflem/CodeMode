@@ -122,6 +122,11 @@ def logout():
 # def home(name):
 #     return render_template('codemode.html', name=name)
 
+@app.route('/pic/<fname>')
+def pic(fname):
+    f = secure_filename(fname)
+    return send_from_directory('images',f)
+
 @app.route('/select/', methods =['POST', 'GET'])
 # page for selecting a deck to be quizzed on
 def select():
@@ -241,12 +246,11 @@ def addDeck():
                 if mime_type != 'jpeg' or mime_type != 'png':
                     raise Exception('Not a JPEG or PNG')
                 filename = secure_filename(deckName + '.' + mime_type)
-                pathname = 'images/'+filename
-                f.save(pathname)
+                f.save(filename)
                 flash('Upload successful')
                 codemodeFunctions.insertDeck(conn, deckName)
                 print pathname
-                return render_template('updateDeck.html',pathname=pathname,deckName=deckName)
+                return render_template('updateDeck.html',pathname=filename,deckName=deckName)
             except Exception as err:
                 flash('Upload failed {why}'.format(why=err))
                 return render_template('add-deck.html',src='',nm='')
