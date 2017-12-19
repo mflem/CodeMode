@@ -19,7 +19,7 @@ when given a question-->
           <tr>
             <th scope="row"><label for="qtype" required>Answer Type</label></th>
             <td>
-              <select name='qtype'>
+              <select id='qtype' name='qtype'>
                 <option value="multi">Multiple Choice</option>
                 <option value="fillblank">Fill in the Blank</option>
               </select>
@@ -69,9 +69,12 @@ when given a question-->
 <script>
 // 	$("#newDeckAdd").hide();
 	console.log("hidden");
-	$("option[value='multi']").click(function(){
+	if ($("#qtype").val() == 'multi') {
 		console.log("made it");
-	})
+	}
+// 	$("option[value='multi']").click(function(){
+// 		console.log("made it");
+// 	})
 // 	$("#newDeck").click(function(){
 // 		console.log("Button clicked");
 // 		$("#newDeck").html("Add to Existing Deck");
