@@ -69,7 +69,7 @@ when given a question-->
 <script>
 // 	$("#newDeckAdd").hide();
 	console.log("hidden");
-	if ($("#qtype").val() == 'multi') {
+	if ($("#qtype option:selected").val() == 'multi') {
 		console.log("is multi");
 		$(".wrong").show();
 	} else {
