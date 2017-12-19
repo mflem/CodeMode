@@ -52,36 +52,15 @@ CodeMode -->
       <h1>{{title}}</h1>
     {% endblock %}
 
-	{% block jquery_scripts %}
-	  <script>
-		  console.log("step one");
-		$("div .item").each(function()
-			$(this).first().addClass("active").nextAll().removeClass("active");
-			console.log("this happened");
-		  );
-	  </script>
-	{% endblock %}
+{% block jquery_scripts %}
+<script>
+	console.log("step one");
+	$("div .item").each(function()
+		$(this).first().addClass("active").nextAll().removeClass("active");
+		console.log("this happened");
+  	);
+</script>
+{% endblock %}
 	  
-<!-- <script>
-// $("li").click(function(){
-// $("li").each(function(){
-// 	if ($(this).hasClass("active")) {
-// 		console.log("It has all the class");
-// 		}
-// 		$(this).first().addClass("active").nextAll().removeClass("active");
-//      	});
-// 	$(this).addClass("active");
-// 	})
-// $("#newDeckAdd").hide();
-// 	$("#newDeck").click(function(){
-// 		$("#newDeck").html("Add to Existing Deck");
-// 		$("#newDeckAdd").toggle(1000);
-// 		$("#addExisting").toggle(1000);
-// 		console.log('toggle');
-// 	});
-$("div .item").load().first().addClass("active").nextAll().removeClass("active");
-console.log("this happened");
-</script> -->
-<!--   <script src="../websiteFunctions.js"></script> -->
   </body>
 </html>
