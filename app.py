@@ -271,19 +271,22 @@ def updateDeck(deckID):
             try:
                 f = request.files['imagefile']
                 mime_type = imghdr.what(f.stream)
-                if mime_type != 'jpeg' or mime_type != 'png':
-                    raise Exception('Not a JPEG or PNG')
-                filename = secure_filename(deckName + '.' + mime_type)
-                pathname = 'images/'+filename
-                f.save(pathname)
-                flash('Upload successful')
-                codemodeFunctions.updateDeck(conn, deckName, imagePath, deckID)
-                print pathname
+                f = request.files['imagefile']
+                mime_type = imghdr.what(f.stream)
+                if mime_type == 'jpeg' or mime_type == 'png' or mime_type == 'jpg':
+                    filename = secure_filename(deckName + '.' + mime_type)
+                    pathname = url_for('pic',fname=filename)
+                    f.save(filename)
+                    flash('Upload successful')
+                    newID = codemodeFunctions.insertDeck(conn, deckName, pathname)
+                    print pathname
+                    codemodeFunctions.updateDeck(conn, deckName, imagePath, deckID)
+                    print pathname
                 return redirect(url_for("updateDeck",deckID=deckID))
             except Exception as err:
                 flash('Upload failed {why}'.format(why=err))
                 return render_template('update-deck.html')
-    return render_template('update-deck.html',pathname=deckInfo[2],deckName=[1])
+    return render_template('update-deck.html')
 
 @app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
 #page for taking a quiz
@@ -306,7 +309,8 @@ def quiz(deckid):
             flash("Please answers all questions!")
             return render_template('quiz.html', questions=qResults)
         else:
-            answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, 'me') # change to username later
+            user = session['user']
+            answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, user) # change to username later
             return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData)
     return render_template('quiz.html', questions=qResults)
 
