@@ -124,8 +124,8 @@ def logout():
 
 @app.route('/pic/<fname>')
 def pic(fname):
-    f = secure_filename(fname)
-    return send_from_directory('images',f)
+    f = secure_filename(fname)
+    return send_from_directory('images',f)
 
 @app.route('/select/', methods =['POST', 'GET'])
 # page for selecting a deck to be quizzed on
