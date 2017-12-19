@@ -8,7 +8,7 @@
     {% set count = [0] %}
     {% for question in questions %}
   <div class="question{{ count }}">
-	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{count[0]}}. {{question['questionText']}}</p>
+	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{count[0] + 1}}. {{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
       <!-- for each multiple choice question show options -->
          <input type="radio" name="q{{ count }}" value="{{question['answer']}}">{{question['answer']}}<br>
@@ -37,6 +37,6 @@
       <div id="totalResult"></div>
       </form>
       <script>
-        
+
       </script>
  {% endblock %}
