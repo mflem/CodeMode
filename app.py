@@ -265,7 +265,7 @@ def update(updateId):
                            answer=qResults["answer"],
                            explanation=qResults["explanation"],
                            pointVal=qResults["point_value"],
-                           deckName=qResults["deck_name"],
+                           selectDeck=qResults["deck_num"],
                            qtype=qResults["qtype"],
                            wrong1=qResults["wrong1"],
                            wrong2=qResults["wrong2"],
