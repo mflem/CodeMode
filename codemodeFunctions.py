@@ -124,7 +124,7 @@ def getDeckList(conn):
 
 def getDeckTotalList(conn):
         curs = conn.cursor(MySQLdb.cursors.DictCursor)
-        curs.execute('SELECT DISTINCT(deck_name) AS deck_name FROM decks ORDER BY deckid DESC;')
+        curs.execute('SELECT * FROM decks ORDER BY deckid DESC;')
         result = curs.fetchall()
         return result
 

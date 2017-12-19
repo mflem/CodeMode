@@ -8,7 +8,7 @@ Lists all current, unique deck options -->
     <form method= "POST" action="{{script}}">
         <select name="selectDeck">
             {% for deck in decks %}
-              <option name="selectDeck" value="{{deck}}">{{deck}}</option>
+              <option name="selectDeck" value="{{deck['deck_name']}}">{{deck['deck_name']}}</option>
             {% endfor %}
         </select>
         <br>
