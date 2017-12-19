@@ -189,24 +189,25 @@ def addDeck():
                 flash('Upload successful')
                 codemodeFunctions.insertDeck(conn, deckName)
                 print pathname
-                return render_template('update-deck.html',pathname=pathname,deckName=deckName)
+                return render_template('updateDeck.html',pathname=pathname,deckName=deckName)
             except Exception as err:
                 flash('Upload failed {why}'.format(why=err))
                 return render_template('add-deck.html',src='',nm='')
     else:
         return render_template('add-deck.html')
 
-@app.route('/update-deck/<deckID>', methods=['POST', 'GET'])
+@app.route('/updateDeck/<deckID>', methods=['POST', 'GET'])
 def updateDeck(deckID):
     conn = codemodeFunctions.getConn()
     deckInfo = codemodeFunctions.getDeck(conn, deckID)
+    print deckInfo
     if request.method == 'POST':
         deckName = request.form['deckName']
         f = request.files['imagefile']
         if not f and deckInfo['image_path']:
             imagePath = deckInfo['image_path']
             codemodeFunctions.updateDeck(conn, deckName, imagePath, deckID)
-            return redirect(url_for("update-deck",deckID=deckID))
+            return redirect(url_for("updateDeck",deckID=deckID))
         else:
             try:
                 f = request.files['imagefile']
@@ -219,17 +220,18 @@ def updateDeck(deckID):
                 flash('Upload successful')
                 codemodeFunctions.updateDeck(conn, deckName, imagePath, deckID)
                 print pathname
-                return redirect(url_for("update-deck",deckID=deckID))
+                return redirect(url_for("updateDeck",deckID=deckID))
             except Exception as err:
                 flash('Upload failed {why}'.format(why=err))
                 return render_template('update-deck.html')
-    return render_template('update-deck.html',pathname=deckInfo['image_path'],deckName=['deck_name'])
+    return render_template('update-deck.html',pathname=deckInfo[2],deckName=[1])
 
 @app.route('/update/<updateId>', methods =['POST', 'GET'])
 # page for updating questions
 def update(updateId):
     conn = codemodeFunctions.getConn()
     qResults = codemodeFunctions.getQuestion(conn, updateId)
+    deckList = codemodeFunctions.getDeckList(conn)
     # print qResults["questionText"]
     if request.method == 'POST':
                 #gathers inputted info to send to database
@@ -245,6 +247,7 @@ def update(updateId):
                 if (not questionText or not answer or (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or not explanation or pointVal <= 0 or not deckName):
                     flash("Please fill out all fields before submitting your question!")
                     data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
+                    print data
                     return render_template('add-question.html',
                                             questionText=data[0],
                                             answer=data[1],
@@ -258,6 +261,7 @@ def update(updateId):
                 else:
                     data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
                     conn = codemodeFunctions.getConn()
+                    print data
                     newInfo = codemodeFunctions.updateQuestion(conn,data,updateId)
                     return redirect(url_for("update",updateId=updateId))
     return render_template('add-question.html',
@@ -265,11 +269,12 @@ def update(updateId):
                            answer=qResults["answer"],
                            explanation=qResults["explanation"],
                            pointVal=qResults["point_value"],
-                           selectDeck=qResults["deck_num"],
+                           selectedDeck=qResults["deck_num"],
                            qtype=qResults["qtype"],
                            wrong1=qResults["wrong1"],
                            wrong2=qResults["wrong2"],
-                           wrong3=qResults["wrong3"])
+                           wrong3=qResults["wrong3"],
+                           decks=deckList)
 
 @app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
 #page for taking a quiz

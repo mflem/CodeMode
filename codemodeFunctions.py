@@ -105,11 +105,12 @@ def getDeckList(conn):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     curs.execute('SELECT DISTINCT(deck_name) AS deck_name FROM decks ORDER BY deckid DESC;')
     result = curs.fetchall()
-    # for row in result:
-    #     deck_list.append(row["deck_name"])
-    # print deck_list
-    deck_list = [ row["deck_name"] for row in curs.fetchall() ]
+    deck_list = []
+    for row in result:
+        deck_list.append(row["deck_name"])
     print deck_list
+    # deck_list = [ row["deck_name"] for row in curs.fetchall() ]
+    # print deck_list
     return deck_list
 
 def getDeck(conn, deckNum):
