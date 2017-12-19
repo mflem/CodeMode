@@ -25,15 +25,15 @@ when given a question-->
               </select>
             </td>
           </tr>
-          <tr>
+          <tr class="wrong">
             <th scope="row"><label for="wrong1">Wrong Option 1:</label></th>
             <td><input type=text name='wrong1' value="{{wrong1}}"></input></td>
           </tr>
-          <tr>
+          <tr class="wrong">
             <th scope="row"><label for="wrong2">Wrong Option 2:</label></th>
             <td><input type=text name='wrong2' value="{{wrong2}}"></input></td>
           </tr>
-          <tr>
+          <tr class="wrong">
             <th scope="row"><label for="wrong3">Wrong Option 3:</label></th>
             <td><input type=text name='wrong3' value="{{wrong3}}"></input></td>
           </tr>
@@ -70,6 +70,9 @@ when given a question-->
 // 	$("#newDeckAdd").hide();
 	console.log("hidden");
 	if ($("#qtype").val() == 'multi') {
+		$(".wrong").show();
+	} else {
+		$(".wrong").hide();
 		console.log("made it");
 	}
 // 	$("option[value='multi']").click(function(){
