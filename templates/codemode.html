@@ -55,10 +55,10 @@ CodeMode -->
 {% block jquery_scripts %}
 <script>
 	console.log("step one");
-	$("div .item").each(function()
+	$("div .item").each(function() {
 		$(this).first().addClass("active").nextAll().removeClass("active");
 		console.log("this happened");
-  	);
+  	});
 </script>
 {% endblock %}
 	  
