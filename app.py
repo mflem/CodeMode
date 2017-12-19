@@ -197,7 +197,7 @@ def addDeck():
         return render_template('add-deck.html')
 
 @app.route('/update-deck/<deckID>', methods=['POST', 'GET'])
-def addDeck(deckID):
+def updateDeck(deckID):
     conn = codemodeFunctions.getConn()
     deckInfo = codemodeFunctions.getDeck(conn, deckID)
     if request.method == 'POST':
