@@ -117,11 +117,6 @@ def logout():
 
 #-------- End of Login Code ---------------
 
-# @app.route('/home/')
-# #home page
-# def home(name):
-#     return render_template('codemode.html', name=name)
-
 @app.route('/pic/<fname>')
 def pic(fname):
     f = secure_filename(fname)
@@ -246,11 +241,11 @@ def addDeck():
                 if mime_type == 'jpeg' or mime_type == 'png' or mime_type == 'jpg':
                     filename = secure_filename(deckName + '.' + mime_type)
                     pathname = url_for('pic',fname=filename)
-                    f.save(pathname)
+                    f.save(filename)
                     flash('Upload successful')
-                    codemodeFunctions.insertDeck(conn, deckName)
+                    newID = codemodeFunctions.insertDeck(conn, deckName, pathname)
                     print pathname
-                    return render_template('updateDeck.html',pathname=filename,deckName=deckName)
+                    return redirect(url_for('updateDeck', deckID=newID))
                 else:
                     raise Exception('Not a JPEG, JPG, or PNG')
 

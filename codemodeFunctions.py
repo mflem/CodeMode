@@ -47,14 +47,13 @@ def updateQuestion(conn, qid, data):
     except Exception as error:
         flash("error: {}".format(error))
 
-def insertDeck(conn, deckName):
+def insertDeck(conn, deckName, pathname):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
-    pathname = deckName + '.jpeg'
     try:
         curs.execute('''INSERT INTO decks
         (deck_name, image_path)
         VALUES(%s, %s)''', ([deckName, pathname]))
-        to_flash = "Question (" + str(data[0]) +") was updated successfully"
+        to_flash = "Deck (" + deckName +") was updated successfully"
         flash(to_flash)
         # check the id of the last inserted question because the qid is auto incremented
         curs.execute('''SELECT last_insert_id();''')
