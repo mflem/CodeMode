@@ -5,13 +5,12 @@
           <tbody>
             <tr id="deckAdd">
               <th scope="row"><label for="deckName">Create new deck:</label></th>
-              <td><input type=text name="deckName" value="{{deckName}}" required>{{deckName}}</input></td>
+              <td><input type=text name="deckName" value="{{deckInfo['deck_name']}}" required>{{deckInfo['deck_name']}}</input></td>
             </tr>
             <tr>
               <th scope="row"><label for="imagefile">Upload new image: </label></th>
               <td>
-                <p>Current image is: </p>
-                <img src='{{pathname}}'>
+                <p>Current image is: <img src="{{deckInfo['image_path']}}"></p>
                 <br>
                 <input type="file" name="imagefile" size="100"></input>
               </td>

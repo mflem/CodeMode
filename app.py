@@ -286,6 +286,7 @@ def updateDeck(deckID):
         username= session['username']
         conn = codemodeFunctions.getConn()
         deckInfo = codemodeFunctions.getDeck(conn, deckID)
+        print "deckInfo: "
         print deckInfo
         if request.method == 'POST':
             deckName = request.form['deckName']
@@ -314,8 +315,8 @@ def updateDeck(deckID):
                         return redirect(url_for("updateDeck",deckID=deckID))
                 except Exception as err:
                     flash('Upload failed {why}'.format(why=err))
-                    return render_template('update-deck.html',username=username)
-        return render_template('update-deck.html',username=username)
+                    return render_template('update-deck.html',username=username,deckInfo=deckInfo)
+        return render_template('update-deck.html',username=username,deckInfo=deckInfo)
 
 @app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
 #page for taking a quiz
