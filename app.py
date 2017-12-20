@@ -339,16 +339,17 @@ def quiz(deckid):
             return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData,username=username)
         return render_template('quiz.html', questions=qResults, username=username)
 
-@app.route('/quiz2/<deckid>', methods = ['POST', 'GET'])
-#page for taking a quiz
-def quiz2(deckid):
-    if 'username' not in session:
-        return redirect( url_for('index') )
-    else:
-        username= session['username']
-        conn = codemodeFunctions.getConn()
-        qResults = codemodeFunctions.getQuestionsFromDeck(conn, deckid)
-        return render_template('quiz2.html', questions=qResults, username=username)
+# ajax attempt LOL
+# @app.route('/quiz2/<deckid>', methods = ['POST', 'GET'])
+# #page for taking a quiz
+# def quiz2(deckid):
+#     if 'username' not in session:
+#         return redirect( url_for('index') )
+#     else:
+#         username= session['username']
+#         conn = codemodeFunctions.getConn()
+#         qResults = codemodeFunctions.getQuestionsFromDeck(conn, deckid)
+#         return render_template('quiz2.html', questions=qResults, username=username)
 
 if __name__ == '__main__':
   dsn = dbconn2.read_cnf()
