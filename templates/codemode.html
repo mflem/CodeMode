@@ -27,7 +27,7 @@ CodeMode -->
 	<li><a href='/insertQuestion/'>Make New Question</a></li>
         <li><a href='/insertDeck/'>Make New Deck</a></li> 
         <li><a href='/logout/' id="logoutID">Logout</a></li>
-	      <li><b><a>Welcome back, {{username}}!</a></b></li>
+	      <li><a>Welcome back, {{username}}!</a></li>
       </ul>
     </div>
   </nav>
@@ -48,7 +48,7 @@ CodeMode -->
 
 {% block jquery_scripts %}
 <script>
-	console.log("start carousel");
+// 	console.log("start carousel");
 	$("div .item").first().addClass("active").nextAll().removeClass("active");
 </script>
 {% endblock %}
