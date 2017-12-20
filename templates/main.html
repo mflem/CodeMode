@@ -11,7 +11,7 @@
 <!--
 <h1>Welcome to CodeMode</h1> -->
 
-<form id="loginform" action="{{url_for('login')}}" method="post">
+<form id="loginform" action="{{url_for('login')}}" method="post" style="padding-left:10%; padding-right:10%;">
     <h2>Login</h2>
     <p><label>Username: <input type="text" name="username" required pattern="^\w+$"></label></p>
     <p><label>Password: <input type="password" name="password" required></label></p>
@@ -22,7 +22,7 @@
 <button id="join">Join Now</button>
 
 
-<form id="joinform" action="{{url_for('join')}}" method="post">
+<form id="joinform" action="{{url_for('join')}}" method="post" style="padding-left:10%; padding-right:10%;">
     <h2>Join</h2>
     <p><label><input type="text" name="username" required pattern="^\w+$"> Username</label></p>
     <p><label><input type="password" name="password1" required> Password </label></p>
