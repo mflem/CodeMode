@@ -48,11 +48,14 @@ def updateQuestion(conn, qid, data):
         flash("error: {}".format(error))
 
 def deleteQuestion(conn,qid):
+    #function to delete a question from a deck given a question ID
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     curs.execute('DELETE FROM questions where qid = %s;', [qid])
     flash('Delete successful')
 
 def insertDeck(conn, deckName, pathname):
+    #function to insert a deck into the table, takes in the connection,
+    #deckName, and URL and returns the ID of the newly inserted deck
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     try:
         curs.execute('''INSERT INTO decks
@@ -89,21 +92,20 @@ def getQuestion(conn, inQid):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     curs.execute('SELECT * from questions where qid = %s;', [inQid])
     result = curs.fetchone()
-    print result
     return result
 
 def getDeckID(conn, deckName):
+    #takes in deck's name and returns the deck's ID
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     curs.execute('SELECT deckid from decks where deck_name = %s;', [deckName])
     result = curs.fetchone()
-    print result
     return result
 
 def getDeckName(conn, deckID):
+    #takes in the deck's ID and returns the deck's name
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     curs.execute('SELECT deck_name from decks where deckid = %s;', [deckID])
     result = curs.fetchone()
-    print result
     return result
 
 def getQuestionsFromDeck(conn, deck_num):
@@ -111,7 +113,6 @@ def getQuestionsFromDeck(conn, deck_num):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     curs.execute('SELECT * from questions where deck_num = %s;', [deck_num])
     result = curs.fetchall()
-    print result
     return result
 
 def getDeckList(conn):
@@ -122,11 +123,10 @@ def getDeckList(conn):
     deck_list = []
     for row in result:
         deck_list.append(row["deck_name"])
-    # deck_list = [ row["deck_name"] for row in curs.fetchall() ]
-    # print deck_list
     return deck_list
 
 def getDeckTotalList(conn):
+    #get all deck info for all decks
         curs = conn.cursor(MySQLdb.cursors.DictCursor)
         curs.execute('SELECT * FROM decks ORDER BY deckid DESC;')
         result = curs.fetchall()
@@ -148,7 +148,6 @@ def getConn():
     DSN = dbconn2.read_cnf('~/.my.cnf')
     DSN['db'] = 'codemode_db'
     conn = dbconn2.connect(DSN)
-#     cursor = conn.cursor(MySQLdb.cursors.DictCursor)
     return conn
 
 def gradeQuiz(conn, questionInfo, formData, username):
@@ -158,7 +157,7 @@ def gradeQuiz(conn, questionInfo, formData, username):
     #counters to keep track of the current question, points, num correct, etc
     index = 0;
     pointCounter = 0;
-    answerResults = []; #using booleans to keep track of right/wrong answers
+    answerResults = []; # creating list of booleans to keep track of right/wrong answers (True = Correct, False = Incorrect)
     totalCorrect = 0;
     for question in formData:
         if questionInfo[index]['answer'] == formData[index]: #if right answer
