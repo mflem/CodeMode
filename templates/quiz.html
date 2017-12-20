@@ -7,7 +7,7 @@
     <!-- count number of questions so we can loop through them later -->
     {% set count = [0] %}
     {% for question in questions %}
-  <div class="question{{ count }}">
+  <div class="question{{ count }}" style="border-top:1px solid lightgray;">
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{count[0] + 1}}. {{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
       <!-- for each multiple choice question show options -->

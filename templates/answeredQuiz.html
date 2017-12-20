@@ -4,12 +4,12 @@
 
 {% extends 'codemode.html' %}
   {% block content %}
-  <div i="test-form">
+  <div i="test-form" style="padding-left:10%; padding-right:10%;">
     <!-- Counters for questions and points -->
     {% set points = [0] %}
     {% set count = [0] %}
     {% for question in questions %}
-  <div class="question{{ count }}">
+  <div class="question{{ count }}" style="border-top: 1px solid lightgray;">
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{question['questionText']}}</p>
     <div id="questionResult">
       <!-- will check the list of booleans to figure out if question was
@@ -38,8 +38,10 @@
   </div>
   <br><br>
     <!-- show total score and points earned -->
-      <div class="alert alert-primary" role="alert">
+      <div class="card card-inverse card-info mb-3 text-center" >
+        <div class="card-block">
         <h5>You got: {{results[count[0]]}} out of {{ count[0] }}</h5>
         You earned {{ points[0] }} points!
+      </div>
       </div>
  {% endblock %}
