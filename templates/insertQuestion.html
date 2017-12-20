@@ -5,12 +5,12 @@ when given a question-->
 
 {% extends 'codemode.html' %}
   {% block content %}
-      <form enctype="multipart/form-data" method= "POST" action="{{script}}">
+      <form enctype="multipart/form-data" method= "POST" action="{{script}}" style="padding-left:10%; padding-right:10%;">
         <table class="table">
         <tbody>
           <tr>
             <th scope="row"><label for="questionText">Question Text:</label></th>
-            <td><input type=text name='questionText' value="{{questionText}}" required></input></td>
+            <td><textarea type=text name='questionText' value="{{questionText}}" required></textarea></td>
           </tr>
           <tr>
             <th scope="row"><label for="answer">Answer:</label></th>
@@ -39,7 +39,7 @@ when given a question-->
           </tr>
           <tr>
             <th scope="row"><label for="explanation">Explanation:</label></th>
-            <td><input type=text name='explanation' value="{{explanation}}"></input></td>
+            <td><textarea type=text name='explanation' value="{{explanation}}"></textarea></td>
           </tr>
           <tr>
             <th scope="row"><label for="pointVal">Point value:</label></th>
@@ -67,11 +67,9 @@ when given a question-->
   {% endblock %}
 {% block jquery_scripts %}
 <script>
-// 	$("#newDeckAdd").hide();
 	console.log("hidden");
 	$('#qtype').change(function() {
 		if ($('#qtype').val() == 'multi') {
-// 	if ($("#qtype option:selected").val() == 'multi') {
 			console.log("is multi");
 			$(".wrong").show(1000);
 		} else {
@@ -80,16 +78,5 @@ when given a question-->
 			console.log("made it");
 	}
 	});
-
-// 	$("option[value='multi']").click(function(){
-// 		console.log("made it");
-// 	})
-// 	$("#newDeck").click(function(){
-// 		console.log("Button clicked");
-// 		$("#newDeck").html("Add to Existing Deck");
-// 		$("#newDeckAdd").toggle(1000);
-// 		$("#addExisting").toggle(1000);
-// 		console.log('toggle');
-// 	});
 </script>
 {% endblock %}
