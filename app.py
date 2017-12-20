@@ -90,7 +90,8 @@ def user(username):
             session['visits'] = 1+int(session['visits'])
             return render_template('codemode.html',
                                    page_title='My App: Welcome '+username,
-                                   name=username)
+                                   name=username,
+                                   username=username)
         else:
             flash('you are not logged in. Please login or join')
             return redirect( url_for('index') )
