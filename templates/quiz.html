@@ -11,7 +11,7 @@
 	 <p data-answer="{{question['answer']}}" data-question="q{{ count }}">{{count[0] + 1}}. {{question['questionText']}}</p>
 	    {% if question['qtype'] == 'multi' %}
       <!-- for each multiple choice question show options -->
-      <p id="arrayorder">
+<!--       <p id="arrayorder"> -->
          <input type="radio" name="q{{ count }}" value="{{question['answer']}}" required>{{question['answer']}}<br>
 	       <input type="radio" name="q{{ count }}" value="{{question['wrong1']}}" required>{{question['wrong1']}}<br>
  	       <input type="radio" name="q{{ count }}" value="{{question['wrong2']}}" required>{{question['wrong2']}}<br>
@@ -39,7 +39,7 @@
       </form>
 
 
-      <script>
+<!--       <script>
         var answerArray = ["answer","wrong1","wrong2","wrong3"];
     function shuffle(array) {
       var currentIndex = array.length, temporaryValue, randomIndex;
@@ -70,6 +70,6 @@
        
     }
     </script>
-
+ -->
 
  {% endblock %}
