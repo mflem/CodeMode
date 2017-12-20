@@ -142,7 +142,7 @@ def select():
         return render_template('select.html', decks=deckList,username=username)
 
 # INSERT AND UPDATE questions --------------------------------------------------
-@app.route('/add-question/', methods =['POST', 'GET'])
+@app.route('/insertQuestion/', methods =['POST', 'GET'])
 # page for making questions to add to decks
 def addquestion():
     if 'username' not in session:
@@ -167,16 +167,16 @@ def addquestion():
                 if (not questionText or not answer or (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or not explanation or pointVal <= 0 or not deckName):
                     flash("Please fill out all fields before submitting your question!")
                     data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
-                    return render_template('add-question.html', decks=deckList,username=username)
+                    return render_template('insertQuestion.html', decks=deckList,username=username)
                 else:
                     data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
                     conn = codemodeFunctions.getConn()
                     # insert returns the qid of the last inputted value on this connection
                     newID = codemodeFunctions.insert(conn,data)
                     return redirect(url_for("update",updateId=newID))
-                # redirect to update page so updates can be made separately from add-question
+                # redirect to update page so updates can be made separately from insertQuestion
         else:
-            return render_template('add-question.html', decks=deckList,username=username)
+            return render_template('insertQuestion.html', decks=deckList,username=username)
 
 @app.route('/update/<updateId>', methods =['POST', 'GET'])
 # page for updating questions
@@ -244,7 +244,7 @@ def update(updateId):
 
 # INSERT AND UPDATE decks ------------------------------------------------------
 
-@app.route('/add-deck/', methods=['POST', 'GET'])
+@app.route('/insertDeck/', methods=['POST', 'GET'])
 def addDeck():
     if 'username' not in session:
         return redirect( url_for('index') )
@@ -256,7 +256,7 @@ def addDeck():
             print codemodeFunctions.getDeckID(conn, deckName)
             if codemodeFunctions.getDeckID(conn, deckName):
                 flash("Deck with the name " + deckName + " already exists!")
-                return render_template('add-deck.html',username=username)
+                return render_template('insertDeck.html',username=username)
             else:
                 try:
                     f = request.files['imagefile']
@@ -275,9 +275,9 @@ def addDeck():
                         raise Exception('Not a JPEG, JPG, or PNG')
                 except Exception as err:
                     flash('Upload failed {why}'.format(why=err))
-                    return render_template('add-deck.html',username=username)
+                    return render_template('insertDeck.html',username=username)
         else:
-            return render_template('add-deck.html',username=username)
+            return render_template('insertDeck.html',username=username)
 
 @app.route('/updateDeck/<deckID>', methods=['POST', 'GET'])
 def updateDeck(deckID):
