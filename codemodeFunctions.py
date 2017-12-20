@@ -49,8 +49,8 @@ def updateQuestion(conn, qid, data):
 
 def deleteQuestion(conn,qid):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
-    curs.execute('DELETE FROM questions where qid = %s', [qid])
-    flash('Successfully deleted Question ' + qid)
+    curs.execute('DELETE FROM questions where qid = %s;' [qid])
+    flash('Delete successful')
 
 def insertDeck(conn, deckName, pathname):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
@@ -101,7 +101,7 @@ def getDeckID(conn, deckName):
 
 def getDeckName(conn, deckID):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
-    curs.execute('SELECT deck_name from decks where deckid = %s;', [deckID])
+    curs.execute('SELECT deck_name from decks where deckid = %s;', [deckName])
     result = curs.fetchone()
     print result
     return result
