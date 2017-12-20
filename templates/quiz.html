@@ -37,39 +37,7 @@
       <input type="submit" name="submit"></input>
       <div id="totalResult"></div>
       </form>
+	<script></script>
 
-
-<!--       <script>
-        var answerArray = ["answer","wrong1","wrong2","wrong3"];
-    function shuffle(array) {
-      var currentIndex = array.length, temporaryValue, randomIndex;
-
-      // While there remain elements to shuffle...
-      while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-      }
-
-      return array;
-    }
-
-    // Used like so
-    arr = shuffle(answerArray);
-    console.log(arr);
-    i=0;
-    while (i<4) { 
-      document.getElementById("arrayorder").innerHTML += "TESTING: {{question["+arr[i]+"]}}<br>";
-      i++;
-       
-    }
-    </script>
- -->
 
  {% endblock %}
