@@ -178,6 +178,7 @@ def update(updateId):
     qResults = codemodeFunctions.getQuestion(conn, updateId)
     deckList = codemodeFunctions.getDeckList(conn)
     currentDeckName = codemodeFunctions.getDeckName(conn, qResults["deck_num"])
+    currentDeckName = currentDeckName['deck_name']
     # print qResults["questionText"]
     print "in update"
     if request.method == 'POST':
@@ -198,7 +199,7 @@ def update(updateId):
                     flash("Please fill out all fields before submitting your question!")
                     data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
                     print "data is: " + str(data)
-                    return render_template('add-question.html',
+                    return render_template('updateQuestion.html',
                                             questionText=questionText,
                                             answer=answer,
                                             explanation=explanation,
@@ -215,7 +216,7 @@ def update(updateId):
                     print data
                     newInfo = codemodeFunctions.updateQuestion(conn,updateId,data)
                     return redirect(url_for("update",updateId=updateId))
-    return render_template('add-question.html',
+    return render_template('updateQuestion.html',
                            questionText=qResults["questionText"],
                            answer=qResults["answer"],
                            explanation=qResults["explanation"],
