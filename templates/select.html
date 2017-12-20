@@ -32,7 +32,7 @@ Lists all current, unique deck options -->
       {% for deck in decks %}
           <div class="item">
             <a href="/quiz/{{deck['deckid']}}">
-              <img style="height:100%" src="{{deck['image_path']}}" alt="{{deck['deck_name']}} image" style="width:100%;" name="selectDeck" value="{{deck['deck_name']}}">
+              <img style="height:500px" src="{{deck['image_path']}}" alt="{{deck['deck_name']}} image" style="width:100%;" name="selectDeck" value="{{deck['deck_name']}}">
             </a>
             <div class="carousel-caption">
               <h3>{{deck['deck_name']}}</h3>
