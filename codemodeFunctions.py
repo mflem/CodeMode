@@ -49,7 +49,7 @@ def updateQuestion(conn, qid, data):
 
 def deleteQuestion(conn,qid):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
-    curs.execute('DELETE FROM questions where qid = %s;' [qid])
+    curs.execute('DELETE FROM questions where qid = %s;', [qid])
     flash('Delete successful')
 
 def insertDeck(conn, deckName, pathname):
