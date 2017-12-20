@@ -80,7 +80,7 @@ def updateDeck(conn, deckName, pathname, deckNum):
         WHERE deckid = %s''', ([deckName, pathname, deckNum]))
         to_flash = "Deck (" + deckName +") was updated successfully"
         flash(to_flash)
-        return getDeck(deckNum)
+        return getDeckInfo(conn,deckNum)
     except Exception as error:
         flash("error: {}".format(error))
 

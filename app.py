@@ -293,16 +293,14 @@ def updateDeck(deckID):
             deckName = request.form['deckName']
             f = request.files['imagefile']
             testDeckID = codemodeFunctions.getDeckID(conn, deckName)
-            testDeckID = testDeckID["deckid"]
-            print deckInfo["deckid"]
             if testDeckID:
-                if testDeckID != deckInfo[0]["deckid"]:
+                if testDeckID != deckInfo["deckid"]:
                     flash("Deck with name " + deckName + " already exists!")
-                    return render_template('update-deck.html',username=username,deckInfo=deckInfo[0])
+                    return render_template('update-deck.html',username=username,deckInfo=deckInfo)
             else:
                 if not f:
                     print f
-                    imagePath = deckInfo[0]['image_path']
+                    imagePath = deckInfo['image_path']
                     codemodeFunctions.updateDeck(conn, deckName, imagePath, deckID)
                     return redirect(url_for("updateDeck",deckID=deckID))
                 else:
@@ -316,14 +314,14 @@ def updateDeck(deckID):
                             flash('Upload successful')
                             url = url_for('pic',fname=filename)
                             print url
-                            codemodeFunctions.updateDeck(conn, deckName, url, deckInfo[0]["deckid"])
+                            codemodeFunctions.updateDeck(conn, deckName, url, deckInfo["deckid"])
                             print pathname
                             return redirect(url_for("updateDeck",deckID=deckID))
                     except Exception as err:
                         flash('Upload failed {why}'.format(why=err))
-                        return render_template('update-deck.html',username=username,deckInfo=deckInfo[0])
+                        return render_template('update-deck.html',username=username,deckInfo=deckInfo)
         # print deckInfo[2]
-        return render_template('update-deck.html',username=username,deckInfo=deckInfo[0])
+        return render_template('update-deck.html',username=username,deckInfo=deckInfo)
 
 @app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
 #page for taking a quiz
