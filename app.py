@@ -178,7 +178,6 @@ def addquestion():
         else:
             return render_template('add-question.html', decks=deckList,username=username)
 
-
 @app.route('/update/<updateId>', methods =['POST', 'GET'])
 # page for updating questions
 def update(updateId):
@@ -263,11 +262,11 @@ def addDeck():
                     mime_type = imghdr.what(f.stream)
                     if mime_type == 'jpeg' or mime_type == 'png' or mime_type == 'jpg':
                         filename = secure_filename(deckName + '.' + mime_type)
-                        pathname = url_for('pic',fname=filename)
-                        f.save(filename)
+                        pathname = 'images/'+filename
+                        f.save(pathname)
                         flash('Upload successful')
-                        newID = codemodeFunctions.insertDeck(conn, deckName, pathname)
-                        print pathname
+                        url = url_for('pic',fname=filename)
+                        newID = codemodeFunctions.insertDeck(conn, deckName, url)
                         return redirect(url_for('updateDeck', deckID=newID))
                     else:
                         raise Exception('Not a JPEG, JPG, or PNG')
