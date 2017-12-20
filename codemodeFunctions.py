@@ -77,8 +77,8 @@ def updateDeck(conn, deckName, pathname, deckNum):
     try:
         curs.execute('''UPDATE decks
         SET deck_name = %s, image_path = %s
-        WHERE deck_num = %s''', ([deckName, pathname, deckNum]))
-        to_flash = "Deck (" + str(data[0]) +") was updated successfully"
+        WHERE deckid = %s''', ([deckName, pathname, deckNum]))
+        to_flash = "Deck (" + deckName +") was updated successfully"
         flash(to_flash)
         return getDeck(deckNum)
     except Exception as error:
@@ -142,7 +142,7 @@ def getDeckInfo(conn, deckNum):
     #returns all info about a deck given the ID
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     curs.execute('SELECT * from decks where deckid = %s;', [deckNum])
-    return curs.fetchall()
+    return curs.fetchone()
 
 def getConn():
     DSN = dbconn2.read_cnf('~/.my.cnf')

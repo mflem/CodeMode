@@ -253,7 +253,8 @@ def addDeck():
         conn = codemodeFunctions.getConn()
         if request.method == 'POST':
             deckName = request.form['deckName']
-            if codemodeFunctions.getDeck(conn, deckName):
+            print codemodeFunctions.getDeckID(conn, deckName)
+            if codemodeFunctions.getDeckID(conn, deckName):
                 flash("Deck with the name " + deckName + " already exists!")
                 return render_template('add-deck.html',username=username)
             else:
@@ -291,31 +292,36 @@ def updateDeck(deckID):
         if request.method == 'POST':
             deckName = request.form['deckName']
             f = request.files['imagefile']
-            if not f and deckInfo['image_path']:
-                print "deck info:"
-                print deckInfo
-                imagePath = deckInfo['image_path']
-                codemodeFunctions.updateDeck(conn, deckName, imagePath, deckID)
-                return redirect(url_for("updateDeck",deckID=deckID))
-            else:
-                try:
-                    f = request.files['imagefile']
-                    mime_type = imghdr.what(f.stream)
-                    f = request.files['imagefile']
-                    mime_type = imghdr.what(f.stream)
-                    if mime_type == 'jpeg' or mime_type == 'png' or mime_type == 'jpg':
-                        filename = secure_filename(deckName + '.' + mime_type)
-                        pathname = url_for('pic',fname=filename)
-                        f.save(filename)
-                        flash('Upload successful')
-                        newID = codemodeFunctions.insertDeck(conn, deckName, pathname)
-                        print pathname
-                        codemodeFunctions.updateDeck(conn, deckName, imagePath, deckID)
-                        print pathname
-                        return redirect(url_for("updateDeck",deckID=deckID))
-                except Exception as err:
-                    flash('Upload failed {why}'.format(why=err))
+            testDeckID = codemodeFunctions.getDeckID(conn, deckName)
+            testDeckID = testDeckID["deckid"]
+            print deckInfo["deckid"]
+            if testDeckID:
+                if testDeckID != deckInfo[0]["deckid"]:
+                    flash("Deck with name " + deckName + " already exists!")
                     return render_template('update-deck.html',username=username,deckInfo=deckInfo[0])
+            else:
+                if not f:
+                    print f
+                    imagePath = deckInfo[0]['image_path']
+                    codemodeFunctions.updateDeck(conn, deckName, imagePath, deckID)
+                    return redirect(url_for("updateDeck",deckID=deckID))
+                else:
+                    try:
+                        f = request.files['imagefile']
+                        mime_type = imghdr.what(f.stream)
+                        if mime_type == 'jpeg' or mime_type == 'png' or mime_type == 'jpg':
+                            filename = secure_filename(deckName + '.' + mime_type)
+                            pathname = 'images/'+ filename
+                            f.save(pathname)
+                            flash('Upload successful')
+                            url = url_for('pic',fname=filename)
+                            print url
+                            codemodeFunctions.updateDeck(conn, deckName, url, deckInfo[0]["deckid"])
+                            print pathname
+                            return redirect(url_for("updateDeck",deckID=deckID))
+                    except Exception as err:
+                        flash('Upload failed {why}'.format(why=err))
+                        return render_template('update-deck.html',username=username,deckInfo=deckInfo[0])
         # print deckInfo[2]
         return render_template('update-deck.html',username=username,deckInfo=deckInfo[0])
 
