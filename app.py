@@ -131,12 +131,10 @@ def select():
         username= session['username']
         conn = codemodeFunctions.getConn()
         deckList = codemodeFunctions.getDeckTotalList(conn)
-        print deckList
         if request.method =='POST':
             deckName = request.form['selectDeck']
             deckid = codemodeFunctions.getDeckID(conn, deckName)
             deckid = deckid['deckid']
-            print deckName + " is " + str(deckid)
             # using the deck's id, go to the associated quiz
             return redirect(url_for("quiz", deckid=deckid))
         return render_template('select.html', decks=deckList,username=username)
@@ -144,7 +142,7 @@ def select():
 # INSERT AND UPDATE questions --------------------------------------------------
 @app.route('/insertQuestion/', methods =['POST', 'GET'])
 # page for making questions to add to decks
-def addquestion():
+def insertQuestion():
     if 'username' not in session:
         return redirect( url_for('index') )
     else:
@@ -172,7 +170,7 @@ def addquestion():
                     data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
                     conn = codemodeFunctions.getConn()
                     # insert returns the qid of the last inputted value on this connection
-                    newID = codemodeFunctions.insert(conn,data)
+                    newID = codemodeFunctions.insertQuestion(conn,data)
                     return redirect(url_for("update",updateId=newID))
                 # redirect to update page so updates can be made separately from insertQuestion
         else:
@@ -188,14 +186,14 @@ def update(updateId):
         conn = codemodeFunctions.getConn()
         qResults = codemodeFunctions.getQuestion(conn, updateId)
         deckList = codemodeFunctions.getDeckList(conn)
+        print "what the info should be is: "
+        print qResults
         currentDeckName = codemodeFunctions.getDeckName(conn, qResults["deck_num"])
-        currentDeckName = currentDeckName['deck_name']
-        # print qResults["questionText"]
         print "in update"
         if request.method == 'POST':
             if request.form['action'] == 'delete':
                 codemodeFunctions.deleteQuestion(conn,updateId)
-                return redirect(url_for(addquestion))
+                return redirect(url_for('insertQuestion'))
             elif request.form['action'] =='update':
                 #gathers inputted info to send to database
                 questionText = request.form['questionText']
@@ -210,7 +208,6 @@ def update(updateId):
                 if (not questionText or not answer or (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or not explanation or pointVal <= 0 or not deckName):
                     flash("Please fill out all fields before submitting your question!")
                     data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
-                    print "data is: " + str(data)
                     return render_template('updateQuestion.html',
                                             questionText=questionText,
                                             answer=answer,
@@ -223,10 +220,8 @@ def update(updateId):
                                             decks=deckList,
                                             username=username)
                 else:
-                    print "conditional passed"
                     data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
                     conn = codemodeFunctions.getConn()
-                    print data
                     newInfo = codemodeFunctions.updateQuestion(conn,updateId,data)
                     return redirect(url_for("update",updateId=updateId))
         return render_template('updateQuestion.html',
@@ -253,14 +248,12 @@ def addDeck():
         conn = codemodeFunctions.getConn()
         if request.method == 'POST':
             deckName = request.form['deckName']
-            print codemodeFunctions.getDeckID(conn, deckName)
             if codemodeFunctions.getDeckID(conn, deckName):
                 flash("Deck with the name " + deckName + " already exists!")
                 return render_template('insertDeck.html',username=username)
             else:
                 try:
                     f = request.files['imagefile']
-                    print f
                     mime_type = imghdr.what(f.stream)
                     if mime_type == 'jpeg' or mime_type == 'png' or mime_type == 'jpg':
                         filename = secure_filename(deckName + '.' + mime_type)
@@ -268,7 +261,6 @@ def addDeck():
                         f.save(pathname)
                         flash('Upload successful')
                         url = url_for('pic',fname=filename)
-                        print url
                         newID = codemodeFunctions.insertDeck(conn, deckName, url)
                         return redirect(url_for('updateDeck', deckID=newID))
                     else:
@@ -288,12 +280,10 @@ def updateDeck(deckID):
         conn = codemodeFunctions.getConn()
         deckInfo = codemodeFunctions.getDeckInfo(conn, deckID)
         deckID = deckInfo["deckid"]
-        print "deckInfo: "
-        print deckInfo
         if request.method == 'POST':
             deckName = request.form['deckName']
             testDeckID = codemodeFunctions.getDeckID(conn, deckName)
-            if testDeckID and (testDeckID != deckID:
+            if testDeckID and (testDeckID != deckID):
                     flash("Deck with name " + deckName + " already exists!")
             else:
                 codemodeFunctions.updateDeck(conn, deckName, deckID)
@@ -317,25 +307,11 @@ def quiz(deckid):
             for q in qResults:
                 # print request.form
                 qName = 'q[' + str(index) + ']'
-                print request.form[qName]
                 formData.append(request.form[qName])
                 index += 1
-
             answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, user) # change to username later
             return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData,username=username)
         return render_template('quiz.html', questions=qResults, username=username)
-
-# ajax attempt LOL
-# @app.route('/quiz2/<deckid>', methods = ['POST', 'GET'])
-# #page for taking a quiz
-# def quiz2(deckid):
-#     if 'username' not in session:
-#         return redirect( url_for('index') )
-#     else:
-#         username= session['username']
-#         conn = codemodeFunctions.getConn()
-#         qResults = codemodeFunctions.getQuestionsFromDeck(conn, deckid)
-#         return render_template('quiz2.html', questions=qResults, username=username)
 
 if __name__ == '__main__':
   dsn = dbconn2.read_cnf()

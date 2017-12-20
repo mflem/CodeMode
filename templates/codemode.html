@@ -24,16 +24,14 @@ CodeMode -->
       <ul class="nav navbar-nav">
 	<!-- if not a home button, maybe a profile button eventually -->
         <li><a href='/select/'>Select A Quiz</a></li>
-	      <li><a href='/add-question/'>Make New Question</a></li> <!--  eventually, only if collaborator -->
-        <li><a href='/add-deck/'>Make New Deck</a></li> <!--  eventually, only if collaborator -->
+	      <li><a href='/insertQuestion/'>Make New Question</a></li> <!--  eventually, only if collaborator -->
+        <li><a href='/insertDeck/'>Make New Deck</a></li> <!--  eventually, only if collaborator -->
 	      <li>Welcome back, {{username}}</li>
         <li><a href='/logout/' id="logoutID">Logout</a></li>
       </ul>
     </div>
   </nav>
-
-
-
+  
     {% block main_content %}
     {% endblock %}
 
