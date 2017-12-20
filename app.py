@@ -334,13 +334,9 @@ def quiz(deckid):
                 print request.form[qName]
                 formData.append(request.form[qName])
                 index += 1
-            print "formData: " + str(formData)
-            if (None in formData or string.empty in formData):
-                flash("Please answers all questions!")
-                return render_template('quiz.html', questions=qResults,username=username)
-            else:
-                answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, user) # change to username later
-                return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData,username=username)
+
+            answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, user) # change to username later
+            return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData,username=username)
         return render_template('quiz.html', questions=qResults, username=username)
 
 if __name__ == '__main__':
