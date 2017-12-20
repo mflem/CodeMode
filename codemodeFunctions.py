@@ -1,6 +1,5 @@
 # Margaret Flemings and Maggie Jennings
 # CodeMode
-# Draft 11/30/17
 
 import sys
 import MySQLdb
