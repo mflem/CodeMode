@@ -1,5 +1,3 @@
-drop table if exists hasAnswered;
-drop table if exists madeBy;
 drop table if exists questions;
 drop table if exists decks;
 drop table if exists users;
