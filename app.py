@@ -287,41 +287,18 @@ def updateDeck(deckID):
         username= session['username']
         conn = codemodeFunctions.getConn()
         deckInfo = codemodeFunctions.getDeckInfo(conn, deckID)
+        deckID = deckInfo["deckid"]
         print "deckInfo: "
         print deckInfo
         if request.method == 'POST':
             deckName = request.form['deckName']
-            f = request.files['imagefile']
             testDeckID = codemodeFunctions.getDeckID(conn, deckName)
-            if testDeckID:
-                if testDeckID != deckInfo["deckid"]:
+            if testDeckID and (testDeckID != deckID:
                     flash("Deck with name " + deckName + " already exists!")
-                    return render_template('update-deck.html',username=username,deckInfo=deckInfo)
             else:
-                if not f:
-                    print f
-                    imagePath = deckInfo['image_path']
-                    codemodeFunctions.updateDeck(conn, deckName, imagePath, deckID)
-                    return redirect(url_for("updateDeck",deckID=deckID))
-                else:
-                    try:
-                        f = request.files['imagefile']
-                        mime_type = imghdr.what(f.stream)
-                        if mime_type == 'jpeg' or mime_type == 'png' or mime_type == 'jpg':
-                            filename = secure_filename(deckName + '.' + mime_type)
-                            pathname = 'images/'+ filename
-                            f.save(pathname)
-                            flash('Upload successful')
-                            url = url_for('pic',fname=filename)
-                            print url
-                            codemodeFunctions.updateDeck(conn, deckName, url, deckInfo["deckid"])
-                            print pathname
-                            return redirect(url_for("updateDeck",deckID=deckID))
-                    except Exception as err:
-                        flash('Upload failed {why}'.format(why=err))
-                        return render_template('update-deck.html',username=username,deckInfo=deckInfo)
-        # print deckInfo[2]
-        return render_template('update-deck.html',username=username,deckInfo=deckInfo)
+                codemodeFunctions.updateDeck(conn, deckName, deckID)
+                return redirect(url_for('updateDeck', deckID))
+        return render_template('updateDeck.html',username=username,deckInfo=deckInfo)
 
 @app.route('/quiz/<deckid>', methods = ['POST', 'GET'])
 #page for taking a quiz

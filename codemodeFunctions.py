@@ -69,15 +69,15 @@ def insertDeck(conn, deckName, pathname):
     except Exception as error:
         flash("error: {}".format(error))
 
-def updateDeck(conn, deckName, pathname, deckNum):
+def updateDeck(conn, deckName, deckNum):
     # function that takes in connection and deck info and updates the deck in
     #the decks table
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     pathname = deckName + '.jpeg'
     try:
         curs.execute('''UPDATE decks
-        SET deck_name = %s, image_path = %s
-        WHERE deckid = %s''', ([deckName, pathname, deckNum]))
+        SET deck_name = %s
+        WHERE deckid = %s''', ([deckName, deckNum]))
         to_flash = "Deck (" + deckName +") was updated successfully"
         flash(to_flash)
         return getDeckInfo(conn,deckNum)
