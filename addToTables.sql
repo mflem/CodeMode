@@ -1,10 +1,5 @@
 -- /* Data that can be inserted temporarily for testing purposes */
 -- /* test users */
-insert into users(loginname,points,email,isCollaborator,password) values
-       ('Martha',0, 'martha@gmail.com','y','secret'),
-       ('Brandy',9,'brandy@gmail.com','n','supersecret'),
-       ('Simba',0,'simba@gmail.com','n','justcantwait'),
-       ('Suzy',0,'suzi@gmail.com','n','imaspy');
 
 insert into decks(deck_name, image_path) VALUES
   ('SQL','SQL.jpeg'),
