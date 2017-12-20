@@ -88,6 +88,9 @@ def user(username):
         if 'username' in session:
             username = session['username']
             session['visits'] = 1+int(session['visits'])
+            session['points'] = curs.execute('SELECT points FROM users WHERE loginname = %s',
+                         [username]).fetchone()
+            print points
             return render_template('codemode.html',
                                    page_title='My App: Welcome '+username,
                                    name=username,
