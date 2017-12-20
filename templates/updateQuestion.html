@@ -50,6 +50,9 @@ when given a question-->
             <td><select name='deckName' required>
                 <option name="deckName" value="None">Select a deck</option>
               {% for deck in decks %}
+                {% if deck == selectedDeck %}
+                <option name="deckName" value="{{deck}}" selected>{{deck}}</option>
+                {% endif %}
                 <option name="deckName" value="{{deck}}">{{deck}}</option>
               {% endfor %}
             </select></td>

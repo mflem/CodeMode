@@ -213,7 +213,7 @@ def updateQuestion(updateId):
                 explanation = request.form['explanation']
                 pointVal = request.form['pointVal']
                 deckName = request.form['deckName']
-                if qtype == "multi" and (not wrong1 or not wrong2 or not wrong3):
+                if (qtype == "multi" and (not wrong1 or not wrong2 or not wrong3)) or deckName == "None":
                     #everything else should be required in the HTML, so the multi
                     #should be the only thing we need to check
                     flash("Please fill out all fields before submitting your question!")

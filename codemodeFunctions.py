@@ -32,15 +32,12 @@ def insertQuestion(conn, data):
 def updateQuestion(conn, qid, data):
     #update a question in the database, returns the row for the updated question
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
-    deckID = getDeckID(conn,data[8])
-    deckID = deckID["deckid"]
-    print deckID
     try:
         # data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
         # uses prepared query to avoid attacks
         curs.execute('''UPDATE questions
         SET questionText = %s, answer = %s, qtype = %s, wrong1 = %s, wrong2 = %s, wrong3 = %s, explanation = %s, point_value = %s, deck_num = %s
-        WHERE qid = %s''', (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], deckID, qid))
+        WHERE qid = %s''', (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], qid))
         to_flash = "Question (" + str(data[0]) +") was inserted successfully"
         flash(to_flash)
         return getQuestion(conn, qid)
