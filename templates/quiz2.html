@@ -30,7 +30,7 @@
       <div id="explanation"></div>
     </div>
 
-    <div id="questionResultTemplate">
+    <div class="questionResultTemplate" style="display:none;">
       <p><span class="questionText"></span></p>
            <p class="bg-success text-white">You answered: <span class="yourAnswer"></span>
              <br><span class="message"></span><br>
@@ -51,7 +51,8 @@
           $.post("https://cs.wellesley.edu/~cs304/php/bleats/insert-bleat.php",
           $("form").serialize(),
           function(){
-            console.log($("form").serialize());
+            var form = $("form").serialize();
+            console.log(form);
           });
           alert("done");
         });
