@@ -47,6 +47,11 @@ def updateQuestion(conn, qid, data):
     except Exception as error:
         flash("error: {}".format(error))
 
+def deleteQuestion(conn,qid):
+    curs = conn.cursor(MySQLdb.cursors.DictCursor)
+    curs.execute('DELETE FROM questions where qid = %s', [qid])
+    flash('Successfully deleted Question ' + qid)
+
 def insertDeck(conn, deckName, pathname):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
     try:
@@ -96,7 +101,7 @@ def getDeckID(conn, deckName):
 
 def getDeckName(conn, deckID):
     curs = conn.cursor(MySQLdb.cursors.DictCursor)
-    curs.execute('SELECT deck_name from decks where deckid = %s;', [deckName])
+    curs.execute('SELECT deck_name from decks where deckid = %s;', [deckID])
     result = curs.fetchone()
     print result
     return result

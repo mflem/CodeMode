@@ -172,15 +172,17 @@ def addquestion():
 
 
 @app.route('/update/<updateId>', methods =['POST', 'GET'])
-# page for updating questions
+# page for updating and deleting questions
 def update(updateId):
     conn = codemodeFunctions.getConn()
     qResults = codemodeFunctions.getQuestion(conn, updateId)
     deckList = codemodeFunctions.getDeckList(conn)
     currentDeckName = codemodeFunctions.getDeckName(conn, qResults["deck_num"])
+    currentDeckName = currentDeckName['deck_name']
     # print qResults["questionText"]
     print "in update"
     if request.method == 'POST':
+        if request.action == 'update':
                 #gathers inputted info to send to database
                 questionText = request.form['questionText']
                 answer = request.form['answer']
@@ -195,7 +197,7 @@ def update(updateId):
                     flash("Please fill out all fields before submitting your question!")
                     data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
                     print "data is: " + str(data)
-                    return render_template('add-question.html',
+                    return render_template('updateQuestion.html',
                                             questionText=questionText,
                                             answer=answer,
                                             explanation=explanation,
@@ -212,7 +214,10 @@ def update(updateId):
                     print data
                     newInfo = codemodeFunctions.updateQuestion(conn,updateId,data)
                     return redirect(url_for("update",updateId=updateId))
-    return render_template('add-question.html',
+        elif action == 'delete':
+            codemodeFunctions.deleteQuestion(updateId)
+
+    return render_template('updateQuestion.html',
                            questionText=qResults["questionText"],
                            answer=qResults["answer"],
                            explanation=qResults["explanation"],
@@ -305,13 +310,13 @@ def quiz(deckid):
             formData.append(request.form[qName])
             index += 1
         print "formData: " + str(formData)
-        if (None in formData or string.empty in formData):
+        if (None in formData):
             flash("Please answers all questions!")
             return render_template('quiz.html', questions=qResults)
         else:
-            user = session['user']
+            user = session['username']
             answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, user) # change to username later
-            return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData)
+            return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData, username=user)
     return render_template('quiz.html', questions=qResults)
 
 if __name__ == '__main__':
