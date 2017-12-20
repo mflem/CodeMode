@@ -3,7 +3,7 @@
 <!-- Counting idea from: https://stackoverflow.com/questions/7537439/how-to-increment-a-variable-on-a-for-loop-in-jinja-template -->
 {% extends 'codemode.html' %}
   {% block content %}
-  <form id="test-form" method='post'>
+  <form id="test-form" method='post' style="padding-left:10%; padding-right:10%;">
     <!-- count number of questions so we can loop through them later -->
     {% set count = [0] %}
     {% for question in questions %}
