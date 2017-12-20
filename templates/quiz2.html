@@ -42,12 +42,12 @@
       {% if count.append(count.pop() + 1) %}
       {% endif %}
       {% endfor %}
-      <button id="gradebutton" class="btn btn-primary" type="button" name="submit"></input>
+      <button id="gradebutton" class="btn btn-primary" type="button" name="submit">Grade Your Quiz!</button>
       <div id="totalResult"></div>
       </form>
       <script>
         $("#gradebutton").click(function () {
-          console.log($("form").serialize());
+          console.log("button clicked!");
           $.post("https://cs.wellesley.edu/~cs304/php/bleats/insert-bleat.php",
           $("form").serialize(),
           function(){
