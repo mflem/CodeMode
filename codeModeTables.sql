@@ -9,8 +9,6 @@ create table users (
        cid integer auto_increment primary key,
        loginname varchar(15) not null,
        points integer default 0,
-       email varchar(50) default null,     -- email address
-       isCollaborator enum('y','n') default 'n',
        password varchar(150)
        );
 
@@ -33,25 +31,4 @@ create table questions(
 	wrong1 varchar(100), -- if not multi, NULL
 	wrong2 varchar(100), -- if not multi, NULL
 	wrong3 varchar(100) -- if not multi, NULL
-       );
-
--- connects collaborators and the questions they made
-create table madeBy(
-	qid int not null,
-	cid int,
-	index(qid),
-	index(cid),
-	foreign key (qid) references questions(qid) on delete restrict,
-	foreign key (cid) references users(cid) on delete restrict
-       );
-
-
--- connects users with the questions they have answered
-create table hasAnswered(
-	qid int not null,
-	cid int not null,
-	index(qid),
-	index(cid),
-	foreign key (qid) references questions(qid) on delete restrict,
-	foreign key (cid) references users(cid) on delete restrict
        );
