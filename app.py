@@ -1,7 +1,7 @@
 # Maggie Jennings and Margaret Flemings
 # CodeMode
 
-from flask import Flask, render_template, make_response, request, flash, redirect, url_for, session, send_from_directory
+from flask import Flask, render_template, make_response, request, flash, redirect, url_for, session, send_from_directory, jsonify
 from werkzeug import secure_filename
 import os, sys
 import bcrypt
@@ -337,6 +337,17 @@ def quiz(deckid):
 
             answerResults = codemodeFunctions.gradeQuiz(conn, qResults, formData, user) # change to username later
             return render_template('answeredQuiz.html', questions=qResults, results=answerResults, form=formData,username=username)
+        return render_template('quiz.html', questions=qResults, username=username)
+
+@app.route('/quiz2/<deckid>', methods = ['POST', 'GET'])
+#page for taking a quiz
+def quiz(deckid):
+    if 'username' not in session:
+        return redirect( url_for('index') )
+    else:
+        username= session['username']
+        conn = codemodeFunctions.getConn()
+        qResults = codemodeFunctions.getQuestionsFromDeck(conn, deckid)
         return render_template('quiz.html', questions=qResults, username=username)
 
 if __name__ == '__main__':
