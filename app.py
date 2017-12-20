@@ -126,7 +126,7 @@ def pic(fname):
 # page for selecting a deck to be quizzed on
 def select():
     if 'username' not in session:
-        redirect(url_for('login'))
+        return redirect( url_for('index') )
     else:
         username= session['username']
         conn = codemodeFunctions.getConn()
@@ -146,7 +146,7 @@ def select():
 # page for making questions to add to decks
 def addquestion():
     if 'username' not in session:
-        redirect(url_for('login'))
+        return redirect( url_for('index') )
     else:
         username= session['username']
         conn = codemodeFunctions.getConn()
@@ -183,7 +183,7 @@ def addquestion():
 # page for updating questions
 def update(updateId):
     if 'username' not in session:
-        redirect(url_for('login'))
+        return redirect( url_for('index') )
     else:
         username= session['username']
         conn = codemodeFunctions.getConn()
@@ -248,7 +248,7 @@ def update(updateId):
 @app.route('/add-deck/', methods=['POST', 'GET'])
 def addDeck():
     if 'username' not in session:
-        redirect(url_for('login'))
+        return redirect( url_for('index') )
     else:
         username= session['username']
         conn = codemodeFunctions.getConn()
@@ -280,7 +280,7 @@ def addDeck():
 @app.route('/updateDeck/<deckID>', methods=['POST', 'GET'])
 def updateDeck(deckID):
     if 'username' not in session:
-        redirect(url_for('login'))
+        return redirect( url_for('index') )
     else:
         username= session['username']
         conn = codemodeFunctions.getConn()
@@ -318,7 +318,7 @@ def updateDeck(deckID):
 #page for taking a quiz
 def quiz(deckid):
     if 'username' not in session:
-        redirect(url_for('login'))
+        return redirect( url_for('index') )
     else:
         username= session['username']
         conn = codemodeFunctions.getConn()
