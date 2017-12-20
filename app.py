@@ -73,6 +73,9 @@ def login():
             session['username'] = username
             session['logged_in'] = True
             session['visits'] = 1
+            points = curs.execute('SELECT points FROM users WHERE loginname = %s', [username])
+            points = curs.fetchone()
+            session['points'] = points['points']
             return redirect( url_for('user', username=username) )
         else:
             flash('login incorrect. Try again or join')
@@ -88,9 +91,6 @@ def user(username):
         if 'username' in session:
             username = session['username']
             session['visits'] = 1+int(session['visits'])
-            session['points'] = curs.execute('SELECT points FROM users WHERE loginname = %s',
-                         [username]).fetchone()
-            print points
             return render_template('codemode.html',
                                    page_title='My App: Welcome '+username,
                                    name=username,
