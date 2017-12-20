@@ -179,14 +179,14 @@ def insertQuestion():
                     conn = codemodeFunctions.getConn()
                     # insert returns the qid of the last inputted value on this connection
                     newID = codemodeFunctions.insertQuestion(conn,data)
-                    return redirect(url_for("update",updateId=newID))
+                    return redirect(url_for("updateQuestion",updateId=newID))
                 # redirect to update page so updates can be made separately from insertQuestion
         else:
             return render_template('insertQuestion.html', decks=deckList,username=username)
 
-@app.route('/update/<updateId>', methods =['POST', 'GET'])
+@app.route('/updateQuestion/<updateId>', methods =['POST', 'GET'])
 # page for updating AND deleting questions
-def update(updateId):
+def updateQuestion(updateId):
     if 'username' not in session:
         return redirect( url_for('index') )
     else:
@@ -233,7 +233,7 @@ def update(updateId):
                     data = (questionText, answer, qtype, wrong1, wrong2, wrong3, explanation, pointVal, deckName)
                     conn = codemodeFunctions.getConn()
                     newInfo = codemodeFunctions.updateQuestion(conn,updateId,data)
-                    return redirect(url_for("update",updateId=updateId))
+                    return redirect(url_for("updateQuestion",updateId=updateId))
         return render_template('updateQuestion.html',
                            questionText=qResults["questionText"],
                            answer=qResults["answer"],
