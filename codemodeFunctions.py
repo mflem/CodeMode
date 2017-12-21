@@ -4,7 +4,7 @@
 import sys
 import MySQLdb
 import dbconn2
-from flask import flash
+from flask import flash, session
 
 #functions and connections necessary for app.py
 

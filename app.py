@@ -92,11 +92,13 @@ def user(username):
         # don't trust the URL; it's only there for decoration
         if 'username' in session:
             username = session['username']
+            points = session['points']
             session['visits'] = 1+int(session['visits'])
             return render_template('codemode.html',
                                    page_title='My App: Welcome '+username,
                                    name=username,
-                                   username=username)
+                                   username=username,
+                                   points=points)
         else:
             flash('you are not logged in. Please login or join')
             return redirect( url_for('index') )
